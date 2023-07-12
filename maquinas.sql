@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-07-2023 a las 02:16:06
+-- Tiempo de generación: 12-07-2023 a las 16:56:13
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.8
 
@@ -49,11 +49,7 @@ CREATE TABLE `inventario` (
 --
 
 INSERT INTO `inventario` (`id`, `id_maquina`, `operador`, `observacion`, `horas_t`, `horas_in`, `horometraje_i`, `horometraje_f`, `lugar_t`, `fallo`, `hora_paro`, `hora_reinicio`, `fecha`, `gastos_falla`) VALUES
-(81, 0, 'registrodeejemplo', '1', 1, 1, '1', 1, 'veracruz', 'FALTA DE TRAMO SEDENA', '1', '1', '2023-07-01', '$1200'),
-(92, 0, 'ya', '', 1, 1, '1', 1, 'tijuana', 'MECANICA', '1', '1', '2023-07-26', ''),
-(93, 0, 'RICARDO', '1', 10, 1, '1', 1, 'guadalajara', 'SERVICIOS', '1', '1', '2023-07-27', ''),
-(94, 0, 'joaquind', 'todo en orden por el momento', 10, 0, '5011', 5020, 'tren maya', 'OTRO', '0', '0', '2023-07-11', '0'),
-(96, 0, 'prueba10', 'no hay falla solo el clima no dejo trabajar', 8, 2, '200', 250, 'guadalajara', 'CLIMA', '12:00pm', '2:00pm', '2023-07-11', '0');
+(103, 11, 'Ernesto', '10', 10, 2, '5', 15, 'guadalajara', 'OTRO', '12', '10', '2023-07-12', '10');
 
 -- --------------------------------------------------------
 
@@ -66,6 +62,8 @@ CREATE TABLE `maquinas` (
   `name` varchar(150) NOT NULL,
   `modelo` varchar(250) NOT NULL,
   `serie` varchar(250) NOT NULL,
+  `ubicacion` varchar(150) NOT NULL,
+  `status` varchar(150) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -73,10 +71,11 @@ CREATE TABLE `maquinas` (
 -- Volcado de datos para la tabla `maquinas`
 --
 
-INSERT INTO `maquinas` (`id`, `name`, `modelo`, `serie`, `fecha`) VALUES
-(2, 'maquina 1', '336E', '01613', '2023-07-11 19:49:28'),
-(10, 'maquina 4', '336E', '0235', '2023-07-11 19:50:23'),
-(11, 'maquina2', 'ksms', 'N6519100', '2023-07-11 23:34:14');
+INSERT INTO `maquinas` (`id`, `name`, `modelo`, `serie`, `ubicacion`, `status`, `fecha`) VALUES
+(2, 'Maquina 1', '336E', '01613', 'Tren Maya', 'Activo', '2023-07-12 14:02:14'),
+(10, 'Maquina 4', '336E', '0235', 'Veracruz', 'Inactivo', '2023-07-12 14:02:24'),
+(11, 'Maquina2', 'ksms', 'N6519100', 'Tijuana', 'Inactivo', '2023-07-12 14:02:35'),
+(12, 'Maquina 5', 'SMDK300', 'DHASFISD', 'Guadalajara', 'Inactivo', '2023-07-12 13:57:15');
 
 -- --------------------------------------------------------
 
@@ -160,13 +159,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT de la tabla `maquinas`
 --
 ALTER TABLE `maquinas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
