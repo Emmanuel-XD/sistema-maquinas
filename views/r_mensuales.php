@@ -10,7 +10,7 @@ session_start();
     <div class="container-fluid">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Reportes diarios</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Reportes Mensuales</h6>
                 <br>
 
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#inv">
@@ -20,24 +20,53 @@ session_start();
                 <a id="download-link" style="display: none"></a>
 
 
-                <form action="#">
+                <form action="../includes/guardar.php" method="POST" accept-charset="utf-8" id="filtro-form">
                     <br>
-                    <div class="row" id="datosMaquina">
+                    <div class="row">
+
+                        <div class="col-md-4">
+
+                            <div class="form-group">
+                                <label><b>Inicio de mes</b></label>
+                                <input type="date" name="star" id="star" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b> Fin de mes</b></label>
+                                <input type="date" name="fin" id="fin" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b></b></label> <br>
+                                <button type="button" class="btn btn-outline-primary" id="filtro"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                <!--<button type="submit" class="btn btn-danger ">Generar Reporte</button>-->
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
                         <div class="col-md-3">
                             <label for="lang">MAQUINA:</label>
-                            <select class="form-control" name="name" id="name">
-                                <option value="0">Selecciona una opción</option>
+                            <select class="form-control" name="lenguajes" id="lang">
+                                <option value="0">Selecciona una opcion</option>
                                 <?php
+
                                 include("../includes/db.php");
-                                // Código para mostrar categorías desde otra tabla
+                                //Codigo para mostrar categorias desde otra tabla
                                 $sql = "SELECT * FROM maquinas ";
                                 $resultado = mysqli_query($conexion, $sql);
                                 while ($consulta = mysqli_fetch_array($resultado)) {
-                                    echo '<option value="' . $consulta['name'] . '">' . $consulta['name'] . '</option>';
+                                    echo '<option value="' . $consulta['id'] . '">' . $consulta['name'] . '</option>';
                                 }
+
                                 ?>
                             </select>
                         </div>
+
                         <div class="col-md-3">
                             <label for="for-label">Modelo</label>
                             <input type="text" class="form-control" name="modelo" id="modelo">
@@ -50,6 +79,10 @@ session_start();
                             <label for="">Ubicacion</label>
                             <input type="text" class="form-control" name="ubicacion" id="ubicacion">
                         </div>
+
+                    </div>
+
+                    <div class="row">
                         <div class="col-md-3">
                             <label for="">Estatus</label>
                             <input type="text" class="form-control" name="estatus" id="estatus">
@@ -67,9 +100,11 @@ session_start();
                             <input type="text" class="form-control" name="horas_p" id="horas_p">
                         </div>
                     </div>
+
                     <br>
                     <button type="submit" class="btn btn-primary" name="save" id="save">Guardar</button>
                 </form>
+
             </div>
 
             <div class="card-body">
@@ -158,27 +193,23 @@ session_start();
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            $("#name").change(function() {
-                var maquinaSeleccionada = $(this).val();
+        $('#filtro').click(function(e) {
+            e.preventDefault();
+            var startDate = $('#star').val();
+            var endDate = $('#fin').val();
 
-                $.ajax({
-                    url: "obtener_maquina.php",
-                    type: "POST",
-                    data: {
-                        name: maquinaSeleccionada
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        $("#modelo").val(data.modelo);
-                        $("#serie").val(data.serie);
-                        $("#ubicacion").val(data.ubicacion);
-                        $("#estatus").val(data.estatus);
-                        $("#mant").val(data.mantenimiento);
-                        $("#horas_a").val(data.horas_a);
-                        $("#horas_p").val(data.horas_p);
-                    }
-                });
+            var data = {
+                start: startDate,
+                end: endDate
+            };
+
+            $.ajax({
+                url: 'dataTable.php',
+                method: 'POST',
+                data: data,
+                success: function(response) {
+                    $('#table_id tbody').html(response);
+                }
             });
         });
     </script>
