@@ -45,11 +45,11 @@ session_start();
                             </div>
                         </div>
                     </div>
-                    <br>
+
                     <div class="row" id="datosMaquina">
                         <div class="col-md-3">
                             <label for="lang">MAQUINA:</label>
-                            <select class="form-control" name="name" id="name">
+                            <select class="form-control" name="id" id="id">
                                 <option value="0">Selecciona una opción</option>
                                 <?php
                                 include("../includes/db.php");
@@ -57,7 +57,7 @@ session_start();
                                 $sql = "SELECT * FROM maquinas ";
                                 $resultado = mysqli_query($conexion, $sql);
                                 while ($consulta = mysqli_fetch_array($resultado)) {
-                                    echo '<option value="' . $consulta['name'] . '">' . $consulta['name'] . '</option>';
+                                    echo '<option value="' . $consulta['id'] . '">' . $consulta['name'] . '</option>';
                                 }
                                 ?>
                             </select>
@@ -76,7 +76,7 @@ session_start();
                         </div>
                         <div class="col-md-3">
                             <label for="">Estatus</label>
-                            <input type="text" class="form-control" name="estatus" id="estatus" readonly>
+                            <input type="text" class="form-control" name="status" id="status" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Mantenimiento</label>
@@ -183,21 +183,21 @@ session_start();
     </div>
     <script>
         $(document).ready(function() {
-            $("#name").change(function() {
+            $("#id").change(function() {
                 var maquinaSeleccionada = $(this).val();
 
                 $.ajax({
                     url: "obtener_maquina.php",
                     type: "POST",
                     data: {
-                        name: maquinaSeleccionada
+                        id: maquinaSeleccionada
                     },
                     dataType: "json",
                     success: function(data) {
                         $("#modelo").val(data.modelo);
                         $("#serie").val(data.serie);
                         $("#ubicacion").val(data.ubicacion);
-                        $("#estatus").val(data.estatus);
+                        $("#status").val(data.status);
                         $("#mant").val(data.mantenimiento);
                         $("#horas_a").val(data.horas_a);
                         $("#horas_p").val(data.horas_p);

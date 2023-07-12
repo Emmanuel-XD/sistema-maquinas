@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="nombre" class="form-label">numero de maquina</label>
+                                <label for="nombre" class="form-label">Numero de Maquina</label>
                                 <input type="text" id="name" name="name" class="form-control" value="<?php echo $fila['name']; ?>" required>
 
                             </div>
@@ -22,7 +22,7 @@
 
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="nombre" class="form-label">modelo</label>
+                                <label for="nombre" class="form-label">Modelo</label>
                                 <input type="text" id="modelo" name="modelo" class="form-control" value="<?php echo $fila['modelo']; ?>" required>
                             </div>
                         </div>
@@ -31,53 +31,72 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">serie</label><br>
+                                <label for="password">Serie</label><br>
                                 <input type="text" name="serie" id="serie" class="form-control" value="<?php echo $fila['serie']; ?>" required>
                             </div>
                         </div>
 
-
-
-                        <input type="hidden" name="accion" value="editar_prov">
-                        <input type="hidden" name="id" value="<?php echo $fila['id']; ?>">
-
-
-                        <br>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" onclick="editarProv(<?php echo $fila['id']; ?>)">Guardar</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Ubicacion</label>
+                                <select name="ubicacion" id="ubicacion" class="form-control" required>
+                                    <option <?php echo $fila['ubicacion'] === 'Tijuana' ? 'selected' : ''; ?> value="Tijuana">Tijuana</option>
+                                    <option <?php echo $fila['ubicacion'] === 'Tren Maya' ? 'selected' : ''; ?> value="Tren Maya">Tren Maya</option>
+                                    <option <?php echo $fila['ubicacion'] === 'Guadalajara' ? 'selected' : ''; ?> value="Guadalajara">Guadalajara</option>
+                                    <option <?php echo $fila['ubicacion'] === 'Veracruz' ? 'selected' : ''; ?> value="Veracruz">Veracruz</option>
+                                </select>
+                            </div>
                         </div>
-
                     </div>
 
-                </form>
+                    <div class="form-group">
+                        <label for="status" class="form-label">Estatus</label>
+                        <select name="status" id="status" class="form-control" required>
+                            <option <?php echo $fila['status'] === 'Activo' ? 'selected' : ''; ?> value="Activo">Activo</option>
+                            <option <?php echo $fila['status'] === 'Inactivo' ? 'selected' : ''; ?> value="Inactivo">Inactivo</option>
+                        </select>
+                    </div>
+
+                    <input type="hidden" name="accion" value="editar_prov">
+                    <input type="hidden" name="id" value="<?php echo $fila['id']; ?>">
+
+
+                    <br>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="editarProv(<?php echo $fila['id']; ?>)">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+
             </div>
+
+            </form>
         </div>
     </div>
+</div>
 
-    <script>
-        function editarProv(id) {
-            var datosFormulario = $("#editProv" + id).serialize();
+<script>
+    function editarProv(id) {
+        var datosFormulario = $("#editProv" + id).serialize();
 
-            $.ajax({
-                url: "../includes/functions.php",
-                type: "POST",
-                data: datosFormulario,
-                dataType: "json",
-                success: function(response) {
-                    if (response === "correcto") {
-                        alert("El registro se ha actualizado correctamente");
-                        setTimeout(function() {
-                            location.assign('maquinas.php');
-                        }, 2000);
-                    } else {
-                        alert("Ha ocurrido un error al actualizar el registro");
-                    }
-                },
-                error: function() {
-                    alert("Error de comunicacion con el servidor");
+        $.ajax({
+            url: "../includes/functions.php",
+            type: "POST",
+            data: datosFormulario,
+            dataType: "json",
+            success: function(response) {
+                if (response === "correcto") {
+                    alert("El registro se ha actualizado correctamente");
+                    setTimeout(function() {
+                        location.assign('maquinas.php');
+                    }, 2000);
+                } else {
+                    alert("Ha ocurrido un error al actualizar el registro");
                 }
-            });
-        }
-    </script>
+            },
+            error: function() {
+                alert("Error de comunicacion con el servidor");
+            }
+        });
+    }
+</script>

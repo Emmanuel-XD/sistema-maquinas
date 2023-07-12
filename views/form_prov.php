@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="nombre" class="form-label">numero de maquina</label>
+                                <label for="nombre" class="form-label">Numero de Maquina</label>
                                 <input type="text" id="name" name="name" class="form-control" required>
 
                             </div>
@@ -22,7 +22,7 @@
 
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="nombre" class="form-label">modelo</label>
+                                <label for="nombre" class="form-label">Modelo</label>
                                 <input type="text" id="modelo" name="modelo" class="form-control" required>
                             </div>
                         </div>
@@ -31,12 +31,33 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">serie</label><br>
+                                <label for="password">Serie</label><br>
                                 <input type="text" name="serie" id="serie" class="form-control" required>
                             </div>
                         </div>
 
 
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Ubicacion</label>
+                                <select name="ubicacion" id="ubicacion" class="form-control" required>
+                                    <option value="0">Selecciona una opcion</option>
+                                    <option value="Tijuana">Tijuana</option>
+                                    <option value="Guadalajara">Guadalajara</option>
+                                    <option value="Veracruz">Veracruz</option>
+                                    <option value="Tren Maya">Tren Maya</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status" class="form-label">Estatus</label>
+                        <select name="status" id="status" class="form-control" required>
+                            <option value="0">Selecciona una opcion</option>
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                        </select>
                     </div>
 
 

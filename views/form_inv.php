@@ -13,14 +13,17 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="password">lugar de trabajo</label><br>
-                                <select name="id_maquina" id="id_maquina" class="form-control">
-                                    <option value="maquina 1">maquina 1</option>
-                                    <option value="maquina 2">maquina 2</option>
-                                    <option value="maquina 3">maquina 3</option>
-                                    <option value="maquina 4">maquina 4</option>
-
-
-
+                                <select class="form-control" name="id_maquina" id="id_maquina">
+                                    <option value="0">Selecciona una opción</option>
+                                    <?php
+                                    include("../includes/db.php");
+                                    // Código para mostrar categorías desde otra tabla
+                                    $sql = "SELECT * FROM maquinas ";
+                                    $resultado = mysqli_query($conexion, $sql);
+                                    while ($consulta = mysqli_fetch_array($resultado)) {
+                                        echo '<option value="' . $consulta['id'] . '">' . $consulta['name'] . '</option>';
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -57,7 +60,7 @@
                         <div class="col-sm-6"><!--input1 operador = codigo-->
                             <div class="mb-3">
                                 <label for="password">hrs inactiva</label><br>
-                                <input type="number" step=".01" name="horas_in" id="minimo" class="form-control" required>
+                                <input type="number" step=".01" name="horas_in" id="horas_in" class="form-control" required>
                             </div>
                         </div><!--input1 operador = codigo-->
                     </div>
@@ -66,14 +69,14 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="password"> horometro inicial</label><br>
-                                <input type="number" step=".01" id="horometro_i" name="horometro_i" class="form-control">
+                                <input type="number" step=".01" id="horometraje_i" name="horometraje_i" class="form-control">
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="password">horometro terminal </label><br>
-                                <input type="number" step=".01" id="horometro_f" name="horometro_i" class="form-control">
+                                <input type="number" step=".01" id="horometraje_f" name="horometraje_f" class="form-control">
                             </div>
                         </div>
                     </div>

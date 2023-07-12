@@ -29,12 +29,11 @@ session_start();
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>numero de maquina</th>
-                                <th>modelo</th>
-                                <th>serie</th>
-                                <!-- <th>Telefono</th>
-                                <th>RFC</th>
-                                <th>Correo</th>-->
+                                <th>Numero Maquina</th>
+                                <th>Modelo</th>
+                                <th>Serie</th>
+                                <th>Ubicacion</th>
+                                <th>Status</th>
                                 <th>Fecha</th>
                                 <th>Acciones.</th>
                             </tr>
@@ -50,7 +49,8 @@ session_start();
                                     <td><?php echo $fila['name']; ?></td>
                                     <td><?php echo $fila['modelo']; ?></td>
                                     <td><?php echo $fila['serie']; ?></td>
-
+                                    <td><?php echo $fila['ubicacion']; ?></td>
+                                    <td><?php echo $fila['status']; ?></td>
                                     <td><?php echo $fila['fecha']; ?></td>
                                     <td>
                                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar<?php echo $fila['id']; ?>">
