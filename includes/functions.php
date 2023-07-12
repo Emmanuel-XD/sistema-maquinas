@@ -40,8 +40,8 @@ function insertar_maquina()
     extract($_POST);
     include "db.php";
 
-    $consulta = "INSERT INTO maquinas (name, modelo, serie) 
-    VALUES ('$name', '$modelo','$serie')";
+    $consulta = "INSERT INTO maquinas (name, modelo, serie, ubicacion, status) 
+    VALUES ('$name', '$modelo','$serie','$ubicacion','$status')";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado) {
@@ -65,8 +65,8 @@ function insertar_inventario()
     extract($_POST);
     include "db.php";
 
-    $consulta = "INSERT INTO inventario (operador, observacion, horas_t, horas_in, horometraje_i, horometraje_f,lugar_t,fallo,fecha,hora_paro,hora_reinicio,gastos_falla) 
-    VALUES ('$operador', '$observacion','$horas_t','$horas_in','$horometraje_i','$horometraje_f','$lugar_t','$fallo','$fecha','$hora_paro','$hora_reinicio','$gastos_falla')";
+    $consulta = "INSERT INTO inventario (id_maquina,operador, observacion, horas_t, horas_in, horometraje_i, horometraje_f,lugar_t,fallo,fecha,hora_paro,hora_reinicio,gastos_falla) 
+    VALUES ('$id_maquina','$operador', '$observacion','$horas_t','$horas_in','$horometraje_i','$horometraje_f','$lugar_t','$fallo','$fecha','$hora_paro','$hora_reinicio','$gastos_falla')";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado) {
@@ -114,7 +114,7 @@ function editar_prov()
 
 
     $consulta = "UPDATE maquinas SET name = '$name', modelo = '$modelo', 
-    serie = '$serie' WHERE id = '$id' ";
+    serie = '$serie' , ubicacion = '$ubicacion', status = '$status' WHERE id = '$id' ";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado) {
