@@ -31,7 +31,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
     <link rel="stylesheet" href="../package/dist/sweetalert2.css">
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-
+    <link href="../css/estilos.css" rel="stylesheet">
     <script src="../js/jquery.min.js"></script>
 
 </head>
@@ -56,7 +56,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="../views/index.php">
-                    <i class=""></i>  <!--fas fa-fw fa-tachometer-alt-->
+                    <i class=""></i> <!--fas fa-fw fa-tachometer-alt-->
                     <span>GLOBAL INFRA</span></a>
             </li>
 
@@ -78,9 +78,9 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Ver Modulos</h6>
                         <a class="collapse-item" href="../views/inventario.php">reportes diarios </a>
-                        <a class="collapse-item" href="../views/inventario.php">reportes mensuales </a>
-                        <a class="collapse-item" href="../views/inventario.php">reporte hrs de maquinas</a>
-                      <!--  <a class="collapse-item" href="../views/codbarra.php">reporte del mes</a>-->
+                        <a class="collapse-item" href="../views/r_mensuales.php">reportes mensuales </a>
+                        <a class="collapse-item" href="../views/horas_total.php">reporte hrs de maquinas</a>
+                        <!--  <a class="collapse-item" href="../views/codbarra.php">reporte del mes</a>-->
                     </div>
                 </div>
             </li>
@@ -104,7 +104,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-         <!--   <div class="sidebar-heading">
+            <!--   <div class="sidebar-heading">
                 Addons
             </div>-->
 
@@ -125,21 +125,21 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
             </li>-->
 
             <!-- Nav Item - Charts -->
-           <!-- <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="../views/categorias.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Categorias</span></a>-->
-                    
+
             </li>
             <?php if ($_SESSION["type"] == 1) { ?>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="../views/usuarios.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Usuarios</span></a>
-            </li>
+                <!-- Nav Item - Tables -->
+                <li class="nav-item">
+                    <a class="nav-link" href="../views/usuarios.php">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Usuarios</span></a>
+                </li>
             <?php }
-                            ?>
+            ?>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -168,7 +168,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
                     </button>
 
                     <!-- Topbar Search -->
-                   <!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             
                             <input type="text" class="form-control bg-light border-0 small" placeholder="buscar ..." aria-label="Search" aria-describedby="basic-addon2">
@@ -179,17 +179,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
                             </div>
                         </div>
                     </form>-->
-                    <form action="#">
-      <label for="lang"> MAQUINA: </label>
-      <select name="lenguajes" id="lang">
-        <option value="javascript">maquina 1</option>
-        <option value="php">maquina 2</option>
-        <option value="java">maquina 3</option>
-        <option value="golang">maquina 4</option>
-        <option value="python">maquina 5</option>
-      </select>
-      <input type="submit" value="seleccionar" />
-</form>
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
