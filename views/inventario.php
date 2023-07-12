@@ -20,7 +20,31 @@ session_start();
                 <a id="download-link" style="display: none"></a>
 
 
-                <form action="#">
+                <form action="../includes/guardar.php" method="POST" accept-charset="utf-8" id="filtro-form">
+                    <br>
+                    <div class="row">
+
+                        <div class="col-md-4">
+
+                            <div class="form-group">
+                                <label><b>Del dia</b></label>
+                                <input type="date" name="star" id="star" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b> Hasta el dia</b></label>
+                                <input type="date" name="fin" id="fin" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b></b></label> <br>
+                                <button type="button" class="btn btn-outline-primary" id="filtro"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                <!--<button type="submit" class="btn btn-danger ">Generar Reporte</button>-->
+                            </div>
+                        </div>
+                    </div>
                     <br>
                     <div class="row" id="datosMaquina">
                         <div class="col-md-3">
@@ -40,31 +64,31 @@ session_start();
                         </div>
                         <div class="col-md-3">
                             <label for="for-label">Modelo</label>
-                            <input type="text" class="form-control" name="modelo" id="modelo">
+                            <input type="text" class="form-control" name="modelo" id="modelo" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Serie</label>
-                            <input type="text" class="form-control" name="serie" id="serie">
+                            <input type="text" class="form-control" name="serie" id="serie" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Ubicacion</label>
-                            <input type="text" class="form-control" name="ubicacion" id="ubicacion">
+                            <input type="text" class="form-control" name="ubicacion" id="ubicacion" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Estatus</label>
-                            <input type="text" class="form-control" name="estatus" id="estatus">
+                            <input type="text" class="form-control" name="estatus" id="estatus" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Mantenimiento</label>
-                            <input type="text" class="form-control" name="mant" id="mant">
+                            <input type="text" class="form-control" name="mant" id="mant" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Total de Hrs Activa</label>
-                            <input type="text" class="form-control" name="horas_a" id="horas_a">
+                            <input type="text" class="form-control" name="horas_a" id="horas_a" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Total de Hrs Parada</label>
-                            <input type="text" class="form-control" name="horas_p" id="horas_p">
+                            <input type="text" class="form-control" name="horas_p" id="horas_p" readonly>
                         </div>
                     </div>
                     <br>

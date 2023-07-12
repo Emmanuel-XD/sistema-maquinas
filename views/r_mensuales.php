@@ -27,13 +27,13 @@ session_start();
                         <div class="col-md-4">
 
                             <div class="form-group">
-                                <label><b>Inicio de mes</b></label>
+                                <label><b>Del dia</b></label>
                                 <input type="date" name="star" id="star" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label><b> Fin de mes</b></label>
+                                <label><b> Hasta el dia</b></label>
                                 <input type="date" name="fin" id="fin" class="form-control" required>
                             </div>
                         </div>
@@ -45,66 +45,55 @@ session_start();
                             </div>
                         </div>
                     </div>
-
-
-
-                    <div class="row">
+                    <br>
+                    <div class="row" id="datosMaquina">
                         <div class="col-md-3">
                             <label for="lang">MAQUINA:</label>
-                            <select class="form-control" name="lenguajes" id="lang">
-                                <option value="0">Selecciona una opcion</option>
+                            <select class="form-control" name="name" id="name">
+                                <option value="0">Selecciona una opción</option>
                                 <?php
-
                                 include("../includes/db.php");
-                                //Codigo para mostrar categorias desde otra tabla
+                                // Código para mostrar categorías desde otra tabla
                                 $sql = "SELECT * FROM maquinas ";
                                 $resultado = mysqli_query($conexion, $sql);
                                 while ($consulta = mysqli_fetch_array($resultado)) {
-                                    echo '<option value="' . $consulta['id'] . '">' . $consulta['name'] . '</option>';
+                                    echo '<option value="' . $consulta['name'] . '">' . $consulta['name'] . '</option>';
                                 }
-
                                 ?>
                             </select>
                         </div>
-
                         <div class="col-md-3">
                             <label for="for-label">Modelo</label>
-                            <input type="text" class="form-control" name="modelo" id="modelo">
+                            <input type="text" class="form-control" name="modelo" id="modelo" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Serie</label>
-                            <input type="text" class="form-control" name="serie" id="serie">
+                            <input type="text" class="form-control" name="serie" id="serie" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Ubicacion</label>
-                            <input type="text" class="form-control" name="ubicacion" id="ubicacion">
+                            <input type="text" class="form-control" name="ubicacion" id="ubicacion" readonly>
                         </div>
-
-                    </div>
-
-                    <div class="row">
                         <div class="col-md-3">
                             <label for="">Estatus</label>
-                            <input type="text" class="form-control" name="estatus" id="estatus">
+                            <input type="text" class="form-control" name="estatus" id="estatus" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Mantenimiento</label>
-                            <input type="text" class="form-control" name="mant" id="mant">
+                            <input type="text" class="form-control" name="mant" id="mant" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Total de Hrs Activa</label>
-                            <input type="text" class="form-control" name="horas_a" id="horas_a">
+                            <input type="text" class="form-control" name="horas_a" id="horas_a" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Total de Hrs Parada</label>
-                            <input type="text" class="form-control" name="horas_p" id="horas_p">
+                            <input type="text" class="form-control" name="horas_p" id="horas_p" readonly>
                         </div>
                     </div>
-
                     <br>
                     <button type="submit" class="btn btn-primary" name="save" id="save">Guardar</button>
                 </form>
-
             </div>
 
             <div class="card-body">
@@ -192,6 +181,31 @@ session_start();
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $("#name").change(function() {
+                var maquinaSeleccionada = $(this).val();
+
+                $.ajax({
+                    url: "obtener_maquina.php",
+                    type: "POST",
+                    data: {
+                        name: maquinaSeleccionada
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        $("#modelo").val(data.modelo);
+                        $("#serie").val(data.serie);
+                        $("#ubicacion").val(data.ubicacion);
+                        $("#estatus").val(data.estatus);
+                        $("#mant").val(data.mantenimiento);
+                        $("#horas_a").val(data.horas_a);
+                        $("#horas_p").val(data.horas_p);
+                    }
+                });
+            });
+        });
+    </script>
     <script>
         $('#filtro').click(function(e) {
             e.preventDefault();
