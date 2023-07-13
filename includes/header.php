@@ -1,6 +1,7 @@
 <?php
 error_reporting(0);
 session_start();
+include "../includes/fecha.php";
 $usuario = $_SESSION['usuario'];
 $permiso = $_SESSION['type'];
 if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
@@ -103,32 +104,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <!--   <div class="sidebar-heading">
-                Addons
-            </div>-->
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <!--<li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Entregas</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">VER MODULOS</h6>
-                        <a class="collapse-item" href="venta.php">Venta</a>
-
-
-                    </div>
-                </div>
-            </li>-->
-
-            <!-- Nav Item - Charts -->
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="../views/categorias.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Categorias</span></a>-->
 
             </li>
             <?php if ($_SESSION["type"] == 1) { ?>
@@ -180,7 +156,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
                         </div>
                     </form>-->
 
-
+                    <p class="ml-auto"><?php echo fecha(); ?></p>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
