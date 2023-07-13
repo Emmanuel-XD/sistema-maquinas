@@ -94,7 +94,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header"> </h6>
+                        <h6 class="collapse-header">Ver Modulo </h6>
                         <a class="collapse-item" href="../views/maquinas.php">Nueva Maquina</a>
 
                     </div>
