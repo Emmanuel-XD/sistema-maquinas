@@ -53,7 +53,7 @@ session_start();
                                         </a>
                                     </td>
                                 </tr>
-                                <?php include "editar_oper  .php"; ?>
+                                <?php include "editar_oper.php"; ?>
                             <?php endwhile; ?>
 
                         </tbody>

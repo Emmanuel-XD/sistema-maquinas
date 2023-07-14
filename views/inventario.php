@@ -29,13 +29,7 @@ session_start();
                                 <input type="date" name="fin" id="fin" class="form-control" required>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label><b></b></label> <br>
-                                <button type="button" class="btn btn-outline-primary" id="filtro"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                <!--<button type="submit" class="btn btn-danger ">Generar Reporte</button>-->
-                            </div>
-                        </div>
+
                     </div>
 
                     <div class="row" id="datosMaquina">
@@ -64,7 +58,7 @@ session_start();
                         </div>
                         <div class="col-md-3">
                             <label for="">Ubicacion</label>
-                            <input type="text" class="form-control" name="ubicacion" id="ubicacion" readonly>
+                            <input type="text" class="form-control" name="lugar_t" id="lugar_t" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Estatus</label>
@@ -76,18 +70,17 @@ session_start();
                         </div>
                         <div class="col-md-3">
                             <label for="">Total de Hrs Activa</label>
-                            <input type="text" class="form-control" name="horas_a" id="horas_a" readonly>
+                            <input type="text" class="form-control" name="horas_t" id="horas_t" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Total de Hrs Parada</label>
-                            <input type="text" class="form-control" name="horas_p" id="horas_p" readonly>
+                            <input type="text" class="form-control" name="horas_in" id="horas_in" readonly>
                         </div>
                     </div>
                     <br>
+                    <button type="button" class="btn btn-primary" id="filtro">Buscar <i class="fa fa-search" aria-hidden="true"></i></button>
                     <button type="submit" class="btn btn-danger" name="save" id="save">Generar PDF</button>
-
-                    <button id="export-btn" class="btn btn-success" type="button">Exportar a Excel</button>
-                    <a id="download-link" style="display: none"></a>
+                    <button id="export-btn" class="btn btn-success" type="button">Exportar a Excel</button><a id="download-link" style="display: none"></a>
                 </form>
             </div>
 
@@ -195,11 +188,11 @@ session_start();
                     success: function(data) {
                         $("#modelo").val(data.modelo);
                         $("#serie").val(data.serie);
-                        $("#ubicacion").val(data.ubicacion);
+                        $("#lugar_t").val(data.lugar_t);
                         $("#status").val(data.status);
                         $("#mant").val(data.mantenimiento);
-                        $("#horas_a").val(data.horas_a);
-                        $("#horas_p").val(data.horas_p);
+                        $("#horas_t").val(data.total_horas_activas); // Actualizado a $("#horas_a")
+                        $("#horas_in").val(data.total_horas_inactivas); // Actualizado a $("#horas_p")
 
                         if (data.status === "Inactivo") {
                             $("#status").css("background-color", "red");

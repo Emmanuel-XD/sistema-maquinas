@@ -33,7 +33,7 @@
 
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">fecha </label><br>
+                                <label for="password">Fecha </label><br>
                                 <input type="date" step="" id="fecha" name="fecha" class="form-control" value="<?php echo $fila['fecha']; ?>">
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">horas trabajadas:</label><br>
+                                <label for="password">Horas Trabajadas:</label><br>
                                 <input type="number" name="horas_t" id="horas_t" class="form-control" value="<?php echo $fila['horas_t']; ?>" required>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
 
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">horas inactiva</label><br>
+                                <label for="password">Horas Inactiva</label><br>
                                 <input type="number" name="horas_in" id="horas_in" class="form-control" value="<?php echo $fila['horas_in']; ?>" required>
                             </div>
                         </div>
@@ -59,14 +59,14 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">horometro inicial </label><br>
+                                <label for="password">Horometro Inicial </label><br>
                                 <input type="number" step="" id="horometraje_i" name="horometraje_i" class="form-control" value="<?php echo $fila['horometraje_i']; ?>">
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">horometro terminnal </label><br>
+                                <label for="password">Horometro Terminnal </label><br>
                                 <input type="number" step="" id="horometraje_f" name="horometraje_f" class="form-control" value="<?php echo $fila['horometraje_f']; ?>">
                             </div>
                         </div>
@@ -75,12 +75,12 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">ubicacion</label><br>
+                                <label for="password">Ubicacion</label><br>
                                 <select name="lugar_t" id="lugar_t" class="form-control" required>
-                                    <option <?php echo $fila['lugar_t'] === 'tijuana' ? 'selected' : ''; ?> value="tijuana">tijuana</option>
-                                    <option <?php echo $fila['lugar_t'] === 'tren maya' ? 'selected' : ''; ?> value="tren maya">tren maya</option>
-                                    <option <?php echo $fila['lugar_t'] === 'guadalajara' ? 'selected' : ''; ?> value="guadalajara">guadalajara</option>
-                                    <option <?php echo $fila['lugar_t'] === 'veracruz' ? 'selected' : ''; ?> value="veracruz">veracruz</option>
+                                    <option <?php echo $fila['lugar_t'] === 'Tijuana' ? 'selected' : ''; ?> value="Tijuana">Tijuana</option>
+                                    <option <?php echo $fila['lugar_t'] === 'Tren maya' ? 'selected' : ''; ?> value="Tren maya">Tren maya</option>
+                                    <option <?php echo $fila['lugar_t'] === 'Guadalajara' ? 'selected' : ''; ?> value="Guadalajara">Guadalajara</option>
+                                    <option <?php echo $fila['lugar_t'] === 'Veracruz' ? 'selected' : ''; ?> value="Veracruz">Veracruz</option>
                                 </select>
                             </div>
                         </div>
