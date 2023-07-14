@@ -13,192 +13,194 @@ session_start();
                 <h6 class="m-0 font-weight-bold text-primary">Agregar un reporte</h6>
                 <br>
 
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#inv">
-                    <span class="glyphicon glyphicon-plus"></span> Agregar nuevo reporte <i class="fa fa-plus"></i>
-                </button>
-                <button id="export-btn" class="btn btn-outline-success" type="button">Exportar a Excel</button>
-                <a id="download-link" style="display: none"></a>
-
-
 
             </div>
 
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>OPERADOR</th>
-                                <th>FECHA</th>
-                                <th>HRS TRABAJADAS</th>
-                                <th>HRS INACTIVA</th>
-                                <th>HOROMETRO INICIAL</th>
-                                <th>HOROMETRO TERMINAL</th>
-                                <th>LUGAR DE TRABAJO</th>
-                                <th>TIPO DE FALLA</th>
-                                <th>hora de paro</th>
-                                <th>hora de reinicio</th>
-                                <th>gastos de falla</th>
-                                <th>OBSERVACIONES</th>
-                                <th>UPDATE/DEL</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            require_once("../includes/db.php");
-                            $result = mysqli_query($conexion, "SELECT * FROM inventario ");
-                            while ($fila = mysqli_fetch_assoc($result)) :
-                            ?>
-                                <tr>
-                                    <td><?php echo $fila['operador']; ?></td>
-                                    <td><?php echo $fila['fecha']; ?></td>
-                                    <td><?php echo $fila['horas_t']; ?></td>
-                                    <td><?php echo $fila['horas_in']; ?></td>
-                                    <td><?php echo $fila['horometraje_i']; ?></td>
-                                    <td><?php echo $fila['horometraje_f']; ?></td>
-                                    <td><?php echo $fila['lugar_t']; ?></td>
-                                    <td><?php echo $fila['fallo']; ?></td>
-                                    <td><?php echo $fila['hora_paro']; ?></td>
-                                    <td><?php echo $fila['hora_reinicio']; ?></td>
-                                    <td><?php echo $fila['gastos_falla']; ?></td>
-                                    <td><?php echo $fila['observacion']; ?></td>
-                                    <td>
-                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar<?php echo $fila['id']; ?>">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <a href="../includes/eliminar_inv.php?id=<?php echo $fila['id'] ?>" class="btn btn-danger btn-del">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php include "editar_inv.php"; ?>
-                            <?php endwhile; ?>
 
-                        </tbody>
-                    </table>
-                    <script>
-                        $('.btn-del').on('click', function(e) {
-                            e.preventDefault();
-                            const href = $(this).attr('href');
-
-                            Swal.fire({
-                                title: 'Estás seguro de eliminar este registro?',
-                                text: "¡No podrás revertir esto!",
-                                icon: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Si, eliminar!',
-                                cancelButtonText: 'Cancelar!',
-                            }).then((result) => {
-                                if (result.value) {
-                                    if (result.isConfirmed) {
-                                        Swal.fire(
-                                            'Eliminado!',
-                                            'El registro fue eliminado.',
-                                            'success'
-                                        );
+                <form id="inventarioForm">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Maquinaria</label>
+                                <select class="form-control" name="id_maquina" id="id_maquina">
+                                    <option value="0">Selecciona una opción</option>
+                                    <?php
+                                    include("../includes/db.php");
+                                    // Código para mostrar categorías desde otra tabla
+                                    $sql = "SELECT * FROM maquinas ";
+                                    $resultado = mysqli_query($conexion, $sql);
+                                    while ($consulta = mysqli_fetch_array($resultado)) {
+                                        echo '<option value="' . $consulta['id'] . '">' . $consulta['name'] . '</option>';
                                     }
-                                    document.location.href = href;
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Operador</label>
+                                <select class="form-control" name="id_operador" id="id_operador">
+                                    <option value="0">Selecciona una opción</option>
+                                    <?php
+                                    include("../includes/db.php");
+                                    // Código para mostrar categorías desde otra tabla
+                                    $sql = "SELECT * FROM operadores ";
+                                    $resultado = mysqli_query($conexion, $sql);
+                                    while ($consulta = mysqli_fetch_array($resultado)) {
+                                        echo '<option value="' . $consulta['id'] . '">' . $consulta['nombre'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="mb-3">
+                                <label for="password">Fecha</label><br>
+                                <input type="date" step="" id="fecha" name="fecha" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="mb-3">
+                                <label for="password">Horas Trabajadas</label><br>
+                                <input type="number" step=".01" name="horas_t" id="horas_t" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="mb-3">
+                                <label for="password">Horas Inactivas</label><br>
+                                <input type="number" step=".01" name="horas_in" id="horas_in" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="mb-3">
+                                <label for="password">Horometroja Inicial</label><br>
+                                <input type="number" step=".01" id="horometraje_i" name="horometraje_i" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="mb-3">
+                                <label for="password">Horometraje Terminal</label><br>
+                                <input type="number" step=".01" id="horometraje_f" name="horometraje_f" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="mb-3">
+                                <label for="password">Lugar de trabajo</label><br>
+                                <select name="lugar_t" id="lugar_t" class="form-control" required>
+                                    <option value="0">Selecciona una opción</option>
+                                    <option value="Tijuana">Tijuana</option>
+                                    <option value="Guadalajara">Guadalajara</option>
+                                    <option value="Veracruz">Veracruz</option>
+                                    <option value="Tren Maya">Tren Maya</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="mb-3">
+                                <label for="password">Tipo de falla</label><br>
+                                <select name="fallo" id="fallo" class="form-control" required>
+                                    <option value="0">Selecciona una opción</option>
+                                    <option value="MECANICA">MECANICA</option>
+                                    <option value="OPERADOR">OPERADOR</option>
+                                    <option value="DIESEL">DIESEL</option>
+                                    <option value="FRACTURA DE BOTE">FRACTURA DE BOTE</option>
+                                    <option value="SERVICIOS">SERVICIOS</option>
+                                    <option value="ACEITE">ACEITE</option>
+                                    <option value="FALTA DE TRAMO SEDENA">FALTA DE TRAMO SEDENA</option>
+                                    <option value="MANGUERAS">MANGUERAS</option>
+                                    <option value="CLIMA">CLIMA</option>
+                                    <option value="VOLADURAS">VOLADURAS</option>
+                                    <option value="OTRO">SIN FALLAS</option>
+                                    <option value="OTRO">OTRA</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="mb-3">
+                                <label for="password">Hora de paro</label><br>
+                                <input type="varchar" step="" id="hora_paro" name="hora_paro" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="mb-3">
+                                <label for="password">Hora de reinicio</label><br>
+                                <input type="varchar" step="" id="hora_reinicio" name="hora_reinicio" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="mb-3">
+                                <label for="password">Gastos de falla</label><br>
+                                <input type="text" step="" id="gastos_falla" name="gastos_falla" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombre" class="form-label">Observaciones</label>
+                        <input type="text" id="observacion" name="observacion" class="form-control" required>
+                    </div>
+
+                    <input type="hidden" name="accion" value="insertar_inventario">
+
+                    <br>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="register" name="registrar">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+
+                <script>
+                    $(document).ready(function() {
+                        $('#inventarioForm').submit(function(e) {
+                            e.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+                            var formData = $(this).serialize(); // Serializa los datos del formulario
+                            $.ajax({
+                                url: '../includes/functions.php',
+                                type: 'POST',
+                                data: formData,
+                                dataType: 'json', // Espera una respuesta en formato JSON
+                                success: function(response) {
+                                    if (response.status === 'success') {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Éxito',
+                                            text: 'Los datos se guardaron correctamente'
+                                        }).then(function() {
+                                            window.location = "add_report.php"; // Redirecciona al usuario a la página deseada
+                                        });
+                                    } else {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error',
+                                            text: 'Ocurrió un error inesperado'
+                                        });
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: 'Ocurrió un error inesperado'
+                                    });
                                 }
                             });
                         });
-                    </script>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        $(document).ready(function() {
-            $("#id").change(function() {
-                var maquinaSeleccionada = $(this).val();
+                    });
+                </script>
 
-                $.ajax({
-                    url: "obtener_maquina.php",
-                    type: "POST",
-                    data: {
-                        id: maquinaSeleccionada
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        $("#modelo").val(data.modelo);
-                        $("#serie").val(data.serie);
-                        $("#ubicacion").val(data.ubicacion);
-                        $("#status").val(data.status);
-                        $("#mant").val(data.mantenimiento);
-                        $("#horas_a").val(data.horas_a);
-                        $("#horas_p").val(data.horas_p);
-                    }
-                });
-            });
-        });
-    </script>
-    <script>
-        $('#filtro').click(function(e) {
-            e.preventDefault();
-            var startDate = $('#star').val();
-            var endDate = $('#fin').val();
-
-            var data = {
-                start: startDate,
-                end: endDate
-            };
-
-            $.ajax({
-                url: 'dataTable.php',
-                method: 'POST',
-                data: data,
-                success: function(response) {
-                    $('#table_id tbody').html(response);
-                }
-            });
-        });
-    </script>
-    <script>
-        function exportTableToExcel() {
-            const table = document.getElementById('dataTable');
-            const data = [];
-            const rows = table.querySelectorAll('tr');
-            rows.forEach((row) => {
-                const rowData = [];
-                const cells = row.querySelectorAll('th, td');
-                cells.forEach((cell) => {
-                    rowData.push(cell.innerText);
-                });
-                data.push(rowData);
-            });
-            const workbook = XLSX.utils.book_new();
-            const worksheet = XLSX.utils.aoa_to_sheet(data);
-            XLSX.utils.book_append_sheet(workbook, worksheet, 'Tabla');
-            const excelBuffer = XLSX.write(workbook, {
-                bookType: 'xlsx',
-                type: 'array'
-            });
-            const blob = new Blob([excelBuffer], {
-                type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-            });
-            const downloadLink = document.getElementById('download-link');
-            downloadLink.href = URL.createObjectURL(blob);
-            downloadLink.download = 'inventario.xlsx';
-            downloadLink.click();
-        }
-        const exportButton = document.getElementById('export-btn');
-        exportButton.addEventListener('click', exportTableToExcel);
-    </script>
-
-    <?php
-    $query = mysqli_query($conexion, "SELECT SUM(horas_t) FROM inventario");
-    $arrayDatos = array();
-    while ($row = mysqli_fetch_array($query)) {
-        $arrayDatos[] = $row;
-    }
-    print_r($arrayDatos);
-    //Ahora tienes la suma en $resultadototal
-    ?>
-    <span>total de horas activa </span> <span id="{{'$query'}}"></span>
-
-    <?php include "form_inv.php"; ?>
-    <?php include "../includes/footer.php"; ?>
+                <?php include "../includes/footer.php"; ?>
 </body>
 
 </html>

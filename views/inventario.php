@@ -12,8 +12,6 @@ session_start();
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Reportes Diarios o Mensuales</h6>
 
-
-
                 <form action="../includes/guardar.php" method="POST" accept-charset="utf-8" id="filtro-form">
                     <br>
                     <div class="row">
@@ -86,7 +84,10 @@ session_start();
                         </div>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary" name="save" id="save">Guardar</button>
+                    <button type="submit" class="btn btn-danger" name="save" id="save">Generar PDF</button>
+
+                    <button id="export-btn" class="btn btn-success" type="button">Exportar a Excel</button>
+                    <a id="download-link" style="display: none"></a>
                 </form>
             </div>
 
@@ -95,6 +96,7 @@ session_start();
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+
                                 <th>OPERADOR</th>
                                 <th>FECHA</th>
                                 <th>HRS TRABAJADAS</th>
@@ -103,9 +105,9 @@ session_start();
                                 <th>HOROMETRO TERMINAL</th>
                                 <th>LUGAR DE TRABAJO</th>
                                 <th>TIPO DE FALLA</th>
-                                <th>hora de paro</th>
-                                <th>hora de reinicio</th>
-                                <th>gastos de falla</th>
+                                <th>HORA DE PARO</th>
+                                <th>HORA DE REINICIO</th>
+                                <th>GASTOS DE FALLA</th>
                                 <th>OBSERVACIONES</th>
                                 <th>UPDATE/DEL</th>
                             </tr>
@@ -113,11 +115,14 @@ session_start();
                         <tbody>
                             <?php
                             require_once("../includes/db.php");
-                            $result = mysqli_query($conexion, "SELECT * FROM inventario ");
+                            $result = mysqli_query($conexion, "SELECT i.id, i.id_maquina,i.id_operador,i.observacion,i.horas_t,
+                            i.horas_in,i.horometraje_i,i.horometraje_f,i.lugar_t, i.fallo,i.hora_paro,i.hora_reinicio,i.fecha,i.gastos_falla, 
+                            o.nombre FROM inventario i INNER JOIN operadores o ON i.id_operador = o.id;");
                             while ($fila = mysqli_fetch_assoc($result)) :
                             ?>
                                 <tr>
-                                    <td><?php echo $fila['operador']; ?></td>
+
+                                    <td><?php echo $fila['nombre']; ?></td>
                                     <td><?php echo $fila['fecha']; ?></td>
                                     <td><?php echo $fila['horas_t']; ?></td>
                                     <td><?php echo $fila['horas_in']; ?></td>
@@ -210,6 +215,38 @@ session_start();
                 });
             });
         });
+    </script>
+
+    <script>
+        function exportTableToExcel() {
+            const table = document.getElementById('dataTable');
+            const data = [];
+            const rows = table.querySelectorAll('tr');
+            rows.forEach((row) => {
+                const rowData = [];
+                const cells = row.querySelectorAll('th, td');
+                cells.forEach((cell) => {
+                    rowData.push(cell.innerText);
+                });
+                data.push(rowData);
+            });
+            const workbook = XLSX.utils.book_new();
+            const worksheet = XLSX.utils.aoa_to_sheet(data);
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Tabla');
+            const excelBuffer = XLSX.write(workbook, {
+                bookType: 'xlsx',
+                type: 'array'
+            });
+            const blob = new Blob([excelBuffer], {
+                type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            });
+            const downloadLink = document.getElementById('download-link');
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.download = 'inventario.xlsx';
+            downloadLink.click();
+        }
+        const exportButton = document.getElementById('export-btn');
+        exportButton.addEventListener('click', exportTableToExcel);
     </script>
 
     <?php

@@ -12,8 +12,21 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="nombre" class="form-label">operador</label>
-                                <input type="text" id="operador" name="operador" class="form-control" value="<?php echo $fila['operador']; ?>" required>
+                                <label for="nombre" class="form-label">Operador</label>
+                                <select class="form-control" id="id_operador" name="id_operador" required>
+                                <option <?php echo $fila['id_operador'] === 'nombre' ? "selected='selected' " : "" ?> value="<?php echo $fila['id_operador']; ?>"><?php echo $fila['nombre']; ?> </option>
+                                <?php
+
+                                include("../includes/db.php");
+                                //Codigo para mostrar categorias desde otra tabla
+                                $sql = "SELECT * FROM operadores ";
+                                $resultado = mysqli_query($conexion, $sql);
+                                while ($consulta = mysqli_fetch_array($resultado)) {
+                                    echo '<option value="' . $consulta['id'] . '">' . $consulta['nombre'] . '</option>';
+                                }
+
+                                ?>
+                            </select>
 
                             </div>
                         </div>

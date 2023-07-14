@@ -11,15 +11,6 @@ session_start();
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Reportes de Total de Horas</h6>
-                <br>
-
-                <!--<button type="button" class="btn btn-success" data-toggle="modal" data-target="#inv">
-                    <span class="glyphicon glyphicon-plus"></span> Agregar nuevo reporte <i class="fa fa-plus"></i>
-                </button>-->
-                <button id="export-btn" class="btn btn-outline-success" type="button">Exportar a Excel</button>
-                <a id="download-link" style="display: none"></a>
-
-
                 <form action="../includes/guardar.php" method="POST" accept-charset="utf-8" id="filtro-form">
                     <br>
                     <div class="row">
@@ -93,6 +84,8 @@ session_start();
                     </div>
                     <br>
                     <!--<button type="submit" class="btn btn-primary" name="save" id="save">Guardar</button>-->
+                    <button id="export-btn" class="btn btn-outline-success" type="button">Exportar a Excel</button>
+                    <a id="download-link" style="display: none"></a>
                 </form>
             </div>
 
@@ -102,31 +95,27 @@ session_start();
                         <thead>
                             <tr>
                                 <th>Maquina</th>
-                                <th>Total de Horas</th>
-                                <th>Acciones</th>
+                                <th>Horas Activas/Trab.</th>
+                                <th>Horas Inactivas</th>
+
 
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             require_once("../includes/db.php");
-                            $result = mysqli_query($conexion, "SELECT * FROM inventario ");
+                            $result = mysqli_query($conexion, "SELECT i.id, i.id_maquina,i.id_operador,i.observacion,i.horas_t, 
+                            i.horas_in,i.horometraje_i,i.horometraje_f,i.lugar_t, i.fallo,i.hora_paro,i.hora_reinicio,i.fecha,
+                            i.gastos_falla, m.name FROM inventario i INNER JOIN maquinas m ON i.id_maquina = m.id;");
                             while ($fila = mysqli_fetch_assoc($result)) :
                             ?>
                                 <tr>
-                                    <td><?php echo $fila['operador']; ?></td>
-                                    <td><?php echo $fila['fecha']; ?></td>
+                                    <td><?php echo $fila['name']; ?></td>
+                                    <td><?php echo $fila['horas_t']; ?></td>
+                                    <td><?php echo $fila['horas_in']; ?></td>
 
-                                    <td>
-                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar<?php echo $fila['id']; ?>">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <a href="../includes/eliminar_inv.php?id=<?php echo $fila['id'] ?>" class="btn btn-danger btn-del">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
+
                                 </tr>
-                                <?php include "editar_inv.php"; ?>
                             <?php endwhile; ?>
 
                         </tbody>
@@ -183,6 +172,17 @@ session_start();
                         $("#mant").val(data.mantenimiento);
                         $("#horas_a").val(data.horas_a);
                         $("#horas_p").val(data.horas_p);
+
+                        if (data.status === "Inactivo") {
+                            $("#status").css("background-color", "red");
+                            $("#status").css("color", "white");
+                        } else if (data.status === "Activo") {
+                            $("#status").css("background-color", "green");
+                            $("#status").css("color", "white");
+                        } else {
+                            $("#status").css("background-color", "");
+                            $("#status").css("color", "");
+                        }
                     }
                 });
             });
@@ -211,19 +211,7 @@ session_start();
     </script>
 
 
-    <?php
-    $query = mysqli_query($conexion, "SELECT SUM(horas_t) FROM inventario");
-    $arrayDatos = array();
-    while ($row = mysqli_fetch_array($query)) {
-        $arrayDatos[] = $row;
-    }
-    print_r($arrayDatos);
-    //Ahora tienes la suma en $resultadototal
-    ?>
-    <span>total de horas activa </span> <span id="{{'$query'}}"></span>
 
-    <?php //include "form_inv.php"; 
-    ?>
     <?php include "../includes/footer.php"; ?>
 </body>
 
