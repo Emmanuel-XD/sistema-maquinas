@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-07-2023 a las 16:56:13
+-- Tiempo de generación: 14-07-2023 a las 18:21:24
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.8
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `inventario` (
   `id` int(11) NOT NULL,
   `id_maquina` int(11) NOT NULL,
-  `operador` varchar(100) DEFAULT NULL,
+  `id_operador` int(11) DEFAULT NULL,
   `observacion` varchar(250) DEFAULT NULL,
   `horas_t` int(150) DEFAULT NULL,
   `horas_in` int(150) DEFAULT NULL,
@@ -48,8 +48,8 @@ CREATE TABLE `inventario` (
 -- Volcado de datos para la tabla `inventario`
 --
 
-INSERT INTO `inventario` (`id`, `id_maquina`, `operador`, `observacion`, `horas_t`, `horas_in`, `horometraje_i`, `horometraje_f`, `lugar_t`, `fallo`, `hora_paro`, `hora_reinicio`, `fecha`, `gastos_falla`) VALUES
-(103, 11, 'Ernesto', '10', 10, 2, '5', 15, 'guadalajara', 'OTRO', '12', '10', '2023-07-12', '10');
+INSERT INTO `inventario` (`id`, `id_maquina`, `id_operador`, `observacion`, `horas_t`, `horas_in`, `horometraje_i`, `horometraje_f`, `lugar_t`, `fallo`, `hora_paro`, `hora_reinicio`, `fecha`, `gastos_falla`) VALUES
+(105, 2, 4, 'Ninguna', 10, 5, '10', 10, 'tijuana', 'OTRO', '10', '10', '2023-07-14', '0');
 
 -- --------------------------------------------------------
 
@@ -75,7 +75,30 @@ INSERT INTO `maquinas` (`id`, `name`, `modelo`, `serie`, `ubicacion`, `status`, 
 (2, 'Maquina 1', '336E', '01613', 'Tren Maya', 'Activo', '2023-07-12 14:02:14'),
 (10, 'Maquina 4', '336E', '0235', 'Veracruz', 'Inactivo', '2023-07-12 14:02:24'),
 (11, 'Maquina2', 'ksms', 'N6519100', 'Tijuana', 'Inactivo', '2023-07-12 14:02:35'),
-(12, 'Maquina 5', 'SMDK300', 'DHASFISD', 'Guadalajara', 'Inactivo', '2023-07-12 13:57:15');
+(12, 'Maquina 5', 'SMDK300', 'DHASFISD', 'Guadalajara', 'Activo', '2023-07-14 16:01:45');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `operadores`
+--
+
+CREATE TABLE `operadores` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `edad` int(50) NOT NULL,
+  `telefono` int(50) NOT NULL,
+  `fecha de registro` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `operadores`
+--
+
+INSERT INTO `operadores` (`id`, `nombre`, `apellido`, `edad`, `telefono`, `fecha de registro`) VALUES
+(3, 'Jesus', 'Garcia Marques', 20, 2147483647, '2023-07-14 15:49:08'),
+(4, 'Emmanuel', 'Gomez Chavez', 22, 54948151, '2023-07-14 15:48:00');
 
 -- --------------------------------------------------------
 
@@ -140,6 +163,12 @@ ALTER TABLE `maquinas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `operadores`
+--
+ALTER TABLE `operadores`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `permisos`
 --
 ALTER TABLE `permisos`
@@ -159,13 +188,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT de la tabla `maquinas`
 --
 ALTER TABLE `maquinas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `operadores`
+--
+ALTER TABLE `operadores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
