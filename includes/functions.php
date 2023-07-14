@@ -26,6 +26,10 @@ if (isset($_POST['accion'])) {
             editar_prov();
             break;
 
+        case 'editar_operador':
+            editar_operador();
+            break;
+
 
         case 'editar_user':
             editar_user();
@@ -154,6 +158,23 @@ function editar_prov()
     }
 }
 
+function editar_operador()
+{
+    require_once("db.php");
+
+    extract($_POST);
+
+
+    $consulta = "UPDATE operadores SET nombre = '$nombre', apellido = '$apellido', 
+    edad = '$edad' , telefono = '$telefono' WHERE id = '$id' ";
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if ($resultado) {
+        echo json_encode("correcto");
+    } else {
+        echo json_encode("error");
+    }
+}
 
 function editar_user()
 {
