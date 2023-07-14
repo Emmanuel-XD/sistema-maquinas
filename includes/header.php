@@ -78,9 +78,9 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Ver Modulos</h6>
-                        <a class="collapse-item" href="../views/inventario.php">Reportes diarios </a>
-                        <a class="collapse-item" href="../views/r_mensuales.php">Reportes mensuales </a>
-                        <a class="collapse-item" href="../views/horas_total.php">Reporte hrs de maquinas</a>
+                        <a class="collapse-item" href="../views/add_report.php">Agregar Reporte</a>
+                        <a class="collapse-item" href="../views/inventario.php">Reportes Generales</a>
+                        <a class="collapse-item" href="../views/horas_total.php">Reporte HRS de Maquina</a>
                         <!--  <a class="collapse-item" href="../views/codbarra.php">reporte del mes</a>-->
                     </div>
                 </div>
