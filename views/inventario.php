@@ -15,18 +15,27 @@ session_start();
                 <form action="../includes/guardar.php" method="POST" accept-charset="utf-8" id="filtro-form">
                     <br>
                     <div class="row">
-
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><b>Tipo de reporte</b></label>
+                            <select   class="form-control" name="type" id="type">
+                                <option value="">Selecciona una opción</option>
+                                <option value="1">Reporte mensual</option>
+                                <option value="2">Reporte semanal</option>
+                                <option value="3">Reporte diario</option>
+                            </select>
+                        </div>
+                        </div>
                         <div class="col-md-4">
-
                             <div class="form-group">
                                 <label><b>Del dia</b></label>
-                                <input type="date" name="star" id="star" class="form-control" required>
+                                <input type="date" name="start" id="start" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label><b> Hasta el dia</b></label>
-                                <input type="date" name="fin" id="fin" class="form-control" required>
+                                <input type="date" name="fin" id="fin" class="form-control" readonly>
                             </div>
                         </div>
 
@@ -61,7 +70,7 @@ session_start();
                             <input type="text" class="form-control" name="lugar_t" id="lugar_t" readonly>
                         </div>
                         <div class="col-md-3">
-                            <label for="">Estatus</label>
+                            <label for="">Estado</label>
                             <input type="text" class="form-control" name="status" id="status" readonly>
                         </div>
                         <div class="col-md-3">
@@ -106,41 +115,12 @@ session_start();
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            require_once("../includes/db.php");
-                            $result = mysqli_query($conexion, "SELECT i.id, i.id_maquina,i.id_operador,i.observacion,i.horas_t,
-                            i.horas_in,i.horometraje_i,i.horometraje_f,i.lugar_t, i.fallo,i.hora_paro,i.hora_reinicio,i.fecha,i.gastos_falla, 
-                            o.nombre FROM inventario i INNER JOIN operadores o ON i.id_operador = o.id;");
-                            while ($fila = mysqli_fetch_assoc($result)) :
-                            ?>
-                                <tr>
-
-                                    <td><?php echo $fila['nombre']; ?></td>
-                                    <td><?php echo $fila['fecha']; ?></td>
-                                    <td><?php echo $fila['horas_t']; ?></td>
-                                    <td><?php echo $fila['horas_in']; ?></td>
-                                    <td><?php echo $fila['horometraje_i']; ?></td>
-                                    <td><?php echo $fila['horometraje_f']; ?></td>
-                                    <td><?php echo $fila['lugar_t']; ?></td>
-                                    <td><?php echo $fila['fallo']; ?></td>
-                                    <td><?php echo $fila['hora_paro']; ?></td>
-                                    <td><?php echo $fila['hora_reinicio']; ?></td>
-                                    <td><?php echo $fila['gastos_falla']; ?></td>
-                                    <td><?php echo $fila['observacion']; ?></td>
-                                    <td>
-                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar<?php echo $fila['id']; ?>">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <a href="../includes/eliminar_inv.php?id=<?php echo $fila['id'] ?>" class="btn btn-danger btn-del">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php include "editar_inv.php"; ?>
-                            <?php endwhile; ?>
-
+                                
+                        
                         </tbody>
                     </table>
+                    <?php include "editar_inv.php"; ?>
+
                     <script>
                         $('.btn-del').on('click', function(e) {
                             e.preventDefault();
@@ -173,42 +153,6 @@ session_start();
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function() {
-            $("#id").change(function() {
-                var maquinaSeleccionada = $(this).val();
-
-                $.ajax({
-                    url: "obtener_maquina.php",
-                    type: "POST",
-                    data: {
-                        id: maquinaSeleccionada
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        $("#modelo").val(data.modelo);
-                        $("#serie").val(data.serie);
-                        $("#lugar_t").val(data.lugar_t);
-                        $("#status").val(data.status);
-                        $("#mant").val(data.mantenimiento);
-                        $("#horas_t").val(data.total_horas_activas); // Actualizado a $("#horas_a")
-                        $("#horas_in").val(data.total_horas_inactivas); // Actualizado a $("#horas_p")
-
-                        if (data.status === "Inactivo") {
-                            $("#status").css("background-color", "red");
-                            $("#status").css("color", "white");
-                        } else if (data.status === "Activo") {
-                            $("#status").css("background-color", "green");
-                            $("#status").css("color", "white");
-                        } else {
-                            $("#status").css("background-color", "");
-                            $("#status").css("color", "");
-                        }
-                    }
-                });
-            });
-        });
-    </script>
 
     <script>
         function exportTableToExcel() {
@@ -255,5 +199,5 @@ session_start();
 
     <?php include "../includes/footer.php"; ?>
 </body>
-
+    <script src="../js/inventario.js"></script>
 </html>
