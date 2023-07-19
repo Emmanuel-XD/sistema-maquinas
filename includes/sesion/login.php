@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | control de maquinas</title>
+    <title>Login | Control De Maquinas</title>
 
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style.css">
@@ -18,12 +18,15 @@
 
     <div class="container">
         <div id="login"></div>
-        
+
         <div class="row justify-content-center align-items-center min-vh-100">
-            <div id="login-box" class="col-5 col-md-5 col-lg-5">
-            <img src="Logo-Primario (1).png" style="max-height: 84px;">
+            <div id="login-box" class="col-12 col-md-8 col-lg-6">
+                <center>
+                    <img src="Logo-Primario (1).png" style="max-height: 84px;">
+                </center>
+                <br>
                 <h2 class="text-center">ENTRAR</h2>
-                
+
 
 
                 <div id="alert">
@@ -47,7 +50,7 @@
                 </form>
                 <br>
 
-               <!--<p class="text-center"> <a href="../recovery.php">olvidaste tu contraseña</a></p>-->
+                <!--<p class="text-center"> <a href="../recovery.php">olvidaste tu contraseña</a></p>-->
             </div>
         </div>
     </div>
