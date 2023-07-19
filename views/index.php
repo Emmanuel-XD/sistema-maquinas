@@ -43,7 +43,7 @@ include "../includes/header.php";
               </div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-calendar fa-2x text-gray-300"></i>
+              <i class="fas fa-male fa-2x text-gray-300"></i>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@ include "../includes/header.php";
               </div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              <i class="fas fa-car fa-2x text-gray-300"></i>
             </div>
           </div>
         </div>
@@ -125,7 +125,8 @@ include "../includes/header.php";
               </div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-comments fa-2x text-gray-300"></i>
+              <i class="fas fa-user fa-2x text-gray-300"></i>
+
             </div>
           </div>
         </div>
