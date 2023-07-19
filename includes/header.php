@@ -72,7 +72,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fas fa-fw fa-clipboard-list"></i>
                     <span>Reportes</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -89,7 +89,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-fw fa-car"></i>
                     <span>Maquinas</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -106,7 +106,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-user-plus"></i>
+                    <i class="fas fa-male"></i>
                     <span>Operadores</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -129,7 +129,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
                     <a class="nav-link" href="../views/usuarios.php">
-                        <i class="fas fa-fw fa-table"></i>
+                        <i class="fas fa-fw fa-user-plus"></i>
                         <span>Usuarios</span></a>
                 </li>
             <?php }
@@ -161,20 +161,21 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="buscar ..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>-->
+                    <style>
+                        .align-left {
+                            float: left;
+                            background-color: #4e73df;
+                            background-image: linear-gradient(180deg, #EB0045 10%, #EB0045 100%);
+                            background-size: cover;
+                            color: white;
+                            padding: 8px 12px;
+                            border-radius: 6px;
+                        }
+                    </style>
 
-                    <p class="ml-auto"><?php echo fecha(); ?></p>
+
+                    <p class="align-left"><?php echo fecha(); ?></p>
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
