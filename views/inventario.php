@@ -67,7 +67,7 @@ session_start();
                         </div>
                         <div class="col-md-3">
                             <label for="">Ubicacion</label>
-                            <input type="text" class="form-control" name="lugar_t" id="lugar_t" readonly>
+                            <input type="text" class="form-control" name="ubicacion" id="ubicacion" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Estado</label>
@@ -186,16 +186,7 @@ session_start();
         exportButton.addEventListener('click', exportTableToExcel);
     </script>
 
-    <?php
-    $query = mysqli_query($conexion, "SELECT SUM(horas_t) FROM inventario");
-    $arrayDatos = array();
-    while ($row = mysqli_fetch_array($query)) {
-        $arrayDatos[] = $row;
-    }
-    print_r($arrayDatos);
-    //Ahora tienes la suma en $resultadototal
-    ?>
-    <span>total de horas activa </span> <span id="{{'$query'}}"></span>
+   
 
     <?php include "../includes/footer.php"; ?>
 </body>
