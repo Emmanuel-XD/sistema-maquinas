@@ -77,7 +77,7 @@
                 success: function(data) {
                     $("#modelo").val(data.modelo);
                     $("#serie").val(data.serie);
-                    $("#lugar_t").val(data.lugar_t);
+                    $("#ubicacion").val(data.ubicacion);
                     $("#status").val(data.status);
                     $("#mant").val(data.mantenimiento);
                     $("#horas_t").val(data.total_horas_activas); // Actualizado a $("#horas_a")
