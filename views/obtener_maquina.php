@@ -15,7 +15,7 @@ if (isset($_POST['id'])) {
       'name' => $row['name'],
       'modelo' => $row['modelo'],
       'serie' => $row['serie'],
-      'lugar_t' => $row['lugar_t'],
+      'ubicacion' => $row['ubicacion'],
       'status' => $row['status'],
       'total_horas_activas' => $row['total_horas_activas'],
       'total_horas_inactivas' => $row['total_horas_inactivas'],

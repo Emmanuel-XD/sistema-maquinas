@@ -11,30 +11,24 @@ session_start();
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Reportes de Total de Horas</h6>
-                <form action="../includes/guardar.php" method="POST" accept-charset="utf-8" id="filtro-form">
+                <form action="../includes/consultar.php" method="POST" accept-charset="utf-8" id="filtro-form">
                     <br>
                     <div class="row">
 
                         <div class="col-md-4">
 
                             <div class="form-group">
-                                <label><b>Inicio de Mes</b></label>
+                                <label><b>Fecha Inicio</b></label>
                                 <input type="date" name="star" id="star" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label><b> Fin de Mes</b></label>
+                                <label><b> Fecha Fin</b></label>
                                 <input type="date" name="fin" id="fin" class="form-control" required>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label><b></b></label> <br>
-                                <button type="button" class="btn btn-outline-primary" id="filtro"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                <!--<button type="submit" class="btn btn-danger ">Generar Reporte</button>-->
-                            </div>
-                        </div>
+
                     </div>
 
                     <div class="row" id="datosMaquina">
@@ -75,18 +69,20 @@ session_start();
                         </div>
                         <div class="col-md-3">
                             <label for="">Total de Hrs Activa</label>
-                            <input type="text" class="form-control" name="horas_a" id="horas_a" readonly>
+                            <input type="text" class="form-control" name="horas_t" id="horas_t" readonly>
                         </div>
                         <div class="col-md-3">
                             <label for="">Total de Hrs Parada</label>
-                            <input type="text" class="form-control" name="horas_p" id="horas_p" readonly>
+                            <input type="text" class="form-control" name="horas_in" id="horas_in" readonly>
                         </div>
                     </div>
+
                     <br>
                     <!--<button type="submit" class="btn btn-primary" name="save" id="save">Guardar</button>-->
-                    <button id="export-btn" class="btn btn-outline-success" type="button">Exportar a Excel</button>
-                    <a id="download-link" style="display: none"></a>
+                    <button type="button" class="btn btn-primary" id="filtro">Buscar <i class="fa fa-search" aria-hidden="true"></i></button>
+                    <button id="export-btn" class="btn btn-success" type="button">Exportar a Excel</button><a id="download-link" style="display: none"></a>
                 </form>
+
             </div>
 
             <div class="card-body">
@@ -170,8 +166,8 @@ session_start();
                         $("#ubicacion").val(data.ubicacion);
                         $("#status").val(data.status);
                         $("#mant").val(data.mantenimiento);
-                        $("#horas_a").val(data.horas_a);
-                        $("#horas_p").val(data.horas_p);
+                        $("#horas_t").val(data.total_horas_activas); // Actualizado a $("#horas_a")
+                        $("#horas_in").val(data.total_horas_inactivas); // Actualizado a $("#horas_p")
 
                         if (data.status === "Inactivo") {
                             $("#status").css("background-color", "red");
@@ -188,29 +184,59 @@ session_start();
             });
         });
     </script>
-    <script>
-        $('#filtro').click(function(e) {
-            e.preventDefault();
-            var startDate = $('#star').val();
-            var endDate = $('#fin').val();
 
-            var data = {
-                start: startDate,
-                end: endDate
-            };
+    <script>
+        $("#filtro").click(function() {
+            var starDate = $("#star").val();
+            var endDate = $("#fin").val();
+            var idMaquina = $("#id").val();
 
             $.ajax({
-                url: 'dataTable.php',
-                method: 'POST',
-                data: data,
-                success: function(response) {
-                    $('#table_id tbody').html(response);
+                url: "../includes/consultar.php",
+                type: "POST",
+                data: {
+                    star: starDate,
+                    fin: endDate,
+                    id: idMaquina
+                },
+                success: function(data) {
+                    $("#dataTable").html(data);
                 }
             });
         });
     </script>
 
-
+    <script>
+        function exportTableToExcel() {
+            const table = document.getElementById('dataTable');
+            const data = [];
+            const rows = table.querySelectorAll('tr');
+            rows.forEach((row) => {
+                const rowData = [];
+                const cells = row.querySelectorAll('th, td');
+                cells.forEach((cell) => {
+                    rowData.push(cell.innerText);
+                });
+                data.push(rowData);
+            });
+            const workbook = XLSX.utils.book_new();
+            const worksheet = XLSX.utils.aoa_to_sheet(data);
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Tabla');
+            const excelBuffer = XLSX.write(workbook, {
+                bookType: 'xlsx',
+                type: 'array'
+            });
+            const blob = new Blob([excelBuffer], {
+                type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            });
+            const downloadLink = document.getElementById('download-link');
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.download = 'total_de_horas.xlsx';
+            downloadLink.click();
+        }
+        const exportButton = document.getElementById('export-btn');
+        exportButton.addEventListener('click', exportTableToExcel);
+    </script>
 
     <?php include "../includes/footer.php"; ?>
 </body>
