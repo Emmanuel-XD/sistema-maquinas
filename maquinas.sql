@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 14-07-2023 a las 18:21:24
--- Versión del servidor: 10.4.20-MariaDB
--- Versión de PHP: 8.0.8
+-- Host: 127.0.0.1
+-- Generation Time: Jul 21, 2023 at 06:51 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `maquinas`
+-- Database: `maquinas`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `inventario`
+-- Table structure for table `inventario`
 --
 
 CREATE TABLE `inventario` (
@@ -34,27 +34,28 @@ CREATE TABLE `inventario` (
   `observacion` varchar(250) DEFAULT NULL,
   `horas_t` int(150) DEFAULT NULL,
   `horas_in` int(150) DEFAULT NULL,
-  `horometraje_i` varchar(150) DEFAULT NULL,
-  `horometraje_f` int(150) DEFAULT NULL,
+  `horometraje_i` time DEFAULT NULL,
+  `horometraje_f` time DEFAULT NULL,
   `lugar_t` varchar(150) DEFAULT NULL,
   `fallo` varchar(150) NOT NULL,
-  `hora_paro` varchar(50) DEFAULT NULL,
-  `hora_reinicio` varchar(50) DEFAULT NULL,
+  `hora_paro` time DEFAULT NULL,
+  `hora_reinicio` time DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `gastos_falla` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `inventario`
+-- Dumping data for table `inventario`
 --
 
 INSERT INTO `inventario` (`id`, `id_maquina`, `id_operador`, `observacion`, `horas_t`, `horas_in`, `horometraje_i`, `horometraje_f`, `lugar_t`, `fallo`, `hora_paro`, `hora_reinicio`, `fecha`, `gastos_falla`) VALUES
-(105, 2, 4, 'Ninguna', 10, 5, '10', 10, 'tijuana', 'OTRO', '10', '10', '2023-07-14', '0');
+(107, 2, 0, '', 0, 0, '00:00:00', '00:00:00', '', '', '00:00:00', '00:00:00', '0000-00-00', ''),
+(108, 2, 3, 'ninguna', 42, 2, '06:00:00', '00:00:00', 'Tijuana', 'SIN FALLAS', '08:00:00', '00:00:00', '2023-07-21', '0');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `maquinas`
+-- Table structure for table `maquinas`
 --
 
 CREATE TABLE `maquinas` (
@@ -65,22 +66,22 @@ CREATE TABLE `maquinas` (
   `ubicacion` varchar(150) NOT NULL,
   `status` varchar(150) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `maquinas`
+-- Dumping data for table `maquinas`
 --
 
 INSERT INTO `maquinas` (`id`, `name`, `modelo`, `serie`, `ubicacion`, `status`, `fecha`) VALUES
 (2, 'Maquina 1', '336E', '01613', 'Tren Maya', 'Activo', '2023-07-12 14:02:14'),
 (10, 'Maquina 4', '336E', '0235', 'Veracruz', 'Inactivo', '2023-07-12 14:02:24'),
-(11, 'Maquina2', 'ksms', 'N6519100', 'Tijuana', 'Inactivo', '2023-07-12 14:02:35'),
+(11, 'Maquina 2', 'ksms', 'N6519100', 'Tijuana', 'Inactivo', '2023-07-19 15:53:51'),
 (12, 'Maquina 5', 'SMDK300', 'DHASFISD', 'Guadalajara', 'Activo', '2023-07-14 16:01:45');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `operadores`
+-- Table structure for table `operadores`
 --
 
 CREATE TABLE `operadores` (
@@ -90,10 +91,10 @@ CREATE TABLE `operadores` (
   `edad` int(50) NOT NULL,
   `telefono` int(50) NOT NULL,
   `fecha de registro` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `operadores`
+-- Dumping data for table `operadores`
 --
 
 INSERT INTO `operadores` (`id`, `nombre`, `apellido`, `edad`, `telefono`, `fecha de registro`) VALUES
@@ -103,16 +104,16 @@ INSERT INTO `operadores` (`id`, `nombre`, `apellido`, `edad`, `telefono`, `fecha
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `permisos`
+-- Table structure for table `permisos`
 --
 
 CREATE TABLE `permisos` (
   `id` int(11) NOT NULL,
   `rol` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `permisos`
+-- Dumping data for table `permisos`
 --
 
 INSERT INTO `permisos` (`id`, `rol`) VALUES
@@ -122,7 +123,7 @@ INSERT INTO `permisos` (`id`, `rol`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -133,10 +134,10 @@ CREATE TABLE `users` (
   `password` varchar(300) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_rol` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `usuario`, `correo`, `telefono`, `password`, `fecha`, `id_rol`) VALUES
@@ -147,69 +148,69 @@ INSERT INTO `users` (`id`, `usuario`, `correo`, `telefono`, `password`, `fecha`,
 (12, 'Admin', 'admin@gmail.com ', '12345', '$2y$05$GLR6QNdk/09FLAm4.Yl8B.0UFNCMac7gmtemGNw75s8OT.DfsPncy', '2023-07-11 23:19:48', 1);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `inventario`
+-- Indexes for table `inventario`
 --
 ALTER TABLE `inventario`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `maquinas`
+-- Indexes for table `maquinas`
 --
 ALTER TABLE `maquinas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `operadores`
+-- Indexes for table `operadores`
 --
 ALTER TABLE `operadores`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `permisos`
+-- Indexes for table `permisos`
 --
 ALTER TABLE `permisos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `inventario`
+-- AUTO_INCREMENT for table `inventario`
 --
 ALTER TABLE `inventario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
--- AUTO_INCREMENT de la tabla `maquinas`
+-- AUTO_INCREMENT for table `maquinas`
 --
 ALTER TABLE `maquinas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT de la tabla `operadores`
+-- AUTO_INCREMENT for table `operadores`
 --
 ALTER TABLE `operadores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `permisos`
+-- AUTO_INCREMENT for table `permisos`
 --
 ALTER TABLE `permisos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
