@@ -48,7 +48,7 @@ session_start();
                                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar<?php echo $fila['id']; ?>">
                                             <i class="fa fa-edit"></i>
                                         </button>
-                                        <a href="../includes/eliminar_inv.php?id=<?php echo $fila['id'] ?>" class="btn btn-danger btn-del">
+                                        <a href="../includes/eliminar_oper.php?id=<?php echo $fila['id'] ?>" class="btn btn-danger btn-del">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </td>

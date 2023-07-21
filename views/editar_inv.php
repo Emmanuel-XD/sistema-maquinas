@@ -15,18 +15,18 @@
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Operador</label>
                                 <select class="form-control" id="id_operador" name="id_operador" required>
-                                <?php
+                                    <?php
 
-                                include("../includes/db.php");
-                                //Codigo para mostrar categorias desde otra tabla
-                                $sql = "SELECT * FROM operadores ";
-                                $resultado = mysqli_query($conexion, $sql);
-                                while ($consulta = mysqli_fetch_array($resultado)) {
-                                    echo '<option value="' . $consulta['id'] . '">' . $consulta['nombre'] . '</option>';
-                                }
+                                    include("../includes/db.php");
+                                    //Codigo para mostrar categorias desde otra tabla
+                                    $sql = "SELECT * FROM operadores ";
+                                    $resultado = mysqli_query($conexion, $sql);
+                                    while ($consulta = mysqli_fetch_array($resultado)) {
+                                        echo '<option value="' . $consulta['id'] . '">' . $consulta['nombre'] . '</option>';
+                                    }
 
-                                ?>
-                            </select>
+                                    ?>
+                                </select>
 
                             </div>
                         </div>
@@ -60,14 +60,14 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="horometraje_i">Horometro Inicial </label><br>
-                                <input type="time" id="horometraje_i" name="horometraje_i" class="form-control">
+                                <input type="number" id="horometraje_i" name="horometraje_i" class="form-control">
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="horometraje_f">Horometro Terminal </label><br>
-                                <input type="time" id="horometraje_f" name="horometraje_f" class="form-control">
+                                <input type="number" id="horometraje_f" name="horometraje_f" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -154,63 +154,62 @@
     </div>
 </div>
 <script>
-  
-        function editarInv() {
-            var id = $("#idrow").val()
-           
-            var datosFormulario = $("#editInv" + id).serialize();
-            console.log(datosFormulario)
+    function editarInv() {
+        var id = $("#idrow").val()
+
+        var datosFormulario = $("#editInv" + id).serialize();
+        console.log(datosFormulario)
 
 
-            var datos = new FormData();
-            datos.append("accion", "editar_inv") 
-            datos.append("id",id)
-            datos.append("id_maquina", $("#id_maquina").val())
-            datos.append("id_operador", $("#id_operador").val())
-            datos.append("observacion", $("#observacion").val())
-            datos.append("horas_t", $("#horas_t").val())
-            datos.append("horas_in", $("#horas_in").val())
-            datos.append("horometraje_i", $("#horometraje_i").val())
-            datos.append("horometraje_f", $("horometraje_f").val())
-            datos.append("lugar_t", $("#lugar_t").val())
-            datos.append("fallo", $("#fallo").val())
-            datos.append("fecha", $("#fecha").val())
-            datos.append("hora_paro", $("#hora_paro").val())
-            datos.append("hora_reinicio", $("hora_reinicio").val())
-            datos.append("gastos_falla", $("#gastos_falla").val())
-            fetch("../includes/functions.php",{
+        var datos = new FormData();
+        datos.append("accion", "editar_inv")
+        datos.append("id", id)
+        datos.append("id_maquina", $("#id_maquina").val())
+        datos.append("id_operador", $("#id_operador").val())
+        datos.append("observacion", $("#observacion").val())
+        datos.append("horas_t", $("#horas_t").val())
+        datos.append("horas_in", $("#horas_in").val())
+        datos.append("horometraje_i", $("#horometraje_i").val())
+        datos.append("horometraje_f", $("horometraje_f").val())
+        datos.append("lugar_t", $("#lugar_t").val())
+        datos.append("fallo", $("#fallo").val())
+        datos.append("fecha", $("#fecha").val())
+        datos.append("hora_paro", $("#hora_paro").val())
+        datos.append("hora_reinicio", $("hora_reinicio").val())
+        datos.append("gastos_falla", $("#gastos_falla").val())
+        fetch("../includes/functions.php", {
                 method: 'POST',
-                body: datos 
+                body: datos
             }).then(response => response.json())
-                    .then(response => {
-                        if (response === "correcto") {
-                        alert("El registro se ha actualizado correctamente");
-                        setTimeout(function() {
-                            location.assign('inventario.php');
-                        }, 2000);
-                    } else {
-                        alert("Ha ocurrido un error al actualizar el registro");
-                    }
-                    })
+            .then(response => {
+                if (response === "correcto") {
+                    alert("El registro se ha actualizado correctamente");
+                    setTimeout(function() {
+                        location.assign('inventario.php');
+                    }, 2000);
+                } else {
+                    alert("Ha ocurrido un error al actualizar el registro");
+                }
+            })
 
-            // $.ajax({
-            //     url: "../includes/functions.php",
-            //     type: "POST",
-            //     data: datosFormulario,
-            //     dataType: "json",
-            //     success: function(response) {
-            //         if (response === "correcto") {
-            //             alert("El registro se ha actualizado correctamente");
-            //             setTimeout(function() {
-            //                 location.assign('inventario.php');
-            //             }, 2000);
-            //         } else {
-            //             alert("Ha ocurrido un error al actualizar el registro");
-            //         }
-            //     },
-            //     error: function() {
-            //         alert("Error de comunicacion con el servidor");
-            //     }
-            // });
-        }
+        // $.ajax({
+        //     url: "../includes/functions.php",
+        //     type: "POST",
+        //     data: datosFormulario,
+        //     dataType: "json",
+        //     success: function(response) {
+        //         if (response === "correcto") {
+        //             alert("El registro se ha actualizado correctamente");
+        //             setTimeout(function() {
+        //                 location.assign('inventario.php');
+        //             }, 2000);
+        //         } else {
+        //             alert("Ha ocurrido un error al actualizar el registro");
+        //         }
+        //     },
+        //     error: function() {
+        //         alert("Error de comunicacion con el servidor");
+        //     }
+        // });
+    }
 </script>

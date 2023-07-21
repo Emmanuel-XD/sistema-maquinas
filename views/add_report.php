@@ -65,34 +65,19 @@ session_start();
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="horas_t"  class="form-label">Horas Trabajadas</label><br>
-                                <input  type="number"  " name="horas_t" id="horas_t" class="form-control" required>
+                                <label for="horas_t" class="form-label">Horas Trabajadas</label><br>
+                                <input type="number" name="horas_t" id="horas_t" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="horas_in"  class="form-label">Horas Inactivas</label><br>
-                                <input  type="number"  " name="horas_in" id="horas_in" class="form-control" required>
+                                <label for="horas_in" class="form-label">Horas Inactivas</label><br>
+                                <input type="number" name="horas_in" id="horas_in" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="horometraje_i"  class="form-label">Horometraje Inicial</label><br>
-                                <input type="time"   id="horometraje_i" name="horometraje_i" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="mb-3">
-                                <label for="horometraje_f"  class="form-label">Horometraje final</label><br>
-                                <input type="time"   id="horometraje_f" name="horometraje_f" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="mb-3">
-                                <label for="lugar_t"  class="form-label">Lugar de trabajo</label><br>
+                                <label for="lugar_t" class="form-label">Lugar de trabajo</label><br>
                                 <select name="lugar_t" id="lugar_t" class="form-control" required>
                                     <option value="0">Selecciona una opción</option>
                                     <option value="Tijuana">Tijuana</option>
@@ -103,9 +88,26 @@ session_start();
                                 </select>
                             </div>
                         </div>
+                
+                    </div>
+
+                    <div class="row">
+                    <div class="col-sm-4">
+                            <div class="mb-3">
+                                <label for="horometraje_i" class="form-label">Horometro Inicial</label><br>
+                                <input type="number" id="horometraje_i" name="horometraje_i" class="form-control">
+                            </div>
+                        </div>
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="fallo"  class="form-label">Tipo de falla</label><br>
+                                <label for="horometraje_f" class="form-label">Horometro final</label><br>
+                                <input type="number" id="horometraje_f" name="horometraje_f" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-4">
+                            <div class="mb-3">
+                                <label for="fallo" class="form-label">Tipo de falla</label><br>
                                 <select name="fallo" id="fallo" class="form-control" required>
                                     <option value="0">Selecciona una opción</option>
                                     <option value="MECANICA">MECANICA</option>
@@ -118,7 +120,7 @@ session_start();
                                     <option value="MANGUERAS">MANGUERAS</option>
                                     <option value="CLIMA">CLIMA</option>
                                     <option value="VOLADURAS">VOLADURAS</option>
-                                    <option value="OTRO">SIN FALLAS</option>
+                                    <option value="SIN FALLAS">SIN FALLAS</option>
                                     <option value="OTRO">OTRA</option>
                                 </select>
                             </div>
@@ -128,24 +130,24 @@ session_start();
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="hora_paro"  class="form-label">Hora de paro</label><br>
-                                <input  type="time"  id="hora_paro" name="hora_paro" class="form-control">
+                                <label for="hora_paro" class="form-label">Hora de paro</label><br>
+                                <input type="time" id="hora_paro" name="hora_paro" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="hora_reinicio"  class="form-label">Hora de reinicio</label><br>
-                                <input type="time"  id="hora_reinicio" name="hora_reinicio" class="form-control">
+                                <label for="hora_reinicio" class="form-label">Hora de reinicio</label><br>
+                                <input type="time" id="hora_reinicio" name="hora_reinicio" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-4">
-                        <label for="gastos_falla"  class="form-label">Gastos de falla</label><br>
+                            <label for="gastos_falla" class="form-label">Gastos de falla</label><br>
                             <div class="form-group">
                                 <span class="fa fa-usd form-control-icon"></span>
-                                <input type="number"  step= "0.1"  id="gastos_falla" name="gastos_falla" class="form-control"> 
+                                <input type="number" step="0.1" id="gastos_falla" name="gastos_falla" class="form-control">
                             </div>
                         </div>
-                    
+
                     </div>
 
                     <div class="form-group">
