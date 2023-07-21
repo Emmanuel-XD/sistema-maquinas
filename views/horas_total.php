@@ -168,12 +168,38 @@ session_start();
                         $("#mant").val(data.mantenimiento);
                         $("#horas_t").val(data.total_horas_activas); // Actualizado a $("#horas_a")
                         $("#horas_in").val(data.total_horas_inactivas); // Actualizado a $("#horas_p")
+                    
+                        if(data.total_horas_activas === null || data.total_horas_activas === ""){
+                        $("#horas_t").val("0");
+                      
 
+                    }
+                    if(data.total_horas_inactivas === null || data.total_horas_inactivas === ""){
+                        $("#horas_in").val("0");
+
+                    }
+                    horasCero = parseInt($("#horas_t").val());
+                    horasAcumiuladas = parseInt((data.total_horas_activas))
+                    if(horasAcumiuladas < 150 || horasCero < 150){
+                        $("#mant").val("En buen estado")
+                        $("#mant").css("background-color", "#50C878");
+                        $("#mant").css("color", "white");
+                    }
+                    if(horasAcumiuladas > 150 && horasAcumiuladas < 180|| horasCero > 150 && horasCero < 180){
+                        $("#mant").val("Puede requerir mantenimiento")
+                        $("#mant").css("background-color", "#FFA500");
+                        $("#mant").css("color", "white");
+                    }
+                    if(horasAcumiuladas > 180 || horasCero > 180){
+                        $("#mant").val("Mantenimiento requerido")
+                        $("#mant").css("background-color", "##ff0000 ");
+                        $("#mant").css("color", "white");
+                    }
                         if (data.status === "Inactivo") {
                             $("#status").css("background-color", "red");
                             $("#status").css("color", "white");
                         } else if (data.status === "Activo") {
-                            $("#status").css("background-color", "green");
+                            $("#status").css("background-color", "#50C878");
                             $("#status").css("color", "white");
                         } else {
                             $("#status").css("background-color", "");

@@ -49,14 +49,29 @@
             
             var endDate =  new Date($("#start").val());
             //default config reporte mensual
+            if($("#type").val() == 1){
             var month = endDate.getMonth() + 2;
             var year =  endDate.getFullYear();
             var day = endDate.getDate() + 1;
+            }
             //si el reporte es semanal
             if($("#type").val() == 2){
-                var month = endDate.getMonth() + 1;
-                var day = endDate.getDate() + 8;
-            }
+
+                const lastDayOfMonth = new Date(
+                    endDate.getFullYear(),
+                    endDate.getMonth() + 1,
+                    0
+                  ).getDate();
+                  var dayact = endDate.getDate()
+                  var day = dayact + 8;
+                  if (day > lastDayOfMonth) {
+                    // Adjust the date to the next month
+                    endDate.setMonth(endDate.getMonth() + 1);
+                    day -= lastDayOfMonth;
+                  }
+                  var year =  endDate.getFullYear();
+                  var month = endDate.getMonth() + 1;
+                }
             //si el reporte es diario
             if($("#type").val() == 3){
                 var month = endDate.getMonth() + 1;
@@ -69,13 +84,14 @@
                     } 
 
             end = year + '-' + month + '-' + day
+            console.log(    year + '-' + month + '-' + day)
             $("#fin").val(end);
         })
         $("#pdfgen").click(function(e){
             e.preventDefault();
                             fecha1 = $("#start").val();
                             fecha2 = $("#fin").val();
-                            id = $("#idm").val();
+                            id = $("#id").val();
                             let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
                             width=600,height=300,left=100,top=100`;
                             open(`../includes/reporte.php?fecha1=${fecha1}&fecha2=${fecha2}&idm=${id}`, 'test', params);
