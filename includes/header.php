@@ -27,12 +27,13 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
     <title>Sistema De control de maquinaria</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../package/dist/sweetalert2.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="../css/estilos.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
     <script src="../js/jquery.min.js"></script>
 
 </head>

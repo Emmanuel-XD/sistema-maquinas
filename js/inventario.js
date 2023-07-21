@@ -1,7 +1,18 @@
   $(document).ready(function () {
+    $("#start").change(function(){
+        $("input:not(.selector  )").val('');
+        $("select:not(.selector  )").val('');
+        html = "";
+        $("#dataTable tbody").html(html);
+        $("#status").css("background-color", "");
+        $("#status").css("color", "");
+    })
+
     $("#type").change(function(){
         $("input:not(#type  )").val('');
         $("select:not(#type  )").val('');
+        html = "";
+        $("#dataTable tbody").html(html);
         $("#start").val("");
         $("#fin").val("");
         $("#status").css("background-color", "");
@@ -82,12 +93,38 @@
                     $("#mant").val(data.mantenimiento);
                     $("#horas_t").val(data.total_horas_activas); // Actualizado a $("#horas_a")
                     $("#horas_in").val(data.total_horas_inactivas); // Actualizado a $("#horas_p")
+                    
+                    if(data.total_horas_activas === null || data.total_horas_activas === ""){
+                        $("#horas_t").val("0");
+                      
 
+                    }
+                    if(data.total_horas_inactivas === null || data.total_horas_inactivas === ""){
+                        $("#horas_in").val("0");
+
+                    }
+                    horasCero = parseInt($("#horas_t").val());
+                    horasAcumiuladas = parseInt((data.total_horas_activas))
+                    if(horasAcumiuladas < 150 || horasCero < 150){
+                        $("#mant").val("En buen estado")
+                        $("#mant").css("background-color", "#50C878");
+                        $("#mant").css("color", "white");
+                    }
+                    if(horasAcumiuladas > 150 && horasAcumiuladas < 180|| horasCero > 150 && horasCero < 180){
+                        $("#mant").val("Puede requerir mantenimiento")
+                        $("#mant").css("background-color", "#FFA500");
+                        $("#mant").css("color", "white");
+                    }
+                    if(horasAcumiuladas > 180 || horasCero > 180){
+                        $("#mant").val("Mantenimiento requerido")
+                        $("#mant").css("background-color", "##ff0000 ");
+                        $("#mant").css("color", "white");
+                    }
                     if (data.status === "Inactivo") {
                         $("#status").css("background-color", "red");
                         $("#status").css("color", "white");
                     } else if (data.status === "Activo") {
-                        $("#status").css("background-color", "green");
+                        $("#status").css("background-color", "#50C878");
                         $("#status").css("color", "white");
                     } else {
                         $("#status").css("background-color", "");
@@ -97,32 +134,39 @@
                     var accion = "table";
                     var datos = new FormData();
                     datos.append("table", accion) 
+                    datos.append("fecha1", $("#start").val())
+                    datos.append("fecha2", $("#fin").val())
                     datos.append("idm", $("#id").val())
                     fetch('obtener_maquina.php',{
                         method: 'POST',
                         body: datos          
                     }).then(response => response.json())
                     .then(response => {
+
                         let html = ``;
+                        if(response != "0"){
                         response.map(function(e){
                             html += `
                             <tr>
-                                <td>${e.nombre}</td>
-                                <td>${e.fecha}</td>
-                                <td>${e.horas_t}</td>
-                                <td>${e.horas_in}</td>
-                                <td>${e.horometraje_i}</td>
-                                <td>${e.horometraje_f}</td>
-                                <td>${e.lugar_t}</td>
-                                <td>${e.fallo}</td>
-                                <td>${e.hora_paro}</td>
-                                <td>${e.hora_reinicio}</td>
-                                <td>${e.gastos_falla}</td>
-                                <td>${e.observacion}</td>
+                                <td class="nombre">${e.nombre}</td>
+                                <td class="fecha">${e.fecha}</td>
+                                <td class="horas_t">${e.horas_t}</td>
+                                <td class="horas_in">${e.horas_in}</td>
+                                <td class="horometraje_i">${e.horometraje_i}</td>
+                                <td class="horometraje_f">${e.horometraje_f}</td>
+                                <td class="lugar_t">${e.lugar_t}</td>
+                                <td class="fallo">${e.fallo}</td>
+                                <td class="hora_paro">${e.hora_paro}</td>
+                                <td class="hora_reinicio">${e.hora_reinicio}</td>
+                                <td class="gastos_falla">${e.gastos_falla}</td>
+                                <td class="observacion">${e.observacion}</td>
                                 <td>
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar${e.id}">
+                                <button type="button" id="ida" class="list btn btn-warning" data-id="${e.id_operador}" data-row="${e.id}" data-toggle="modal" data-target="#editar">
                                 <i class="fa fa-edit"></i>
                                  </button>
+                                 <script>
+
+                                 </script>
                                 <a href="../includes/eliminar_inv.php?id=${e.id}" class="btn btn-danger btn-del">
                                     <i class="fa fa-trash"></i>
                                 </a>
@@ -131,17 +175,45 @@
                           
                             `;
                         });
+                  
                         $("#dataTable tbody").html(html);
+                                    $(".list").click(function (e) {
 
+                                          $("#id_operador").val(parseInt($(this).data('id')))
+                                          $("#fecha").val($(e.target).closest('tr').find(".fecha").html())
+                                          $("#horas_to").val($(e.target).closest('tr').find(".horas_t").html())
+                                          $("#horas_ina").val($(e.target).closest('tr').find(".horas_in").html())
+                                          $("#horometraje_i").val($(e.target).closest('tr').find(".horometraje_i").html())
+                                          $("#horometraje_f").val($(e.target).closest('tr').find(".horometraje_f").html())
+                                        $("#lugar_t").val($(e.target).closest('tr').find(".lugar_t").html())
+                                        $("#fallo").val($(e.target).closest('tr').find(".fallo").html())
+                                        $("#hora_paro").val($(e.target).closest('tr').find(".hora_paro").html())
+                                        $("#hora_reinicio").val($(e.target).closest('tr').find(".hora_reinicio").html())
+                                        $("#gastos_falla").val($(e.target).closest('tr').find(".gastos_falla").html())
+                                        $("#observacion").val($(e.target).closest('tr').find(".observacion").html())
+                                        $("#idrow").val($(this).data('row'))
+                                     })
+                                    }
+                                   else{
+                                    html = "";
+                                    $("#dataTable tbody").html(html);
+                                   }
                     })
                 }
             });
         }
         else{
-            alert("completa los campos!!")
+            new swal({
+                title: "Información incompleta",
+                text: "Elige un tipo de reporte y fecha valida",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })    
             $("#filtro-form")[0].reset();
 
         }
         });
-        
+        //
+       
   });

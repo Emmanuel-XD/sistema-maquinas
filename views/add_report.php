@@ -22,7 +22,7 @@ session_start();
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="password" class="form-label">Maquinaria</label>
+                                <label for="id_maquina" class="form-label">Maquinaria</label>
                                 <select class="form-control" name="id_maquina" id="id_maquina">
                                     <option value="0">Selecciona una opción</option>
                                     <?php
@@ -56,7 +56,7 @@ session_start();
                         </div>
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="password">Fecha</label><br>
+                                <label for="fecha" class="form-label">Fecha</label><br>
                                 <input type="date" step="" id="fecha" name="fecha" class="form-control">
                             </div>
                         </div>
@@ -65,20 +65,20 @@ session_start();
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="password">Horas Trabajadas</label><br>
-                                <input type="number" step=".01" name="horas_t" id="horas_t" class="form-control" required>
+                                <label for="horas_t"  class="form-label">Horas Trabajadas</label><br>
+                                <input  type="number"  " name="horas_t" id="horas_t" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="password">Horas Inactivas</label><br>
-                                <input type="number" step=".01" name="horas_in" id="horas_in" class="form-control" required>
+                                <label for="horas_in"  class="form-label">Horas Inactivas</label><br>
+                                <input  type="number"  " name="horas_in" id="horas_in" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="password">Horometroja Inicial</label><br>
-                                <input type="number" step=".01" id="horometraje_i" name="horometraje_i" class="form-control">
+                                <label for="horometraje_i"  class="form-label">Horometraje Inicial</label><br>
+                                <input type="time"   id="horometraje_i" name="horometraje_i" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -86,13 +86,13 @@ session_start();
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="password">Horometraje Terminal</label><br>
-                                <input type="number" step=".01" id="horometraje_f" name="horometraje_f" class="form-control">
+                                <label for="horometraje_f"  class="form-label">Horometraje final</label><br>
+                                <input type="time"   id="horometraje_f" name="horometraje_f" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="password">Lugar de trabajo</label><br>
+                                <label for="lugar_t"  class="form-label">Lugar de trabajo</label><br>
                                 <select name="lugar_t" id="lugar_t" class="form-control" required>
                                     <option value="0">Selecciona una opción</option>
                                     <option value="Tijuana">Tijuana</option>
@@ -105,7 +105,7 @@ session_start();
                         </div>
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="password">Tipo de falla</label><br>
+                                <label for="fallo"  class="form-label">Tipo de falla</label><br>
                                 <select name="fallo" id="fallo" class="form-control" required>
                                     <option value="0">Selecciona una opción</option>
                                     <option value="MECANICA">MECANICA</option>
@@ -128,22 +128,24 @@ session_start();
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="password">Hora de paro</label><br>
-                                <input type="varchar" step="" id="hora_paro" name="hora_paro" class="form-control">
+                                <label for="hora_paro"  class="form-label">Hora de paro</label><br>
+                                <input  type="time"  id="hora_paro" name="hora_paro" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="password">Hora de reinicio</label><br>
-                                <input type="varchar" step="" id="hora_reinicio" name="hora_reinicio" class="form-control">
+                                <label for="hora_reinicio"  class="form-label">Hora de reinicio</label><br>
+                                <input type="time"  id="hora_reinicio" name="hora_reinicio" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="mb-3">
-                                <label for="password">Gastos de falla</label><br>
-                                <input type="text" step="" id="gastos_falla" name="gastos_falla" class="form-control">
+                        <label for="gastos_falla"  class="form-label">Gastos de falla</label><br>
+                            <div class="form-group">
+                                <span class="fa fa-usd form-control-icon"></span>
+                                <input type="number"  step= "0.1"  id="gastos_falla" name="gastos_falla" class="form-control"> 
                             </div>
                         </div>
+                    
                     </div>
 
                     <div class="form-group">

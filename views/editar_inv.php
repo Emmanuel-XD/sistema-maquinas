@@ -1,6 +1,7 @@
-<div class="modal fade" id="editar<?php echo $fila['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <input type="number" value="" readonly hidden>
             <div class="modal-header bg-primary text-white">
                 <h3 class="modal-title" id="exampleModalLabel">Editar registro de maquina</h3>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">
@@ -8,13 +9,12 @@
             </div>
             <div class="modal-body">
 
-                <form id="editInv<?php echo $fila['id']; ?>" method="POST">
+                <form id="editInv" data-id="<?php echo $fila['id']; ?>" method="POST">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Operador</label>
                                 <select class="form-control" id="id_operador" name="id_operador" required>
-                                <option <?php echo $fila['id_operador'] === 'nombre' ? "selected='selected' " : "" ?> value="<?php echo $fila['id_operador']; ?>"><?php echo $fila['nombre']; ?> </option>
                                 <?php
 
                                 include("../includes/db.php");
@@ -33,8 +33,8 @@
 
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">Fecha </label><br>
-                                <input type="date" step="" id="fecha" name="fecha" class="form-control" value="<?php echo $fila['fecha']; ?>">
+                                <label for="fecha">Fecha </label><br>
+                                <input type="date" step="" id="fecha" name="fecha" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -42,32 +42,16 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">Horas Trabajadas:</label><br>
-                                <input type="number" name="horas_t" id="horas_t" class="form-control" value="<?php echo $fila['horas_t']; ?>" required>
+                                <label for="horas_t">Horas Trabajadas</label><br>
+                                <input type="number" name="horas_t" id="horas_to" class="form-control" required>
                             </div>
                         </div>
 
 
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">Horas Inactiva</label><br>
-                                <input type="number" name="horas_in" id="horas_in" class="form-control" value="<?php echo $fila['horas_in']; ?>" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label for="password">Horometro Inicial </label><br>
-                                <input type="number" step="" id="horometraje_i" name="horometraje_i" class="form-control" value="<?php echo $fila['horometraje_i']; ?>">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label for="password">Horometro Terminnal </label><br>
-                                <input type="number" step="" id="horometraje_f" name="horometraje_f" class="form-control" value="<?php echo $fila['horometraje_f']; ?>">
+                                <label for="horas_in">Horas Inactiva</label><br>
+                                <input type="number" name="horas_in" id="horas_ina" class="form-control" required>
                             </div>
                         </div>
                     </div>
@@ -75,7 +59,23 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">Ubicacion</label><br>
+                                <label for="horometraje_i">Horometro Inicial </label><br>
+                                <input type="time" id="horometraje_i" name="horometraje_i" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="horometraje_f">Horometro Terminal </label><br>
+                                <input type="time" id="horometraje_f" name="horometraje_f" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="lugar_t">Ubicacion</label><br>
                                 <select name="lugar_t" id="lugar_t" class="form-control" required>
                                     <option <?php echo $fila['lugar_t'] === 'Tijuana' ? 'selected' : ''; ?> value="Tijuana">Tijuana</option>
                                     <option <?php echo $fila['lugar_t'] === 'Tren maya' ? 'selected' : ''; ?> value="Tren maya">Tren maya</option>
@@ -87,7 +87,7 @@
 
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">TIPO DE FALLA</label><br>
+                                <label for="fallo">TIPO DE FALLA</label><br>
                                 <select name="fallo" id="fallo" class="form-control" required>
                                     <option <?php echo $fila['fallo'] === 'MECANICA' ? 'selected' : ''; ?> value="MECANICA">MECANICA</option>
                                     <option <?php echo $fila['fallo'] === 'OPERADOR' ? 'selected' : ''; ?> value="OPERADOR">OPERADOR</option>
@@ -109,15 +109,15 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">hora de paro </label><br>
-                                <input type="text" step="" id="hora_paro" name="hora_paro" class="form-control" value="<?php echo $fila['hora_paro']; ?>">
+                                <label for="hora_paro">hora de paro </label><br>
+                                <input type="time" id="hora_paro" name="hora_paro" class="form-control" value="<?php echo $fila['hora_paro']; ?>">
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">hora de reinicio </label><br>
-                                <input type="text" step="" id="hora_reinicio" name="hora_reinicio" class="form-control" value="<?php echo $fila['hora_reinicio']; ?>">
+                                <label for="hora_reinicio">hora de reinicio </label><br>
+                                <input type="time" id="hora_reinicio" name="hora_reinicio" class="form-control" value="<?php echo $fila['hora_reinicio']; ?>">
                             </div>
                         </div>
                     </div>
@@ -126,26 +126,24 @@
 
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="nombre" class="form-label">gastos de falla</label>
-                                <input type="text" id="gastos_falla" name="gastos_falla" class="form-control" value="<?php echo $fila['gastos_falla']; ?>">
+                                <label for="gastos_falla" class="form-label">gastos de falla</label>
+                                <input type="number" id="gastos_falla" name="gastos_falla" class="form-control" value="<?php echo $fila['gastos_falla']; ?>">
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="nombre" class="form-label">observaciones</label>
+                                <label for="observacion" class="form-label">observaciones</label>
                                 <input type="text" id="observacion" name="observacion" class="form-control" value="<?php echo $fila['observacion']; ?>" required>
                             </div>
                         </div>
                     </div>
-
-                    <input type="hidden" name="accion" value="editar_inv">
-                    <input type="hidden" name="id" value="<?php echo $fila['id']; ?>">
+                    <input type="hidden" name="idrow" id="idrow">
 
                     <br>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="editarInv(<?php echo $fila['id']; ?>)">Guardar</button>
+                        <button type="button" id="save" class="btn btn-primary" onclick='editarInv( )'>Guardar</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     </div>
 
@@ -155,29 +153,64 @@
         </div>
     </div>
 </div>
-
 <script>
-    function editarInv(id) {
-        var datosFormulario = $("#editInv" + id).serialize();
+  
+        function editarInv() {
+            var id = $("#idrow").val()
+           
+            var datosFormulario = $("#editInv" + id).serialize();
+            console.log(datosFormulario)
 
-        $.ajax({
-            url: "../includes/functions.php",
-            type: "POST",
-            data: datosFormulario,
-            dataType: "json",
-            success: function(response) {
-                if (response === "correcto") {
-                    alert("El registro se ha actualizado correctamente");
-                    setTimeout(function() {
-                        location.assign('inventario.php');
-                    }, 2000);
-                } else {
-                    alert("Ha ocurrido un error al actualizar el registro");
-                }
-            },
-            error: function() {
-                alert("Error de comunicacion con el servidor");
-            }
-        });
-    }
+
+            var datos = new FormData();
+            datos.append("accion", "editar_inv") 
+            datos.append("id",id)
+            datos.append("id_maquina", $("#id_maquina").val())
+            datos.append("id_operador", $("#id_operador").val())
+            datos.append("observacion", $("#observacion").val())
+            datos.append("horas_t", $("#horas_t").val())
+            datos.append("horas_in", $("#horas_in").val())
+            datos.append("horometraje_i", $("#horometraje_i").val())
+            datos.append("horometraje_f", $("horometraje_f").val())
+            datos.append("lugar_t", $("#lugar_t").val())
+            datos.append("fallo", $("#fallo").val())
+            datos.append("fecha", $("#fecha").val())
+            datos.append("hora_paro", $("#hora_paro").val())
+            datos.append("hora_reinicio", $("hora_reinicio").val())
+            datos.append("gastos_falla", $("#gastos_falla").val())
+            fetch("../includes/functions.php",{
+                method: 'POST',
+                body: datos 
+            }).then(response => response.json())
+                    .then(response => {
+                        if (response === "correcto") {
+                        alert("El registro se ha actualizado correctamente");
+                        setTimeout(function() {
+                            location.assign('inventario.php');
+                        }, 2000);
+                    } else {
+                        alert("Ha ocurrido un error al actualizar el registro");
+                    }
+                    })
+
+            // $.ajax({
+            //     url: "../includes/functions.php",
+            //     type: "POST",
+            //     data: datosFormulario,
+            //     dataType: "json",
+            //     success: function(response) {
+            //         if (response === "correcto") {
+            //             alert("El registro se ha actualizado correctamente");
+            //             setTimeout(function() {
+            //                 location.assign('inventario.php');
+            //             }, 2000);
+            //         } else {
+            //             alert("Ha ocurrido un error al actualizar el registro");
+            //         }
+            //     },
+            //     error: function() {
+            //         alert("Error de comunicacion con el servidor");
+            //     }
+            // });
+        }
 </script>

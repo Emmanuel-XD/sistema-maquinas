@@ -18,7 +18,7 @@ session_start();
                     <div class="col-md-4">
                         <div class="form-group">
                             <label><b>Tipo de reporte</b></label>
-                            <select   class="form-control" name="type" id="type">
+                            <select   class="form-control selector" name="type" id="type">
                                 <option value="">Selecciona una opción</option>
                                 <option value="1">Reporte mensual</option>
                                 <option value="2">Reporte semanal</option>
@@ -27,15 +27,15 @@ session_start();
                         </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-group">
+                            <div class="form-group ">
                                 <label><b>Del dia</b></label>
-                                <input type="date" name="start" id="start" class="form-control" required>
+                                <input type="date" name="start" id="start" class="selector form-control" required>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-group">
+                            <div class="form-group ">
                                 <label><b> Hasta el dia</b></label>
-                                <input type="date" name="fin" id="fin" class="form-control" readonly>
+                                <input type="date" name="fin" id="fin" class="selector form-control" readonly>
                             </div>
                         </div>
 
@@ -87,7 +87,6 @@ session_start();
                         </div>
                     </div>
                     <br>
-                    <button type="button" class="btn btn-primary" id="filtro">Buscar <i class="fa fa-search" aria-hidden="true"></i></button>
                     <button type="submit" class="btn btn-danger" name="save" id="save">Generar PDF</button>
                     <button id="export-btn" class="btn btn-success" type="button">Exportar a Excel</button><a id="download-link" style="display: none"></a>
                 </form>

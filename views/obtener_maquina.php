@@ -25,16 +25,21 @@ if (isset($_POST['id'])) {
 }
 if(isset($_POST['table'])){
     $idMaquina = $_POST['idm'];
-    $result = mysqli_query($conexion, "SELECT i.id, i.id_maquina,i.id_operador,i.observacion,i.horas_t,
-    i.horas_in,i.horometraje_i,i.horometraje_f,i.lugar_t, i.fallo,i.hora_paro,i.hora_reinicio,i.fecha,i.gastos_falla, 
-    o.nombre FROM inventario i INNER JOIN operadores o ON i.id_operador = o.id WHERE i.id_maquina = $idMaquina;");
+    $fecha1 = $_POST['fecha1'];
+    $fecha2 = $_POST['fecha2'];
+    $query =  "SELECT i.id, i.id_maquina,i.id_operador,i.observacion,i.horas_t,i.horas_in,i.horometraje_i,i.horometraje_f,i.lugar_t, i.fallo,i.hora_paro,i.hora_reinicio,i.fecha,i.gastos_falla,o.nombre FROM inventario i INNER JOIN operadores o ON i.id_operador = o.id WHERE i.id_maquina = $idMaquina AND i.fecha BETWEEN  '$fecha1' and '$fecha2';";
+    $result = mysqli_query($conexion, $query);
     if (mysqli_num_rows($result)>0)
     {    
         while ($dato = mysqli_fetch_assoc($result) ){
          $datos[] = $dato;
     }
+    echo json_encode($datos);
+  }
+  else{
+    echo json_encode(0);
   }
 
-    echo json_encode($datos);
+
 
 }
