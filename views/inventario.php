@@ -12,7 +12,7 @@ session_start();
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Reportes Diarios o Mensuales</h6>
 
-                <form action="../includes/guardar.php" method="POST" accept-charset="utf-8" id="filtro-form">
+                <form action="../includes/reporte.php" method="POST" accept-charset="utf-8" id="filtro-form">
                     <br>
                     <div class="row">
                     <div class="col-md-4">
@@ -87,7 +87,7 @@ session_start();
                         </div>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-danger" name="save" id="save">Generar PDF</button>
+                    <button type="submit" class="btn btn-danger" name="pdfgen" id="pdfgen">Generar PDF</button>
                     <button id="export-btn" class="btn btn-success" type="button">Exportar a Excel</button><a id="download-link" style="display: none"></a>
                 </form>
             </div>
@@ -119,35 +119,6 @@ session_start();
                         </tbody>
                     </table>
                     <?php include "editar_inv.php"; ?>
-
-                    <script>
-                        $('.btn-del').on('click', function(e) {
-                            e.preventDefault();
-                            const href = $(this).attr('href');
-
-                            Swal.fire({
-                                title: 'Estás seguro de eliminar este registro?',
-                                text: "¡No podrás revertir esto!",
-                                icon: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Si, eliminar!',
-                                cancelButtonText: 'Cancelar!',
-                            }).then((result) => {
-                                if (result.value) {
-                                    if (result.isConfirmed) {
-                                        Swal.fire(
-                                            'Eliminado!',
-                                            'El registro fue eliminado.',
-                                            'success'
-                                        );
-                                    }
-                                    document.location.href = href;
-                                }
-                            });
-                        });
-                    </script>
                 </div>
             </div>
         </div>

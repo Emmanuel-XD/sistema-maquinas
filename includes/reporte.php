@@ -3,6 +3,7 @@
 
 require('../fpdf/fpdf.php');
 
+
 class PDF extends FPDF
 {
     // Cabecera de página
@@ -106,8 +107,19 @@ class PDF extends FPDF
         $this->Cell(23, 10, 'Hra Reinicio', 1, 0, 'C', 0);
         $this->Cell(22, 10, 'Gastos', 1, 0, 'C', 0);
         $this->Cell(78, 10, 'Observacion', 1, 1, 'C', 0);
-    }
 
+
+    }
+    include_once "db.php";
+    $idMaquina = $_GET['idm'];
+    $fecha1 = $_GET['fecha1'];
+    $fecha2 = $_GET['fecha2'];
+    $query =  "SELECT i.id, i.id_maquina,i.id_operador,i.observacion,i.horas_t,i.horas_in,i.horometraje_i,i.horometraje_f,i.lugar_t, i.fallo,i.hora_paro,i.hora_reinicio,i.fecha,i.gastos_falla,o.nombre FROM inventario i INNER JOIN operadores o ON i.id_operador = o.id WHERE i.id_maquina = $idMaquina AND i.fecha BETWEEN  '$fecha1' and '$fecha2';";
+    $result = mysqli_query($conexion, $query);
+    while ($row=$result->fetch_assoc()) {
+        $this->SetX(10);
+        $this->Cell(40,10,$row['id'],1,0,'C',0);
+    }
     // Pie de página
     function Footer()
     {

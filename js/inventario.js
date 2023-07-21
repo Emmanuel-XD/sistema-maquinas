@@ -71,7 +71,17 @@
             end = year + '-' + month + '-' + day
             $("#fin").val(end);
         })
+        $("#pdfgen").click(function(e){
+            e.preventDefault();
+                            fecha1 = $("#start").val();
+                            fecha2 = $("#fin").val();
+                            id = $("#idm").val();
+                            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+                            width=600,height=300,left=100,top=100`;
+                            open(`../includes/reporte.php?fecha1=${fecha1}&fecha2=${fecha2}&idm=${id}`, 'test', params);
 
+            })
+     
         $("#id").change(function() {
             //validate that there's an selected report type and date rate
             if ($('#type').val( )!= "" && $('#type').val() != null && $('#start').val() != ''){
@@ -177,6 +187,34 @@
                         });
                   
                         $("#dataTable tbody").html(html);
+                        $('.btn-del').on('click', function(e) {
+                            e.preventDefault();
+                            const href = $(this).attr('href')
+
+                            Swal.fire({
+                                title: 'Estas seguro de eliminar este registro?',
+                                text: "¡No podrás revertir esto!!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Si, eliminar!',
+                                cancelButtonText: 'Cancelar!',
+                            }).then((result) => {
+                                if (result.value) {
+                                    if (result.isConfirmed) {
+                                        Swal.fire(
+                                            'Eliminado!',
+                                            'El registro fue eliminado.',
+                                            'success'
+                                        )
+                                    }
+
+                                    document.location.href = href;
+                                }
+                            })
+
+                        })
                                     $(".list").click(function (e) {
 
                                           $("#id_operador").val(parseInt($(this).data('id')))
