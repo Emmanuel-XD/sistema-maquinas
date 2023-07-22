@@ -2,21 +2,25 @@
       $("#start").change(function () {
           $("input:not(.selector  )").val('');
           $("select:not(.selector  )").val('');
+          removeDataTableRows()
           html = "";
-          $("#dataTable tbody").html(html);
           $("#status").css("background-color", "");
+          $("#mant").css("background-color", "");
+          $("#mant").css("color", "");
           $("#status").css("color", "");
       })
 
       $("#type").change(function () {
           $("input:not(#type  )").val('');
           $("select:not(#type  )").val('');
+          removeDataTableRows()
           html = "";
-          $("#dataTable tbody").html(html);
           $("#start").val("");
           $("#fin").val("");
           $("#status").css("background-color", "");
           $("#status").css("color", "");
+          $("#mant").css("background-color", "");
+          $("#mant").css("color", "");
           var typeForm = $("#type").val();
           var today = new Date();
           var dd = today.getDate();
@@ -49,7 +53,19 @@
           var endDate = new Date($("#start").val());
           //default config reporte mensual
           if ($("#type").val() == 1) {
-              var month = endDate.getMonth() + 2;
+            const currentMonth = endDate.getMonth() + 1; 
+          
+            let futureMonth = currentMonth + 1;
+          
+            const yearOffset = Math.floor((futureMonth - 1) / 12);
+            const newYear = endDate.getFullYear() + yearOffset;
+          
+            futureMonth = ((futureMonth - 1) % 12) + 1;
+          
+            endDate.setMonth(futureMonth - 1); 
+            endDate.setFullYear(newYear);
+            //
+            var month = futureMonth
               var year = endDate.getFullYear();
               var day = endDate.getDate() + 1;
           }
@@ -71,11 +87,24 @@
               var year = endDate.getFullYear();
               var month = endDate.getMonth() + 1;
           }
+
+
           //si el reporte es diario
           if ($("#type").val() == 3) {
+            const lastDayOfMonth = new Date(
+                endDate.getFullYear(),
+                endDate.getMonth() + 1,
+                0
+            ).getDate();
+            var dayact = endDate.getDate()
+            var day = dayact + 1;
+            if (day > lastDayOfMonth) {
+                // Adjust the date to the next month
+                endDate.setMonth(endDate.getMonth() + 1);
+                day -= lastDayOfMonth;
+            }
               var month = endDate.getMonth() + 1;
               var year = endDate.getFullYear();
-              var day = endDate.getDate() + 1;
           }
           if (day < 10) {
               day = '0' + day;
@@ -100,7 +129,61 @@
           open(`../includes/reporte.php?fecha1=${fecha1}&fecha2=${fecha2}&idm=${id}&mant=${mant}`, 'test', params);
 
       })
+      function fillDataTable(data) {
+        console.log(data)
+        if(data != 0){
+        const transformedData = data.map(e => [
+           e.nombre,
+           e.fecha,
+            e.horas_t,
+            e.horas_in,
+            e.horometraje_i,
+           e.horometraje_f, 
+            e.lugar_t, 
+            e.fallo,
+            e.hora_paro,
+            e.hora_reinicio,
+            e.gastos_falla,
+            e.observacion,
+            `<button type="button" id="ida" class="list btn btn-warning" data-id="${e.id_operador}" data-row="${e.id}" data-toggle="modal" data-target="#editar">
+            <i class="fa fa-edit"></i></button>
+            <a href="../includes/eliminar_inv.php?id=${e.id}" class="btn btn-danger btn-del">
+            <i class="fa fa-trash"></i>`
+        ]);
+       
+        // Initialize the datatable with the transformed data
+        $('#dataTable').DataTable({
+            "bDestroy": true,
+          data: transformedData,
+          "columnDefs": [
+            { className: "id", "targets": [ 0 ] },
+            { className: "fecha", "targets": [ 1 ] },
+            { className: "horas_t", "targets": [ 2 ] },
+            { className: "horas_in", "targets": [ 3 ] },
+            { className: "horometraje_i", "targets": [ 4 ] },
+            { className: "horometraje_f", "targets": [ 5 ] },
+            { className: "lugar_t", "targets": [ 6 ] },
+            { className: "fallo", "targets": [ 7 ] },
+            { className: "hora_paro", "targets": [ 8 ] },
+            { className: "hora_reinicio", "targets": [ 9 ] },
+            { className: "gastos_falla", "targets": [ 10 ] },
+            { className: "observacion", "targets": [ 11 ] },
 
+
+          ],
+ 
+        });
+        }
+    
+    if(data == 0){
+        removeDataTableRows();
+    }
+      }
+      
+      function removeDataTableRows() {
+        $('#dataTable').DataTable().clear().draw();
+      }
+      
       $("#id").change(function () {
           //validate that there's an selected report type and date rate
           if ($('#type').val() != "" && $('#type').val() != null && $('#start').val() != '') {
@@ -146,7 +229,7 @@
                       }
                       if (horasAcumiuladas > 180 || horasCero > 180) {
                           $("#mant").val("Mantenimiento requerido")
-                          $("#mant").css("background-color", "##ff0000 ");
+                          $("#mant").css("background-color", "#ff0000");
                           $("#mant").css("color", "white");
                       }
                       if (data.status === "Inactivo") {
@@ -171,41 +254,12 @@
                               body: datos
                           }).then(response => response.json())
                           .then(response => {
-
-                              let html = ``;
                               if (response != "0") {
-                                  response.map(function (e) {
-                                      html += `
-                            <tr>
-                                <td class="nombre">${e.nombre}</td>
-                                <td class="fecha">${e.fecha}</td>
-                                <td class="horas_t">${e.horas_t}</td>
-                                <td class="horas_in">${e.horas_in}</td>
-                                <td class="horometraje_i">${e.horometraje_i}</td>
-                                <td class="horometraje_f">${e.horometraje_f}</td>
-                                <td class="lugar_t">${e.lugar_t}</td>
-                                <td class="fallo">${e.fallo}</td>
-                                <td class="hora_paro">${e.hora_paro}</td>
-                                <td class="hora_reinicio">${e.hora_reinicio}</td>
-                                <td class="gastos_falla">${e.gastos_falla}</td>
-                                <td class="observacion">${e.observacion}</td>
-                                <td>
-                                <button type="button" id="ida" class="list btn btn-warning" data-id="${e.id_operador}" data-row="${e.id}" data-toggle="modal" data-target="#editar">
-                                <i class="fa fa-edit"></i>
-                                 </button>
-                                 <script>
+                                 fillDataTable(response)
+                                
+      
 
-                                 </script>
-                                <a href="../includes/eliminar_inv.php?id=${e.id}" class="btn btn-danger btn-del">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                                </td>
-                            </tr>
-                          
-                            `;
-                                  });
-
-                                  $("#dataTable tbody").html(html);
+                                //   $("#dataTable tbody").html(html);
                                   $('.btn-del').on('click', function (e) {
                                       e.preventDefault();
                                       const href = $(this).attr('href')
@@ -240,8 +294,8 @@
                                       $("#fecha").val($(e.target).closest('tr').find(".fecha").html())
                                       $("#horas_to").val($(e.target).closest('tr').find(".horas_t").html())
                                       $("#horas_ina").val($(e.target).closest('tr').find(".horas_in").html())
-                                      $("#horometraje_i").val($(e.target).closest('tr').find(".horometraje_i").html())
-                                      $("#horometraje_f").val($(e.target).closest('tr').find(".horometraje_f").html())
+                                      $("#horometrajes_i").val($(e.target).closest('tr').find(".horometraje_i").html())
+                                      $("#horometrajes_f").val($(e.target).closest('tr').find(".horometraje_f").html())
                                       $("#lugar_t").val($(e.target).closest('tr').find(".lugar_t").html())
                                       $("#fallo").val($(e.target).closest('tr').find(".fallo").html())
                                       $("#hora_paro").val($(e.target).closest('tr').find(".hora_paro").html())
@@ -265,7 +319,8 @@
                   buttons: true,
                   dangerMode: true,
               })
-              $("#filtro-form")[0].reset();
+              fillDataTable(0)
+
 
           }
       });

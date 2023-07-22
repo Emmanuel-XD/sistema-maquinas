@@ -60,14 +60,14 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="horometraje_i">Horometro Inicial </label><br>
-                                <input type="number" id="horometraje_i" name="horometraje_i" class="form-control">
+                                <input type="number" id="horometrajes_i" name="horometrajes_i" class="form-control">
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="horometraje_f">Horometro Terminal </label><br>
-                                <input type="number" id="horometraje_f" name="horometraje_f" class="form-control">
+                                <input type="number" id="horometrajes_f" name="horometrajes_f" class="form-control">
                             </div>
                         </div>
                     </div>
