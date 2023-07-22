@@ -155,28 +155,27 @@
 </div>
 <script>
     function editarInv() {
-        var id = $("#idrow").val()
+        var id = $("#idrow").val();
 
         var datosFormulario = $("#editInv" + id).serialize();
-        console.log(datosFormulario)
-
+        console.log(datosFormulario);
 
         var datos = new FormData();
-        datos.append("accion", "editar_inv")
-        datos.append("id", id)
-        datos.append("id_maquina", $("#id_maquina").val())
-        datos.append("id_operador", $("#id_operador").val())
-        datos.append("observacion", $("#observacion").val())
-        datos.append("horas_t", $("#horas_t").val())
-        datos.append("horas_in", $("#horas_in").val())
-        datos.append("horometraje_i", $("#horometraje_i").val())
-        datos.append("horometraje_f", $("horometraje_f").val())
-        datos.append("lugar_t", $("#lugar_t").val())
-        datos.append("fallo", $("#fallo").val())
-        datos.append("fecha", $("#fecha").val())
-        datos.append("hora_paro", $("#hora_paro").val())
-        datos.append("hora_reinicio", $("hora_reinicio").val())
-        datos.append("gastos_falla", $("#gastos_falla").val())
+        datos.append("accion", "editar_inv");
+        datos.append("id", id);
+        datos.append("id_maquina", $("#id_maquina").val());
+        datos.append("id_operador", $("#id_operador").val());
+        datos.append("observacion", $("#observacion").val());
+        datos.append("horas_t", $("#horas_to").val()); // Corregido para usar $("#horas_to")
+        datos.append("horas_in", $("#horas_ina").val()); // Corregido para usar $("#horas_ina")
+        datos.append("horometraje_i", $("#horometraje_i").val());
+        datos.append("horometraje_f", $("#horometraje_f").val());
+        datos.append("lugar_t", $("#lugar_t").val());
+        datos.append("fallo", $("#fallo").val());
+        datos.append("fecha", $("#fecha").val());
+        datos.append("hora_paro", $("#hora_paro").val());
+        datos.append("hora_reinicio", $("#hora_reinicio").val());
+        datos.append("gastos_falla", $("#gastos_falla").val());
         fetch("../includes/functions.php", {
                 method: 'POST',
                 body: datos
@@ -190,26 +189,27 @@
                 } else {
                     alert("Ha ocurrido un error al actualizar el registro");
                 }
-            })
-
-        // $.ajax({
-        //     url: "../includes/functions.php",
-        //     type: "POST",
-        //     data: datosFormulario,
-        //     dataType: "json",
-        //     success: function(response) {
-        //         if (response === "correcto") {
-        //             alert("El registro se ha actualizado correctamente");
-        //             setTimeout(function() {
-        //                 location.assign('inventario.php');
-        //             }, 2000);
-        //         } else {
-        //             alert("Ha ocurrido un error al actualizar el registro");
-        //         }
-        //     },
-        //     error: function() {
-        //         alert("Error de comunicacion con el servidor");
-        //     }
-        // });
+            });
     }
+
+
+    // $.ajax({
+    //     url: "../includes/functions.php",
+    //     type: "POST",
+    //     data: datosFormulario,
+    //     dataType: "json",
+    //     success: function(response) {
+    //         if (response === "correcto") {
+    //             alert("El registro se ha actualizado correctamente");
+    //             setTimeout(function() {
+    //                 location.assign('inventario.php');
+    //             }, 2000);
+    //         } else {
+    //             alert("Ha ocurrido un error al actualizar el registro");
+    //         }
+    //     },
+    //     error: function() {
+    //         alert("Error de comunicacion con el servidor");
+    //     }
+    // });
 </script>
