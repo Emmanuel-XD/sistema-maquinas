@@ -46,7 +46,6 @@
           }
       });
       $("#start").change(function () {
-
           var endDate = new Date($("#start").val());
           //default config reporte mensual
           if ($("#type").val() == 1) {
@@ -75,6 +74,8 @@
           //si el reporte es diario
           if ($("#type").val() == 3) {
               var month = endDate.getMonth() + 1;
+              var year = endDate.getFullYear();
+              var day = endDate.getDate() + 1;
           }
           if (day < 10) {
               day = '0' + day;
