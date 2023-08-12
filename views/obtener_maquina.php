@@ -23,23 +23,40 @@ if (isset($_POST['id'])) {
     echo json_encode($maquina);
   }
 }
-if(isset($_POST['table'])){
-    $idMaquina = $_POST['idm'];
-    $fecha1 = $_POST['fecha1'];
-    $fecha2 = $_POST['fecha2'];
-    $query =  "SELECT i.id, i.id_maquina,i.id_operador,i.observacion,i.horas_t,i.horas_in,i.horometraje_i,i.horometraje_f,i.lugar_t, i.fallo,i.hora_paro,i.hora_reinicio,i.fecha,i.gastos_falla,o.nombre,i.responsable_falla FROM inventario i INNER JOIN operadores o ON i.id_operador = o.id WHERE i.id_maquina = $idMaquina AND i.fecha BETWEEN  '$fecha1' and '$fecha2';";
-    $result = mysqli_query($conexion, $query);
-    if (mysqli_num_rows($result)>0)
-    {    
-        while ($dato = mysqli_fetch_assoc($result) ){
-         $datos[] = $dato;
+if (isset($_POST['table'])) {
+  $idMaquina = $_POST['idm'];
+  $fecha1 = $_POST['fecha1'];
+  $fecha2 = $_POST['fecha2'];
+  $query =  "SELECT i.id, i.id_maquina,i.id_operador,i.observacion,i.horas_t,i.horas_in,i.horometraje_i,i.horometraje_f,i.lugar_t, i.fallo,i.hora_paro,i.hora_reinicio,i.fecha,i.gastos_falla,o.nombre,i.responsable_falla FROM inventario i INNER JOIN operadores o ON i.id_operador = o.id WHERE i.id_maquina = $idMaquina AND i.fecha BETWEEN  '$fecha1' and '$fecha2';";
+  $result = mysqli_query($conexion, $query);
+  if (mysqli_num_rows($result) > 0) {
+    while ($dato = mysqli_fetch_assoc($result)) {
+      $datos[] = $dato;
     }
     echo json_encode($datos);
-  }
-  else{
+  } else {
     echo json_encode(0);
   }
+}
+
+if (isset($_POST['id_maquina'])) {
+  $idMaquina = $_POST['id_maquina'];
 
 
+  $result = mysqli_query($conexion, "SELECT h.id, h.id_maquina, h.status, h.inicio, h.fin, h.datetime, h.usuario,
+  m.name FROM historial h INNER JOIN maquinas m ON h.id_maquina = m.id WHERE h.id_maquina = '$idMaquina'");
 
+  $output = '';
+  while ($fila = mysqli_fetch_assoc($result)) {
+    $output .= '<tr>
+            <td>' . $fila['name'] . '</td>
+            <td>' . $fila['status'] . '</td>
+            <td>' . $fila['inicio'] . '</td>
+            <td>' . $fila['fin'] . '</td>
+            <td>' . $fila['datetime'] . '</td>
+            <td>' . $fila['usuario'] . '</td>
+        </tr>';
+  }
+
+  echo $output;
 }
