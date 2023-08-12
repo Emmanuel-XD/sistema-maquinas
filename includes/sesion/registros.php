@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h3 class="modal-title" id="exampleModalLabel">Agregar un nuevo usuario</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Agregar un Nuevo Usuario</h3>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">
                     <i class="fa fa-times" aria-hidden="true"></i></button>
             </div>
@@ -14,7 +14,7 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Usuario</label>
-                                <input type="text" id="usuario" name="usuario" class="form-control" required>
+                                <input type="text" placeholder="ricardo" id="usuario" name="usuario" class="form-control" required>
 
                             </div>
                         </div>
@@ -23,7 +23,7 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Correo</label>
-                                <input type="email" id="correo" name="correo" class="form-control" required>
+                                <input type="email" placeholder="ricardo.g@globalinfra.mx" id="correo" name="correo" class="form-control" required>
                             </div>
                         </div>
                     </div>
@@ -31,30 +31,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">confirma el rol de usuario</label><br>
-                                <input type="tel" name="telefono" id="telefono" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label for="password">Password</label><br>
-                                <input type="password" name="password" id="password" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label for="password">Confirmar Password</label><br>
-                                <input type="password" name="password2" id="password2" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label for="username">Rol de Usuario</label><br>
+                                <label for="username" class="form-label">Rol de Usuario</label><br>
                                 <select name="id_rol" id="id_rol" class="form-control" required>
                                     <option value="">Selecciona una opcion</option>
                                     <option value="1">Administrador</option>
@@ -63,6 +40,31 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Confirma el rol de Usuario</label><br>
+                                <input type="tel" placeholder="Administrador" name="telefono" id="telefono" class="form-control" required>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label><br>
+                                <input type="password" placeholder="*****" name="password" id="password" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Confirmar contraseña</label><br>
+                                <input type="password" placeholder="*****" name="password2" id="password2" class="form-control" required>
+                            </div>
+                        </div>
+
+
                     </div>
 
 

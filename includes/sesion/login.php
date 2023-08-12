@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -25,7 +25,7 @@
                     <img src="Logo-Primario (1).png" style="max-height: 84px;">
                 </center>
                 <br>
-                <h2 class="text-center">ENTRAR</h2>
+                <h2 class="text-center">Iniciar Sesion</h2>
 
 
 
@@ -40,12 +40,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password" class="form-label">Password</label>
+                        <label for="password" class="form-label">Contraseña</label>
                         <input type="password" placeholder="ingresa tu contraseña" id="password" name="password" class="form-control" required>
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">ACCEDER</button>
+                        <button type="submit" class="btn btn-primary">ENTRAR</button>
                     </div>
                 </form>
                 <br>
