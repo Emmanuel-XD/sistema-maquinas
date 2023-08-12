@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-07-2023 a las 23:50:30
+-- Tiempo de generación: 12-08-2023 a las 02:50:33
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.8
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `maquinas`
+-- Base de datos: `newpro`
 --
 
 -- --------------------------------------------------------
@@ -30,29 +30,45 @@ SET time_zone = "+00:00";
 CREATE TABLE `inventario` (
   `id` int(11) NOT NULL,
   `id_maquina` int(11) NOT NULL,
-  `id_operador` int(11) DEFAULT NULL,
-  `observacion` varchar(250) DEFAULT NULL,
+  `id_operador` int(11) NOT NULL,
+  `observacion` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
   `horas_t` int(150) DEFAULT NULL,
   `horas_in` int(150) DEFAULT NULL,
   `horometraje_i` int(50) DEFAULT NULL,
   `horometraje_f` int(50) DEFAULT NULL,
-  `lugar_t` varchar(150) DEFAULT NULL,
-  `fallo` varchar(150) NOT NULL,
+  `lugar_t` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fallo` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `hora_paro` time DEFAULT NULL,
   `hora_reinicio` time DEFAULT NULL,
   `fecha` date DEFAULT NULL,
-  `gastos_falla` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `gastos_falla` varchar(500) COLLATE utf8_spanish_ci NOT NULL,
+  `responsable_falla` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `inventario`
 --
 
-INSERT INTO `inventario` (`id`, `id_maquina`, `id_operador`, `observacion`, `horas_t`, `horas_in`, `horometraje_i`, `horometraje_f`, `lugar_t`, `fallo`, `hora_paro`, `hora_reinicio`, `fecha`, `gastos_falla`) VALUES
-(109, 2, 3, 'Ninguna', 10, 2, 0, 1000, 'Guadalajara', 'FRACTURA DE BOTE', '00:15:00', '13:15:00', '2023-07-16', '0'),
-(110, 11, 3, 'Ninguna', 10, 2, 1400, 120000, 'Guadalajara', 'SERVICIOS', '15:15:00', '16:15:00', '2023-07-14', '10'),
-(111, 2, 3, 'Ninguna', 15, 5, 111900, 232000, 'Guadalajara', 'FRACTURA DE BOTE', '02:17:00', '11:23:00', '2023-07-21', '0'),
-(112, 12, 4, 'Ninguna', 50, 12, 15, 0, 'Veracruz', 'DIESEL', '16:40:00', '00:00:00', '2023-07-02', '0');
+INSERT INTO `inventario` (`id`, `id_maquina`, `id_operador`, `observacion`, `horas_t`, `horas_in`, `horometraje_i`, `horometraje_f`, `lugar_t`, `fallo`, `hora_paro`, `hora_reinicio`, `fecha`, `gastos_falla`, `responsable_falla`) VALUES
+(149, 2, 3, 'funciona perfectamente', 9, 2, 6319, 6328, 'Tren maya', 'servicios,voladuras,sin falla', '00:00:00', '00:00:00', '2023-07-01', '', ''),
+(151, 2, 3, 'funciona perfectamente ', 6, 0, 6328, 6334, 'Tren maya', 'sin falla', '00:00:00', '00:00:00', '2023-07-02', '', ''),
+(152, 2, 4, 'nada', 14, 0, 6334, 6348, 'Tren maya', '', '00:00:00', '00:00:00', '2023-07-03', '', ''),
+(153, 2, 3, 'todo esta en orden  ', 11, 0, 6348, 6359, 'Tren maya', 'sin falla', '00:00:00', '00:00:00', '2023-07-04', '', ''),
+(155, 2, 3, 'funciona perfectamente ', 12, 0, 6359, 6371, 'Tren maya', 'sin falla', '00:00:00', '00:00:00', '2023-07-05', '', ''),
+(156, 2, 3, 'sigue funcionando bien', 10, 0, 6371, 6381, 'Tren maya', 'sin falla', '00:00:00', '00:00:00', '2023-07-06', '', ''),
+(157, 2, 3, 'maquina en buen funcionamiento', 11, 0, 6381, 6392, 'Tren maya', 'sin falla', '00:00:00', '00:00:00', '2023-07-07', '', ''),
+(158, 2, 3, 'se trabajo medio día por mi cumpleaños', 6, 0, 6392, 6398, 'Tren maya', 'sin falla', '14:00:00', '00:00:00', '2023-07-08', '', ''),
+(159, 2, 3, 'no se presento el operador ', 0, 10, 6398, 6398, 'Tren maya', 'operador', '00:00:00', '00:00:00', '2023-07-09', '', ''),
+(160, 2, 3, 'todo en orden', 7, 0, 6398, 6405, 'Tren maya', 'sin falla', '00:00:00', '00:00:00', '2023-07-10', '', ''),
+(162, 10, 6, 'se rompió la manguera ', 8, 2, 3279, 3287, 'Tren maya', 'mangueras', '17:00:00', '00:00:00', '2023-07-01', '', ''),
+(163, 10, 6, 'esta en reparación ', 0, 10, 3287, 3287, 'Tren maya', 'mangueras', '00:00:00', '00:00:00', '2023-07-02', '', ''),
+(407, 10, 3, 'Ninguna1', 10, 2, 1000, 258, 'banco de material acc2', '', '21:10:00', '21:06:00', '2023-08-11', '0', 'Global'),
+(408, 11, 7, '1111', 100, 2, 10000, 55572, 'tramo', 'mecanica,operador,diesel', '21:09:00', '18:12:00', '2023-08-11', '10', 'empresa'),
+(409, 14, 6, '10', 10, 124, 101, 10, 'banco de material acc2', 'mecanica,aceite,falta valvula-pago,cabezal-pago', '18:23:00', '18:27:00', '2023-08-24', '10', 'Global'),
+(410, 12, 9, 'kkl-j-', 56, 786, 756756, 767676, 'banco de material acc2', 'fractura de bote,falta de tramo sedena, falta valvula-pago,cabezal-pago', '18:38:00', '20:35:00', '2023-08-11', '10', 'empresa'),
+(411, 11, 6, '44554', 8998, 78, 78785775, 578, 'banco de material tulum', 'operador, clima, cabezal-pago, sin falla', '22:39:00', '23:39:00', '2023-08-11', '10', 'Global'),
+(412, 2, 4, 'Ninguna', 442, 44, 10, 10, 'banco de material acc2', 'mecanica, fractura de bote, voladuras, cabezal-pago', '18:44:00', '18:44:00', '2023-08-11', '10', 'empresa'),
+(413, 10, 6, '688', 68, 56, 86, 86, 'Tren maya', 'mecanica,operador,voladuras,cabezal-pago', '18:44:00', '18:45:00', '2023-08-25', '666', 'Global');
 
 -- --------------------------------------------------------
 
@@ -62,23 +78,24 @@ INSERT INTO `inventario` (`id`, `id_maquina`, `id_operador`, `observacion`, `hor
 
 CREATE TABLE `maquinas` (
   `id` int(11) NOT NULL,
-  `name` varchar(150) NOT NULL,
-  `modelo` varchar(250) NOT NULL,
-  `serie` varchar(250) NOT NULL,
-  `ubicacion` varchar(150) NOT NULL,
-  `status` varchar(150) NOT NULL,
+  `name` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `modelo` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
+  `serie` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
+  `ubicacion` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `status` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `maquinas`
 --
 
 INSERT INTO `maquinas` (`id`, `name`, `modelo`, `serie`, `ubicacion`, `status`, `fecha`) VALUES
-(2, 'Maquina 1', '336E', '01613', 'Tren Maya', 'Activo', '2023-07-12 14:02:14'),
-(10, 'Maquina 4', '336E', '0235', 'Veracruz', 'Inactivo', '2023-07-12 14:02:24'),
-(11, 'Maquina 2', 'ksms', 'N6519100', 'Tijuana', 'Inactivo', '2023-07-19 15:53:51'),
-(12, 'Maquina 5', 'SMDK300', 'DHASFISD', 'Guadalajara', 'Activo', '2023-07-14 16:01:45');
+(2, 'Maquina 1', '336E', 'CAT0336EHBZY01613', 'Tren maya', 'Inactivo', '2023-08-03 19:54:25'),
+(10, 'Maquina 4', '336E', 'CAT0336ECYEP00235', 'Tren maya', 'Activo', '2023-08-08 17:01:28'),
+(11, 'Maquina 5', '330D', 'CAT0330DLB6H00252', 'Tren maya', 'Inactivo', '2023-08-03 23:39:08'),
+(12, 'Maquina 6', 'PC390LC-8M0 KOMATSU', '83578', 'Tren maya', 'Activo', '2023-07-31 16:20:36'),
+(14, 'Maquina 7', 'PC390LC-8M0 KOMATSU', '83617', 'banco de material acc2', 'Activo', '2023-07-31 17:34:49');
 
 -- --------------------------------------------------------
 
@@ -88,20 +105,23 @@ INSERT INTO `maquinas` (`id`, `name`, `modelo`, `serie`, `ubicacion`, `status`, 
 
 CREATE TABLE `operadores` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `apellido` varchar(50) NOT NULL,
+  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `edad` int(50) NOT NULL,
   `telefono` int(50) NOT NULL,
   `fecha de registro` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `operadores`
 --
 
 INSERT INTO `operadores` (`id`, `nombre`, `apellido`, `edad`, `telefono`, `fecha de registro`) VALUES
-(3, 'Jesus', 'Garcia Marques', 20, 2147483647, '2023-07-14 15:49:08'),
-(4, 'Emmanuel', 'Gomez Chavez', 22, 54948151, '2023-07-14 15:48:00');
+(3, 'Joaquin', 'Garcia Marques', 20, 2147483647, '2023-07-24 17:46:47'),
+(4, 'Erick', 'Gomez Chavez', 22, 54948151, '2023-07-24 17:46:30'),
+(6, 'Domingo', 'sierra', 45, 554567896, '2023-07-21 23:10:19'),
+(7, 'Jose', 'aguilar', 33, 33333, '2023-07-26 21:56:50'),
+(9, 'Sin operador', '-', 0, 12345, '2023-07-27 00:06:29');
 
 -- --------------------------------------------------------
 
@@ -111,8 +131,8 @@ INSERT INTO `operadores` (`id`, `nombre`, `apellido`, `edad`, `telefono`, `fecha
 
 CREATE TABLE `permisos` (
   `id` int(11) NOT NULL,
-  `rol` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `rol` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `permisos`
@@ -130,24 +150,22 @@ INSERT INTO `permisos` (`id`, `rol`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `usuario` varchar(50) NOT NULL,
-  `correo` varchar(50) NOT NULL,
-  `telefono` varchar(50) NOT NULL,
-  `password` varchar(300) NOT NULL,
+  `usuario` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `correo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `telefono` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(300) COLLATE utf8_spanish_ci NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_rol` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `usuario`, `correo`, `telefono`, `password`, `fecha`, `id_rol`) VALUES
-(5, 'omar', 'omar@global.mx', 'administrador', '$2y$05$/EGr.neCjwlFVoigWRtZmO.XOLc6fcifznin0rsRugQrQR/fwcmz6', '2023-07-10 16:51:25', 1),
-(9, 'ejemplo2223', 'omar@global.mx', 'empleado', '$2y$05$R7hNGFEBFOe6wZfwnAf30ulwBN2ZM7U8zsxGDPXN0R9eoP60qctS2', '2023-07-10 16:50:18', 2),
-(10, 'pino', 'pino@global.mx', 'empleado', '$2y$05$Uy21f62/po/umdkKbnakfOZ/IZVCjjnuDqZZ9NOwNRbkCBacmUDKG', '2023-07-10 16:50:59', 2),
-(11, 'EJEMPLODEPRUEBA', 'EJEMPLO@G.COM', 'empleado', '$2y$05$65O.l9nTHj06FgJBrvILc.3tD0zY6eDkKTyXDkj8amaZpSTlixwgS', '2023-07-10 17:02:01', 1),
-(12, 'Admin', 'admin@gmail.com ', '12345', '$2y$05$GLR6QNdk/09FLAm4.Yl8B.0UFNCMac7gmtemGNw75s8OT.DfsPncy', '2023-07-11 23:19:48', 1);
+(5, 'Omar', 'omar.rodriguez@a.mx', 'Administrador', '$2y$05$UxN47LMLv9hUyRkTEuHPR.ms42Qceaw/LdLgeo2xDfvD8tuxg6Zp2', '2023-08-10 18:20:16', 1),
+(10, 'Pino', 'pino@global.mx', 'Empleado', '$2y$05$h2fXdJV6vHMDXdYThGxGjOc696lBIfbIyceKyeWSSO9YN1QppTRlq', '2023-07-25 14:58:42', 2),
+(12, 'admin', 'ricardo.garcia@gl.mx', '12345', '$2y$05$Grln/f.IBgVtg2gzpnDMD.ceKYjnLBasnx3KfbN7J84AdWGudpigW', '2023-08-10 18:19:53', 1);
 
 --
 -- Índices para tablas volcadas
@@ -191,19 +209,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=414;
 
 --
 -- AUTO_INCREMENT de la tabla `maquinas`
 --
 ALTER TABLE `maquinas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `operadores`
 --
 ALTER TABLE `operadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -215,7 +233,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
