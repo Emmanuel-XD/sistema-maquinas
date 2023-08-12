@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-08-2023 a las 02:50:33
+-- Tiempo de generación: 12-08-2023 a las 06:19:00
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.8
 
@@ -18,8 +18,33 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `newpro`
+-- Base de datos: `maquinas`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historial`
+--
+
+CREATE TABLE `historial` (
+  `id` int(11) NOT NULL,
+  `id_maquina` int(11) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `inicio` date NOT NULL,
+  `fin` date NOT NULL,
+  `datetime` datetime NOT NULL,
+  `usuario` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `historial`
+--
+
+INSERT INTO `historial` (`id`, `id_maquina`, `status`, `inicio`, `fin`, `datetime`, `usuario`) VALUES
+(1, 2, 'Mantenimiento Relizado', '2023-08-09', '2023-08-11', '2023-08-12 05:32:42', 'admin'),
+(2, 10, 'Mantenimiento Realizado', '2023-07-01', '2023-08-18', '2023-08-12 05:32:42', 'admin'),
+(3, 2, 'Mantenimiento Relizado', '2023-07-01', '2023-07-03', '2023-08-12 05:41:41', 'admin');
 
 -- --------------------------------------------------------
 
@@ -172,6 +197,12 @@ INSERT INTO `users` (`id`, `usuario`, `correo`, `telefono`, `password`, `fecha`,
 --
 
 --
+-- Indices de la tabla `historial`
+--
+ALTER TABLE `historial`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `inventario`
 --
 ALTER TABLE `inventario`
@@ -204,6 +235,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `historial`
+--
+ALTER TABLE `historial`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `inventario`
