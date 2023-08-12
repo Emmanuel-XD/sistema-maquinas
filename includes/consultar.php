@@ -1,61 +1,49 @@
 <?php
 include_once "../includes/db.php";
 
-if (isset($_POST['star']) && isset($_POST['fin']) && isset($_POST['id'])) {
+if (isset($_POST['star']) && isset($_POST['fin'])) {
     $starDate = $_POST['star'];
     $endDate = $_POST['fin'];
-    $idMaquina = $_POST['id'];
 
-    $consulta = "SELECT i.id, i.id_maquina,i.id_operador,i.observacion,i.horas_t, 
-    i.horas_in,i.horometraje_i,i.horometraje_f,i.lugar_t, i.fallo,i.hora_paro,i.hora_reinicio,i.fecha,
-    i.gastos_falla, m.name FROM inventario i INNER JOIN maquinas m ON i.id_maquina = m.id
-    WHERE i.fecha BETWEEN '$starDate' AND '$endDate' AND i.id_maquina = " . $idMaquina;
-    $result = mysqli_query($conexion, $consulta);
+   
+    $consulta_totales = "SELECT m.name AS maquina, m.serie, m.modelo, SUM(i.horas_t) AS total_horas_activas,
+    SUM(i.horas_in) AS total_horas_inactivas FROM maquinas m LEFT JOIN inventario i ON i.id_maquina = m.id AND i.fecha BETWEEN '$starDate' AND '$endDate'
+    GROUP BY m.name, m.serie, m.modelo";
+    $result_totales = mysqli_query($conexion, $consulta_totales);
 
-    // Calcular el total de horas activass e inactivas
-    $sqlsum = "SELECT SUM(i.horas_t) AS total_horas_activas, SUM(i.horas_in) AS total_horas_inactivas FROM inventario i 
-    INNER JOIN maquinas m ON i.id_maquina = m.id WHERE i.fecha BETWEEN '$starDate' AND '$endDate' AND i.id_maquina = $idMaquina";
-    $resultSum = mysqli_query($conexion, $sqlsum);
-    $filaSum = mysqli_fetch_assoc($resultSum);
-    $totalHorasActivas = $filaSum['total_horas_activas'];
-    $totalHorasInactivas = $filaSum['total_horas_inactivas'];
-
-    // Construir la tabla con los resultados y la suma de horas
-    if (mysqli_num_rows($result) > 0) {
-        echo '<table>';
-        echo '<thead>
-        <tr>
-        <th>Maquina</th>
-        <th>Horas Activas/Trab.</th>
-        <th>Horas Inactivas</th>
-        </tr>
-        </thead>';
-        echo '<tbody>';
-        while ($fila = mysqli_fetch_assoc($result)) {
-            echo '<tr>';
-            echo '<td>' . $fila['name'] . '</td>';
-            echo '<td>' . $fila['horas_t'] . '</td>';
-            echo '<td>' . $fila['horas_in'] . '</td>';
-            echo '</tr>';
-        }
-        echo '</tbody>';
-        echo '<tfoot>';
-        echo '<tr>';
-        echo '<th>Total:</th>';
-        echo '<th>' . $totalHorasActivas . '</th>';
-        echo '<th>' . $totalHorasInactivas . '</th>';
-        echo '</tr>';
-        echo '</tfoot>';
-        echo '</table>';
-    } else {
-        // Mostrar alerta SweetAlert2 si no se encontraron resultados
-        echo "<script>
-                Swal.fire({
-                  title: 'Sin resultados',
-                  text: 'No se encontraron registros en la base de datos.',
-                  icon: 'info',
-                  confirmButtonText: 'Aceptar'
-                });
-              </script>";
+    $totales_por_maquina = array();
+    while ($fila_total = mysqli_fetch_assoc($result_totales)) {
+        $renta = 1670.40;
+        $totales_por_maquina[$fila_total['maquina']] = array(
+            'serie' => $fila_total['serie'],
+            'modelo' => $fila_total['modelo'],
+            'total_horas_activas' => $fila_total['total_horas_activas'],
+            'total_horas_inactivas' => $fila_total['total_horas_inactivas']
+        );
     }
+
+    echo '<table>';
+    echo '<thead>
+<tr>
+<th>Maquina</th>
+<th>Serie</th>
+<th>Modelo</th>
+<th>Horas Activas/Trabajadas</th>
+<th>Horas Inactivas</th>
+<th>Precio Renta</th>
+</tr>
+</thead>';
+    echo '<tbody>';
+    foreach ($totales_por_maquina as $maquina_nombre => $totales) {
+        echo '<tr>';
+        echo '<td>' . $maquina_nombre . '</td>';
+        echo '<td>' . $totales['serie'] . '</td>';
+        echo '<td>' . $totales['modelo'] . '</td>';
+        echo '<td>' . $totales['total_horas_activas'] . '</td>';
+        echo '<td>' . $totales['total_horas_inactivas'] . '</td>';
+        echo '<td>' . '$', $totales['total_horas_activas'] * $renta . '</td>';
+        echo '</tr>';
+    }
+    echo '</tbody>';
+    echo '</table>';
 }

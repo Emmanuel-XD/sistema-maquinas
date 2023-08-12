@@ -14,7 +14,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
     die();
 } ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 
@@ -59,7 +59,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
             <li class="nav-item active">
                 <a class="nav-link" href="../views/index.php">
                     <i class=""></i> <!--fas fa-fw fa-tachometer-alt-->
-                    <span>GLOBAL INFRA</span></a>
+                   <span>GLOBAL INFRA</span> </a>
             </li>
 
             <!-- Divider -->
@@ -74,15 +74,15 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-clipboard-list"></i>
-                    <span>Reportes</span>
+                    <span style="font-size: 13px; font-weight: 550; color: #FFFFFF; letter-spacing: .1mm;">Reportes</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="bg-white py-2 collapse-inner rounded" >
                         <h6 class="collapse-header">Ver Modulos</h6>
-                        <a class="collapse-item" href="../views/add_report.php">Agregar Reporte</a>
-                        <a class="collapse-item" href="../views/inventario.php">Reportes Generales</a>
-                        <a class="collapse-item" href="../views/horas_total.php">Reporte HRS de Maquina</a>
-                        <!--  <a class="collapse-item" href="../views/codbarra.php">reporte del mes</a>-->
+                        <a class="collapse-item" href="../views/add_report.php">Agregar Nuevo Reporte </a>
+                        <a class="collapse-item" href="../views/inventario.php">Consultar Reportes</a>
+                        <a class="collapse-item" href="../views/horas_total.php">Reporte por Horas</a>
+                        <a class="collapse-item" href="../views/registros.php">Actualizar/Eliminar </a>
                     </div>
                 </div>
             </li>
@@ -90,8 +90,8 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-car"></i>
-                    <span>Maquinas</span>
+                    <i class="fas fa-fw fa-cogs"></i>
+                    <span style="font-size: 13px; font-weight: 550; color: #FFFFFF; letter-spacing: .1mm;">Maquinas</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -108,7 +108,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-male"></i>
-                    <span>Operadores</span>
+                    <span style="font-size: 13px; font-weight: 550; color: #FFFFFF; letter-spacing: .1mm;">Operadores</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -131,7 +131,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
                 <li class="nav-item">
                     <a class="nav-link" href="../views/usuarios.php">
                         <i class="fas fa-fw fa-user-plus"></i>
-                        <span>Usuarios</span></a>
+                        <span style="font-size: 13px; font-weight: 550; color: #FFFFFF; letter-spacing: .1mm;">Usuarios</span></a>
                 </li>
             <?php }
             ?>

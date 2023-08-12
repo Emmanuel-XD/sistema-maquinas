@@ -99,8 +99,11 @@ function insertar_inventario()
     extract($_POST);
     include "db.php";
 
-    $consulta = "INSERT INTO inventario (id_maquina,id_operador, observacion, horas_t, horas_in, horometraje_i, horometraje_f,lugar_t,fallo,fecha,hora_paro,hora_reinicio,gastos_falla) 
-    VALUES ('$id_maquina','$id_operador', '$observacion','$horas_t','$horas_in','$horometraje_i','$horometraje_f','$lugar_t','$fallo','$fecha','$hora_paro','$hora_reinicio','$gastos_falla')";
+    // Convertimos el arreglo de fallas a una cadena para almacenar en la base de datos
+    $fallas_str = implode(",",$fallas);
+
+    $consulta = "INSERT INTO inventario (id_maquina, id_operador, observacion, horas_t, horas_in, horometraje_i, horometraje_f, lugar_t, fallo, fecha, hora_paro, hora_reinicio, gastos_falla, responsable_falla) 
+    VALUES ('$id_maquina', '$id_operador', '$observacion', '$horas_t', '$horas_in', '$horometraje_i', '$horometraje_f', '$lugar_t', '$fallas_str', '$fecha', '$hora_paro', '$hora_reinicio', '$gastos_falla', '$responsable_falla')";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado) {
@@ -126,11 +129,18 @@ function editar_inv()
     require_once("db.php");
 
     extract($_POST);
+    $id_operador = $_POST['id_operador'];
 
+    // Procesar los valores de los checkboxes en un solo string
+    if (isset($_POST['fallas']) && is_array($_POST['fallas'])) {
+        $fallas_str = implode(',', $_POST['fallas']);
+    } else {
+        $fallas_str = '';
+    }
 
     $consulta = "UPDATE inventario SET id_operador = '$id_operador', observacion = '$observacion', 
-        horas_t = '$horas_t',  horas_in = '$horas_in', horometraje_i = '$horometraje_i',
-		horometraje_f = '$horometraje_f', lugar_t='$lugar_t',fecha='$fecha',hora_paro='$hora_paro',hora_reinicio='$hora_reinicio', fallo = '$fallo', gastos_falla = '$gastos_falla' WHERE id = '$id' ";
+        horas_t = '$horas_t', horas_in = '$horas_in', horometraje_i = '$horometraje_i',
+		horometraje_f = '$horometraje_f', lugar_t='$lugar_t', fecha='$fecha', hora_paro='$hora_paro', hora_reinicio='$hora_reinicio', fallo = '$fallas_str', gastos_falla = '$gastos_falla', responsable_falla='$responsable_falla' WHERE id = '$id' ";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado) {
@@ -139,6 +149,7 @@ function editar_inv()
         echo json_encode("error");
     }
 }
+
 
 function editar_prov()
 {
