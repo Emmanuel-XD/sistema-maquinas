@@ -145,10 +145,8 @@
             e.hora_reinicio,
             e.gastos_falla,
             e.observacion,
-            `<button type="button" id="ida" class="list btn btn-warning" data-id="${e.id_operador}" data-row="${e.id}" data-toggle="modal" data-target="#editar">
-            <i class="fa fa-edit"></i></button>
-            <a href="../includes/eliminar_inv.php?id=${e.id}" class="btn btn-danger btn-del">
-            <i class="fa fa-trash"></i>`
+            e.responsable_falla
+            
         ]);
        
         // Initialize the datatable with the transformed data
@@ -168,6 +166,7 @@
             { className: "hora_reinicio", "targets": [ 9 ] },
             { className: "gastos_falla", "targets": [ 10 ] },
             { className: "observacion", "targets": [ 11 ] },
+            { className: "responsable_falla", "targets": [ 12 ] },
 
 
           ],
@@ -302,6 +301,7 @@
                                       $("#hora_reinicio").val($(e.target).closest('tr').find(".hora_reinicio").html())
                                       $("#gastos_falla").val($(e.target).closest('tr').find(".gastos_falla").html())
                                       $("#observacion").val($(e.target).closest('tr').find(".observacion").html())
+                                      $("#responsable_falla").val($(e.target).closest('tr').find(".responsable_falla").html())
                                       $("#idrow").val($(this).data('row'))
                                   })
                               } else {
