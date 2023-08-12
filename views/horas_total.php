@@ -11,7 +11,7 @@ session_start();
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Reportes de Total de Horas</h6>
-                <form action="../includes/consultar.php" method="POST" accept-charset="utf-8" id="filtro-form">
+                <form action="../includes/reporte_horas.php" method="POST" accept-charset="utf-8" id="filtro-form" target="_blank">
                     <br>
                     <div class="row">
 
@@ -31,55 +31,10 @@ session_start();
 
                     </div>
 
-                    <div class="row" id="datosMaquina">
-                        <div class="col-md-3">
-                            <label for="lang">MAQUINA:</label>
-                            <select class="form-control" name="id" id="id">
-                                <option value="0">Selecciona una opción</option>
-                                <?php
-                                include("../includes/db.php");
-                                // Código para mostrar categorías desde otra tabla
-                                $sql = "SELECT * FROM maquinas ";
-                                $resultado = mysqli_query($conexion, $sql);
-                                while ($consulta = mysqli_fetch_array($resultado)) {
-                                    echo '<option value="' . $consulta['id'] . '">' . $consulta['name'] . '</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="for-label">Modelo</label>
-                            <input type="text" class="form-control" name="modelo" id="modelo" readonly>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="">Serie</label>
-                            <input type="text" class="form-control" name="serie" id="serie" readonly>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="">Ubicacion</label>
-                            <input type="text" class="form-control" name="ubicacion" id="ubicacion" readonly>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="">Estatus</label>
-                            <input type="text" class="form-control" name="status" id="status" readonly>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="">Mantenimiento</label>
-                            <input type="text" class="form-control" name="mant" id="mant" readonly>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="">Total de Hrs Activa</label>
-                            <input type="text" class="form-control" name="horas_t" id="horas_t" readonly>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="">Total de Hrs Parada</label>
-                            <input type="text" class="form-control" name="horas_in" id="horas_in" readonly>
-                        </div>
-                    </div>
-
                     <br>
-                    <!--<button type="submit" class="btn btn-primary" name="save" id="save">Guardar</button>-->
+
                     <button type="button" class="btn btn-primary" id="filtro">Buscar <i class="fa fa-search" aria-hidden="true"></i></button>
+                    <button class="btn btn-danger" type="submit">Exportar a PDF</button><a id="download-link" style="display: none"></a>
                     <button id="export-btn" class="btn btn-success" type="button">Exportar a Excel</button><a id="download-link" style="display: none"></a>
                 </form>
 
@@ -91,24 +46,34 @@ session_start();
                         <thead>
                             <tr>
                                 <th>Maquina</th>
-                                <th>Horas Activas/Trab.</th>
+                                <th>Serie</th>
+                                <th>Modelo</th>
+                                <th>Horas Activas/Trabajadas.</th>
                                 <th>Horas Inactivas</th>
+                                <th>Precio Renta</th>
 
 
                             </tr>
                         </thead>
                         <tbody>
+
+
                             <?php
                             require_once("../includes/db.php");
-                            $result = mysqli_query($conexion, "SELECT i.id, i.id_maquina,i.id_operador,i.observacion,i.horas_t, 
-                            i.horas_in,i.horometraje_i,i.horometraje_f,i.lugar_t, i.fallo,i.hora_paro,i.hora_reinicio,i.fecha,
-                            i.gastos_falla, m.name FROM inventario i INNER JOIN maquinas m ON i.id_maquina = m.id;");
+                            $result = mysqli_query($conexion, "SELECT m.name AS maquina, m.serie, m.modelo, SUM(i.horas_t) AS total_horas_activas,
+                            SUM(i.horas_in) AS total_horas_inactivas FROM maquinas m LEFT JOIN inventario i ON i.id_maquina = m.id 
+                            GROUP BY m.name, m.serie, m.modelo;");
                             while ($fila = mysqli_fetch_assoc($result)) :
+
+                                $renta = 1670.40;
                             ?>
                                 <tr>
-                                    <td><?php echo $fila['name']; ?></td>
-                                    <td><?php echo $fila['horas_t']; ?></td>
-                                    <td><?php echo $fila['horas_in']; ?></td>
+                                    <td><?php echo $fila['maquina']; ?></td>
+                                    <td><?php echo $fila['serie']; ?></td>
+                                    <td><?php echo $fila['modelo']; ?></td>
+                                    <td><?php echo $fila['total_horas_activas']; ?></td>
+                                    <td><?php echo $fila['total_horas_inactivas']; ?></td>
+                                    <td><?php echo '$', $fila['total_horas_activas'] * $renta; ?></td>
 
 
                                 </tr>
@@ -148,73 +113,24 @@ session_start();
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function() {
-            $("#id").change(function() {
-                var maquinaSeleccionada = $(this).val();
 
-                $.ajax({
-                    url: "obtener_maquina.php",
-                    type: "POST",
-                    data: {
-                        id: maquinaSeleccionada
-                    },
-                    dataType: "json",
-                    success: function(data) {
-                        $("#modelo").val(data.modelo);
-                        $("#serie").val(data.serie);
-                        $("#ubicacion").val(data.ubicacion);
-                        $("#status").val(data.status);
-                        $("#mant").val(data.mantenimiento);
-                        $("#horas_t").val(data.total_horas_activas); // Actualizado a $("#horas_a")
-                        $("#horas_in").val(data.total_horas_inactivas); // Actualizado a $("#horas_p")
-                    
-                        if(data.total_horas_activas === null || data.total_horas_activas === ""){
-                        $("#horas_t").val("0");
-                      
-
-                    }
-                    if(data.total_horas_inactivas === null || data.total_horas_inactivas === ""){
-                        $("#horas_in").val("0");
-
-                    }
-                    horasCero = parseInt($("#horas_t").val());
-                    horasAcumiuladas = parseInt((data.total_horas_activas))
-                    if(horasAcumiuladas < 150 || horasCero < 150){
-                        $("#mant").val("En buen estado")
-                        $("#mant").css("background-color", "#50C878");
-                        $("#mant").css("color", "white");
-                    }
-                    if(horasAcumiuladas > 150 && horasAcumiuladas < 180|| horasCero > 150 && horasCero < 180){
-                        $("#mant").val("Puede requerir mantenimiento")
-                        $("#mant").css("background-color", "#FFA500");
-                        $("#mant").css("color", "white");
-                    }
-                    if(horasAcumiuladas > 180 || horasCero > 180){
-                        $("#mant").val("Mantenimiento requerido")
-                        $("#mant").css("background-color", "##ff0000 ");
-                        $("#mant").css("color", "white");
-                    }
-                        if (data.status === "Inactivo") {
-                            $("#status").css("background-color", "red");
-                            $("#status").css("color", "white");
-                        } else if (data.status === "Activo") {
-                            $("#status").css("background-color", "#50C878");
-                            $("#status").css("color", "white");
-                        } else {
-                            $("#status").css("background-color", "");
-                            $("#status").css("color", "");
-                        }
-                    }
-                });
-            });
-        });
-    </script>
 
     <script>
         $("#filtro").click(function() {
             var starDate = $("#star").val();
             var endDate = $("#fin").val();
+
+            // Verificar si no se han seleccionado fechas
+            if (!starDate || !endDate) {
+                Swal.fire({
+                    title: 'Fechas no seleccionadas',
+                    text: 'Por favor, selecciona un rango de fechas antes de buscar.',
+                    icon: 'warning',
+                    confirmButtonText: 'Aceptar'
+                });
+                return; // Detener la ejecución si no se seleccionaron fechas
+            }
+
             var idMaquina = $("#id").val();
 
             $.ajax({
@@ -231,6 +147,7 @@ session_start();
             });
         });
     </script>
+
 
     <script>
         function exportTableToExcel() {

@@ -77,7 +77,7 @@
                     alert("El registro se ha actualizado correctamente");
                     setTimeout(function() {
                         location.assign('operadores.php');
-                    }, 2000);
+                    }, 10);
                 } else {
                     alert("Ha ocurrido un error al actualizar el registro");
                 }

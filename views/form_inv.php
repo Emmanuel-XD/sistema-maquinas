@@ -85,10 +85,10 @@
                                 <label for="password">Lugar de trabajo</label><br>
                                 <select name="lugar_t" id="lugar_t" class="form-control" required>
                                     <option value="0">Selecciona una opción</option>
-                                    <option value="tijuana">Tijuana</option>
-                                    <option value="guadalajara">Guadalajara</option>
-                                    <option value="veracruz">Veracruz</option>
-                                    <option value="tren maya">Tren Maya</option>
+                                    <option value="banco de material acc2">banco de material acc2</option>
+                                    <option value="Tren maya">Tren maya</option>
+                                    <option value="banco de material tulum">banco de material tulum</option>
+                                    <option value="tramo">tramo</option>
 
 
 
@@ -99,20 +99,25 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label for="password">Tipo de falla</label><br>
-                                <select name="fallo" id="fallo" class="form-control" required>
+                                <select name="fallo" id="fallo" class="form-control"  multiple required>
                                     <option value="0">Selecciona una opción</option>
-                                    <option value="MECANICA">MECANICA</option>
-                                    <option value="OPERADOR">OPERADOR</option>
-                                    <option value="DIESEL">DIESEL</option>
-                                    <option value="FRACTURA DE BOTE">FRACTURA DE BOTE</option>
-                                    <option value="SERVICIOS">SERVICIOS</option>
-                                    <option value="ACEITE">ACEITE</option>
-                                    <option value="FALTA DE TRAMO SEDENA">FALTA DE TRAMO SEDENA</option>
-                                    <option value="MANGUERAS">MANGUERAS</option>
-                                    <option value="CLIMA">CLIMA</option>
-                                    <option value="VOLADURAS">VOLADURAS</option>
-                                    <option value="OTRO">SIN FALLAS</option>
-                                    <option value="OTRO">OTRA</option>
+                                    <option value="mecanica">mecanica</option>
+                                    <option value="operador">operador</option>
+                                    <option value="diesel">diesel</option>
+                                    <option value="fractura de bote">fractura de bote</option>
+                                    <option value="servicios">servicios</option>
+                                    <option value="aceite">aceite</option>
+                                    <option value="falta de tramo sedena">falta de tramo sedena</option>
+                                    <option value="mangueras">mangueras</option>
+                                    <option value="clima">clima</option>
+                                    <option value="voladuras">voladuras</option>
+                                    <option value="cabezal">cabezal</option>
+                                    <option value="pago">pago</option>
+                                    <option value="falta valvula">falta valvula</option>
+                                    <option value="falta valvula, pago">falta valvula, pago</option>
+                                    <option value="cabezal,pago">cabezal,pago</option>
+                                    <option value="sin fallas">sin fallas</option>
+                                    <option value="otro">otro</option>
                                 </select>
                             </div>
                         </div>

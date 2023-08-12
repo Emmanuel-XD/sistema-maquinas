@@ -3,6 +3,7 @@ error_reporting(0);
 session_start();
 ?>
 
+
 <?php include "../includes/header.php"; ?>
 <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
@@ -15,19 +16,19 @@ session_start();
                 <form action="../includes/reporte.php" method="POST" accept-charset="utf-8" id="filtro-form">
                     <br>
                     <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label><b>Tipo de reporte</b></label>
-                            <select   class="form-control selector" name="type" id="type">
-                                <option value="">Selecciona una opción</option>
-                                <option value="1">Reporte mensual</option>
-                                <option value="2">Reporte semanal</option>
-                                <option value="3">Reporte diario</option>
-                            </select>
-                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label><b>Tipo de reporte</b></label>
+                                <select class="form-control selector" name="type" id="type">
+                                    <option value="">Selecciona una opción</option>
+                                    <option value="1">Reporte mensual</option>
+                                    <option value="2">Reporte semanal</option>
+                                    <option value="3">Reporte diario</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-group ">
+                            <div class="form-group">
                                 <label><b>Del dia</b></label>
                                 <input type="date" name="start" id="start" class="selector form-control" required>
                             </div>
@@ -48,7 +49,7 @@ session_start();
                                 <option value="0">Selecciona una opción</option>
                                 <?php
                                 include("../includes/db.php");
-                                // Código para mostrar categorías desde otra tabla
+                                // Código para mostrar las maquinas desde otra tabla
                                 $sql = "SELECT * FROM maquinas ";
                                 $resultado = mysqli_query($conexion, $sql);
                                 while ($consulta = mysqli_fetch_array($resultado)) {
@@ -74,16 +75,20 @@ session_start();
                             <input type="text" class="form-control" name="status" id="status" readonly>
                         </div>
                         <div class="col-md-3">
-                            <label for="">Mantenimiento</label>
-                            <input type="text" class="form-control" name="mant" id="mant" readonly>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="">Total de Hrs Activa</label>
+                            <label for="">Total de horas Activa</label>
                             <input type="text" class="form-control" name="horas_t" id="horas_t" readonly>
                         </div>
                         <div class="col-md-3">
-                            <label for="">Total de Hrs Parada</label>
+                            <label for="">Total de horas Inactiva Global</label>
                             <input type="text" class="form-control" name="horas_in" id="horas_in" readonly>
+                        </div>
+                        <div  class="col-md-3">
+                            <label style="color: brown;" for="">Total de horas Inactiva empresa</label>
+                            <input type="text" class="form-control" name="" id="" readonly>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="">Mantenimiento</label>
+                            <input type="text" class="form-control" name="mant" id="mant" readonly>
                         </div>
                     </div>
                     <br>
@@ -97,25 +102,24 @@ session_start();
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-
-                                <th>OPERADOR</th>
-                                <th>FECHA</th>
-                                <th>HRS TRABAJADAS</th>
-                                <th>HRS INACTIVA</th>
-                                <th>HOROMETRO INICIAL</th>
-                                <th>HOROMETRO TERMINAL</th>
-                                <th>LUGAR DE TRABAJO</th>
-                                <th>TIPO DE FALLA</th>
-                                <th>HORA DE PARO</th>
-                                <th>HORA DE REINICIO</th>
-                                <th>GASTOS DE FALLA</th>
-                                <th>OBSERVACIONES</th>
-                                <th>UPDATE/DEL</th>
+                                <th style="font-size: 13px;">OPERADOR</th>
+                                <th style="font-size: 13px;">FECHA</th>
+                                <th style="font-size: 13px;">HORAS TRABAJADAS</th>
+                                <th style="font-size: 13px;">HORAS INACTIVA</th>
+                                <th style="font-size: 13px;">HOROMETRO INICIAL</th>
+                                <th style="font-size: 13px;">HOROMETRO TERMINAL</th>
+                                <th style="font-size: 13px;">LUGAR DE TRABAJO</th>
+                                <th style="font-size: 13px;">TIPO DE FALLA</th>
+                                <th style="font-size: 13px;">HORA DE FALLA</th>
+                                <th style="font-size: 13px;">HORA DE REINICIO</th>
+                                <th style="font-size: 13px;">GASTOS DE FALLA</th>
+                                <th style="font-size: 13px;">OBSERVACIONES</th>
+                                <th style="font-size: 13px;">RESPONSABLE DE FALLA</th>
                             </tr>
                         </thead>
                         <tbody>
-                                
-                        
+
+
                         </tbody>
                     </table>
                     <?php include "editar_inv.php"; ?>
@@ -156,9 +160,10 @@ session_start();
         exportButton.addEventListener('click', exportTableToExcel);
     </script>
 
-   
+
 
     <?php include "../includes/footer.php"; ?>
 </body>
-    <script src="../js/inventario.js"></script>
+<script src="../js/inventario.js"></script>
+
 </html>

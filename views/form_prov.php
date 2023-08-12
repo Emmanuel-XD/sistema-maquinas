@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h3 class="modal-title" id="exampleModalLabel">Agregar nueva maquina</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Agregar Nueva Maquina</h3>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">
                     <i class="fa fa-times" aria-hidden="true"></i></button>
             </div>
@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">Serie</label><br>
+                                <label for="password" class="form-label">Serie</label><br>
                                 <input type="text" name="serie" id="serie" class="form-control" required>
                             </div>
                         </div>
@@ -42,10 +42,10 @@
                                 <label for="nombre" class="form-label">Ubicacion</label>
                                 <select name="ubicacion" id="ubicacion" class="form-control" required>
                                     <option value="0">Selecciona una opcion</option>
-                                    <option value="Tijuana">Tijuana</option>
-                                    <option value="Guadalajara">Guadalajara</option>
-                                    <option value="Veracruz">Veracruz</option>
-                                    <option value="Tren Maya">Tren Maya</option>
+                                    <option value="banco de material acc2">banco de material acc2</option>
+                                    <option value="Tren maya">Tren maya</option>
+                                    <option value="banco de material tulum">banco de material tulum</option>
+                                    <option value="tramo">tramo</option>
                                 </select>
                             </div>
                         </div>

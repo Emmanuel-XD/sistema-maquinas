@@ -30,7 +30,7 @@ session_start();
                                 <th>Apellido</th>
                                 <th>Edad</th>
                                 <th>Telefono</th>
-                                <th>UPDATE/DEL</th>
+                                <th>actualizar /eliminar</th>
                             </tr>
                         </thead>
                         <tbody>

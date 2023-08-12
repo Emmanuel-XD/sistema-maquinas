@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">Serie</label><br>
+                                <label for="password" class="form-label">Serie</label><br>
                                 <input type="text" name="serie" id="serie" class="form-control" value="<?php echo $fila['serie']; ?>" required>
                             </div>
                         </div>
@@ -40,10 +40,10 @@
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Ubicacion</label>
                                 <select name="ubicacion" id="ubicacion" class="form-control" required>
-                                    <option <?php echo $fila['ubicacion'] === 'Tijuana' ? 'selected' : ''; ?> value="Tijuana">Tijuana</option>
-                                    <option <?php echo $fila['ubicacion'] === 'Tren Maya' ? 'selected' : ''; ?> value="Tren Maya">Tren Maya</option>
-                                    <option <?php echo $fila['ubicacion'] === 'Guadalajara' ? 'selected' : ''; ?> value="Guadalajara">Guadalajara</option>
-                                    <option <?php echo $fila['ubicacion'] === 'Veracruz' ? 'selected' : ''; ?> value="Veracruz">Veracruz</option>
+                                    <option <?php echo $fila['ubicacion'] === 'banco de material acc2' ? 'selected' : ''; ?> value="banco de material acc2">banco de material acc2</option>
+                                    <option <?php echo $fila['ubicacion'] === 'Tren maya' ? 'selected' : ''; ?> value="Tren maya">Tren maya</option>
+                                    <option <?php echo $fila['ubicacion'] === 'banco de material tulum' ? 'selected' : ''; ?> value="banco de material tulum">banco de material tulum</option>
+                                    <option <?php echo $fila['ubicacion'] === 'tramo' ? 'selected' : ''; ?> value="tramo">tramo</option>
                                 </select>
                             </div>
                         </div>
@@ -84,6 +84,7 @@
             type: "POST",
             data: datosFormulario,
             dataType: "json",
+            
             success: function(response) {
                 if (response === "correcto") {
                     alert("El registro se ha actualizado correctamente");

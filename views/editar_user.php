@@ -26,21 +26,22 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-6">
+                    <div class="col-sm-6">
                             <div class="mb-3">
-                                <label for="password">confirma el rol de acceso</label><br>
-                                <input type="tel" name="telefono" id="telefono" class="form-control" value="<?php echo $fila['telefono']; ?>" required>
-                            </div>
-                        </div>                  
-                        <div class="col-sm-6">
-                            <div class="mb-3">
-                                <label for="username">Rol de Usuario</label><br>
+                                <label for="username" class="form-label">Rol de Usuario</label><br>
                                 <select name="id_rol" id="id_rol" class="form-control" required>
                                     <option <?php echo $fila['id_rol'] === '1' ? 'selected' : ''; ?> value="1">Administrador</option>
                                     <option <?php echo $fila['id_rol'] === '2' ? 'selected' : ''; ?> value="2">Empleado</option>
                                 </select>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                <label for="password" class="form-label">confirma el rol de acceso</label><br>
+                                <input type="tel" name="telefono" id="telefono" class="form-control" value="<?php echo $fila['telefono']; ?>" required>
+                            </div>
+                        </div>                  
+                        
                     </div>
 
                     <?php
@@ -48,7 +49,7 @@
                     ?>
 
                     <div class="form-group">
-                        <label for="password" style="text-align: justify;">Password: (Es necesario ingresar tu contraseña para confirmar la actualizacion)</label><br>
+                        <label for="password" class="form-label" style="text-align: justify;">Contraseña: (Es necesario ingresar tu contraseña para confirmar la actualizacion)</label><br>
                         <input type="password" name="password" id="password" class="form-control" value="Defaultpass<?php echo $passrand; ?>">
                     </div>
 
@@ -80,7 +81,7 @@
                     alert("El registro se ha actualizado correctamente");
                     setTimeout(function() {
                         location.assign('usuarios.php');
-                    }, 2000);
+                    }, 10);
                 } else {
                     alert("Ha ocurrido un error al actualizar el registro");
                 }

@@ -70,7 +70,7 @@ include "../includes/header.php";
               </div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-car fa-2x text-gray-300"></i>
+              <i class="fa fa-cogs fa-2x text-gray-300" ></i>
             </div>
           </div>
         </div>
@@ -111,13 +111,13 @@ include "../includes/header.php";
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <a href="#" class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+              <a href="../views/usuarios.php" class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                 Usuarios</a>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
                 <?php
                 require_once("../includes/db.php");
 
-                $SQL = "SELECT id FROM inventario ORDER BY id";
+                $SQL = "SELECT id FROM users ORDER BY id";
                 $dato = mysqli_query($conexion, $SQL);
                 $fila = mysqli_num_rows($dato);
 
