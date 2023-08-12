@@ -59,7 +59,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
             <li class="nav-item active">
                 <a class="nav-link" href="../views/index.php">
                     <i class=""></i> <!--fas fa-fw fa-tachometer-alt-->
-                   <span>GLOBAL INFRA</span> </a>
+                    <span>GLOBAL INFRA</span> </a>
             </li>
 
             <!-- Divider -->
@@ -77,12 +77,13 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
                     <span style="font-size: 13px; font-weight: 550; color: #FFFFFF; letter-spacing: .1mm;">Reportes</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded" >
+                    <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Ver Modulos</h6>
                         <a class="collapse-item" href="../views/add_report.php">Agregar Nuevo Reporte </a>
                         <a class="collapse-item" href="../views/inventario.php">Consultar Reportes</a>
                         <a class="collapse-item" href="../views/horas_total.php">Reporte por Horas</a>
                         <a class="collapse-item" href="../views/registros.php">Actualizar/Eliminar </a>
+                        <a class="collapse-item" href="../views/historial.php">Historial </a>
                     </div>
                 </div>
             </li>
