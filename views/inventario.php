@@ -82,10 +82,7 @@ session_start();
                             <label for="">Total de horas Inactiva Global</label>
                             <input type="text" class="form-control" name="horas_in" id="horas_in" readonly>
                         </div>
-                        <div  class="col-md-3">
-                            <label style="color: brown;" for="">Total de horas Inactiva empresa</label>
-                            <input type="text" class="form-control" name="" id="" readonly>
-                        </div>
+
                         <div class="col-md-3">
                             <label for="">Mantenimiento</label>
                             <input type="text" class="form-control" name="mant" id="mant" readonly>
@@ -93,7 +90,8 @@ session_start();
                     </div>
                     <br>
                     <button type="submit" class="btn btn-danger" name="pdfgen" id="pdfgen">Generar PDF</button>
-                    <button id="export-btn" class="btn btn-success" type="button">Exportar a Excel</button><a id="download-link" style="display: none"></a>
+                    <button type="button" class="btn btn-success" name="save" id="save">Realizar Mantenimiento</button>
+                    <button id="export-btn" class="btn btn-outline-success" type="button">Exportar a Excel</button><a id="download-link" style="display: none"></a>
                 </form>
             </div>
 
@@ -127,6 +125,65 @@ session_start();
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#save').click(function(event) {
+                event.preventDefault();
+
+                var idMaquina = $('#id').val();
+                var start = $('#start').val();
+                var fin = $('#fin').val();
+
+                if (idMaquina === '0') {
+                    Swal.fire({
+                        title: '¡Atención!',
+                        text: 'Por favor, selecciona una máquina antes de realizar el mantenimiento.',
+                        icon: 'warning',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    return;
+                }
+
+                $.ajax({
+                    url: '../includes/verificar_mant.php',
+                    method: 'POST',
+                    data: {
+                        id_maquina: idMaquina,
+                        start: start,
+                        fin: fin
+                    },
+                    success: function(response) {
+                        if (response === 'existe') {
+                            Swal.fire({
+                                title: 'Mantenimiento Realizado',
+                                text: 'El mantenimiento para la máquina seleccionada ya ha sido registrado en el historial.',
+                                icon: 'info',
+                                confirmButtonText: 'Aceptar'
+                            });
+                        } else if (response === 'no_existe') {
+                            Swal.fire({
+                                title: 'Mantenimiento No Realizado',
+                                text: 'El mantenimiento para la máquina seleccionada aún no ha sido registrado en el historial.',
+                                icon: 'warning',
+                                confirmButtonText: 'Aceptar'
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Hubo un error al verificar el historial de mantenimiento.',
+                                icon: 'error',
+                                confirmButtonText: 'Aceptar'
+                            });
+                        }
+                    },
+                    error: function() {
+                        alert('Error al verificar el historial de mantenimiento.');
+                    }
+                });
+            });
+        });
+    </script>
 
     <script>
         function exportTableToExcel() {
