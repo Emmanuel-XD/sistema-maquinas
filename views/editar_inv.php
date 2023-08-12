@@ -133,7 +133,6 @@
 
                     </div>
 
-
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="mb-3">
@@ -141,21 +140,39 @@
                                 <?php
                                 $tipoFalla = explode(',', $fila['fallo']); // Convertir la cadena de fallas en un arreglo
                                 $tiposFalla = array(
-                                    'mecanica', 'operador', 'diesel', 'fractura de bote', 'servicios', 'aceite', 'falta de tramo sedena', // Agregar todas las opciones aquí
+                                    'mecanica', 'operador', 'diesel', 'fractura de bote', 'servicios', 'aceite', 'falta de tramo sedena',
                                     'mangueras', 'clima', 'voladuras', 'cabezal', 'pago', 'falta valvula', 'falta valvula-pago', 'cabezal-pago', 'sin falla', 'otro',
                                 );
 
-                                foreach ($tiposFalla as $tipo) {
-                                    $checked = in_array($tipo, $tipoFalla) ? 'checked' : '';
-                                    echo '<div class="form-check">';
-                                    echo '<input type="checkbox" id="fallo-' . $tipo . '" name="fallas[]" value="' . $tipo . '" class="form-check-input" ' . $checked . '>';
-                                    echo '<label for="fallo-' . $tipo . '" class="form-check-label">' . $tipo . '</label>';
+                                $itemsPerRow = 6;
+                                $itemsPerColumn = 4;
+                                $totalItems = count($tiposFalla);
+
+                                for ($row = 0; $row < $itemsPerColumn; $row++) {
+                                    echo '<div class="row">';
+                                    for ($col = 0; $col < $itemsPerRow; $col++) {
+                                        $index = $row * $itemsPerRow + $col;
+                                        if ($index < $totalItems) {
+                                            $tipo = $tiposFalla[$index];
+                                            $checked = in_array($tipo, $tipoFalla) ? 'checked' : '';
+                                            echo '<div class="col-md-2">';
+                                            echo '<div class="form-check">';
+                                            echo '<input type="checkbox" id="fallo-' . $tipo . '" name="fallas[]" value="' . $tipo . '" class="form-check-input" ' . $checked . '>';
+                                            echo '<label for="fallo-' . $tipo . '" class="form-check-label">' . $tipo . '</label>';
+                                            echo '</div>';
+                                            echo '</div>';
+                                        } else {
+                                            // Agregar una columna vacía para mantener la estructura
+                                            echo '<div class="col-md-2"></div>';
+                                        }
+                                    }
                                     echo '</div>';
                                 }
                                 ?>
                             </div>
                         </div>
                     </div>
+
                     <input type="hidden" name="accion" value="editar_inv">
                     <input type="hidden" name="id" value="<?php echo $fila['id']; ?>">
 
