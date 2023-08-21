@@ -16,7 +16,7 @@ session_start();
                 <form action="../includes/reporte.php" method="POST" accept-charset="utf-8" id="filtro-form">
                     <br>
                     <div class="row">
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                             <div class="form-group">
                                 <label><b>Tipo de reporte</b></label>
                                 <select class="form-control selector" name="type" id="type">
@@ -26,17 +26,17 @@ session_start();
                                     <option value="3">Reporte diario</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-md-4">
+                        </div> -->
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label><b>Del dia</b></label>
                                 <input type="date" name="start" id="start" class="selector form-control" required>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group ">
                                 <label><b> Hasta el dia</b></label>
-                                <input type="date" name="fin" id="fin" class="selector form-control" readonly>
+                                <input type="date" name="fin" id="fin" class="selector form-control" required>
                             </div>
                         </div>
 
@@ -75,16 +75,16 @@ session_start();
                             <input type="text" class="form-control" name="status" id="status" readonly>
                         </div>
                         <div class="col-md-3">
-                            <label for="">Total de horas Activa</label>
+                            <label for="">Total de horas Activa (fechas elegidas)</label>
                             <input type="text" class="form-control" name="horas_t" id="horas_t" readonly>
                         </div>
                         <div class="col-md-3">
-                            <label for="">Total de horas Inactiva Global</label>
+                            <label for="">Total de horas Inactiva (fechas elegidas)</label>
                             <input type="text" class="form-control" name="horas_in" id="horas_in" readonly>
                         </div>
 
                         <div class="col-md-3">
-                            <label for="">Mantenimiento</label>
+                            <label for="">Mantenimiento (segun las fechas elegidas)</label>
                             <input type="text" class="form-control" name="mant" id="mant" readonly>
                         </div>
                     </div>
