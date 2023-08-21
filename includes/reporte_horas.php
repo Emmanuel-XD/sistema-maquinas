@@ -83,8 +83,30 @@ class PDF extends FPDF
         // Arial italic 8
         $this->SetFont('Arial', 'I', 8);
         // Número de página
+        extract($_GET);
+        include("db.php");
+        $star = date("Y-m-d", strtotime($_POST['star']));
+        $fin  = date("Y-m-d", strtotime($_POST['fin']));
+        $consulta = "SELECT m.name AS maquina, m.serie, m.modelo, SUM(i.horas_t) AS total_horas_activas,
+        SUM(i.horas_in) AS total_horas_inactivas FROM maquinas m LEFT JOIN inventario i ON i.id_maquina = m.id  
+        AND i.fecha BETWEEN '$star' AND '$fin' GROUP BY m.name, m.serie, m.modelo;";
+        $resultado = mysqli_query($conexion, $consulta);
+        $renta = 1670.40;
+        $total_renta = 0;  // Inicializamos la variable para llevar la suma total de rentas
+        while ($fila = mysqli_fetch_array($resultado)) {
+            $total_horas_activas = $fila['total_horas_activas'];
 
-        $this->Cell(0, 10, utf8_decode('Página') . $this->PageNo() . '/{nb}', 0, 0, 'C');
+            $this->SetFont('Helvetica', '', 12);
+            $this->Ln(20);
+            $this->setY(135);
+            $this->setX(165);
+            $total_renta += $total_horas_activas;
+        }
+        $this->Cell(60, 0, utf8_decode('Total: $' .  number_format($total_renta * $renta, 2)), 0, 1, 'L');
+        // Número de página
+
+
+
         //$this->SetFillColor(223, 229,235);
         //$this->SetDrawColor(181, 14,246);
         //$this->Ln(0.5);
@@ -116,7 +138,7 @@ while ($row = $resultado->fetch_assoc()) {
     $pdf->Cell(50, 10, $row['modelo'], 1, 0, 'L', 0);
     $pdf->Cell(25, 10, $row['total_horas_activas'], 1, 0, 'L', 0);
     $pdf->Cell(25, 10, $row['total_horas_inactivas'], 1, 0, 'L', 0);
-    $pdf->Cell(25, 10, '$' . $row['total_horas_activas'] * $renta, 1, 1, 'L', 0);
+    $pdf->Cell(25, 10, '$' . number_format($row['total_horas_activas'] * $renta, 2), 1, 1, 'L', 0);
 }
 
 
