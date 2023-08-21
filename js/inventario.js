@@ -146,7 +146,6 @@
       function updateHours() {
         var table = document.getElementById("dataTable");
         var  tbl = $("#dataTable").DataTable()
-        console.log(tbl.data().count())
         if(tbl.data().count() > 0){
          
             var horasTrab = Array.from(table.rows).slice(1).reduce((total, row) => {
@@ -311,38 +310,38 @@
                                       $("#idrow").val($(this).data('row'))
                                   })
 
-                                  horasCero = parseInt($("#horas_t").val());
 
-                                  horasAcumiuladas = parseInt((data.total_horas_activas))
-                                  if (horasCero < 150) {
-                                      $("#mant").val("En buen estado")
-                                      $("#mant").css("background-color", "#50C878");
-                                      $("#mant").css("color", "white");
-                                  }
-                                  if ( horasCero > 150 && horasCero < 180) {
-                                      $("#mant").val("Puede requerir mantenimiento")
-                                      $("#mant").css("background-color", "#FFA500");
-                                      $("#mant").css("color", "white");
-                                  }
-                                  if (horasCero > 180) {
-                                      $("#mant").val("Mantenimiento requerido")
-                                      $("#mant").css("background-color", "#ff0000");
-                                      $("#mant").css("color", "white");
-                                  }
-                                  if (data.status === "Inactivo") {
-                                      $("#status").css("background-color", "red");
-                                      $("#status").css("color", "white");
-                                  } else if (data.status === "Activo") {
-                                      $("#status").css("background-color", "#50C878");
-                                      $("#status").css("color", "white");
-                                  } else {
-                                      $("#status").css("background-color", "");
-                                      $("#status").css("color", "");
-                                  }
 
                               } else {
                                 removeDataTableRows();
                                   updateHours()
+                              }
+                              horasCero = parseInt($("#horas_t").val());
+                              horasAcumiuladas = parseInt((data.total_horas_activas))
+                              if (horasCero < 150) {
+                                  $("#mant").val("En buen estado")
+                                  $("#mant").css("background-color", "#50C878");
+                                  $("#mant").css("color", "white");
+                              }
+                              if ( horasCero > 150 && horasCero < 180) {
+                                  $("#mant").val("Puede requerir mantenimiento")
+                                  $("#mant").css("background-color", "#FFA500");
+                                  $("#mant").css("color", "white");
+                              }
+                              if (horasCero > 180) {
+                                  $("#mant").val("Mantenimiento requerido")
+                                  $("#mant").css("background-color", "#ff0000");
+                                  $("#mant").css("color", "white");
+                              }
+                              if (data.status === "Inactivo") {
+                                  $("#status").css("background-color", "red");
+                                  $("#status").css("color", "white");
+                              } else if (data.status === "Activo") {
+                                  $("#status").css("background-color", "#50C878");
+                                  $("#status").css("color", "white");
+                              } else {
+                                  $("#status").css("background-color", "");
+                                  $("#status").css("color", "");
                               }
                           })
                   }
@@ -350,7 +349,7 @@
           } else {
               new swal({
                   title: "Información incompleta",
-                  text: "Elige un tipo de reporte y fecha valida",
+                  text: "Elige una fecha valida",
                   icon: "warning",
                   buttons: true,
                   dangerMode: true,

@@ -84,7 +84,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
                         <a class="collapse-item" href="../views/inventario.php">Consultar Reportes</a>
                         <a class="collapse-item" href="../views/horas_total.php">Reporte por Horas</a>
                         <a class="collapse-item" href="../views/registros.php">Actualizar/Eliminar </a>
-                        <a class="collapse-item" href="../views/historial.php">Historial </a>
+                        <a class="collapse-item" href="../views/historial.php">Historial de mantenimiento</a>
                     </div>
                 </div>
             </li>

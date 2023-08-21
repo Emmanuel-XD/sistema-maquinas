@@ -157,15 +157,15 @@ session_start();
                         if (response === 'existe') {
                             Swal.fire({
                                 title: 'Mantenimiento Realizado',
-                                text: 'El mantenimiento para la máquina seleccionada ya ha sido registrado en el historial.',
+                                text: 'Ya se ah realizado un mantenimiento para esta maquina en este rango de fechas  revisa el historial de mantenimientos para elegir otro rango de fechas.',
                                 icon: 'info',
                                 confirmButtonText: 'Aceptar'
                             });
-                        } else if (response === 'no_existe') {
+                        } else if (response === 'mant_realizado') {
                             Swal.fire({
-                                title: 'Mantenimiento No Realizado',
-                                text: 'El mantenimiento para la máquina seleccionada aún no ha sido registrado en el historial.',
-                                icon: 'warning',
+                                title: 'Mantenimiento realizado',
+                                text: 'El mantenimiento para la máquina seleccionada ha sido registrado en el historial.',
+                                icon: 'success',
                                 confirmButtonText: 'Aceptar'
                             });
                         } else {
