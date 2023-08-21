@@ -1,3 +1,54 @@
+.dropdown-check-list {
+    display: inline-block;
+  }
+  
+  .dropdown-check-list .anchor {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 50px 5px 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .dropdown-check-list .anchor:after {
+    position: absolute;
+    content: "";
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+    padding: 5px;
+    right: 10px;
+    top: 20%;
+    -moz-transform: rotate(-135deg);
+    -ms-transform: rotate(-135deg);
+    -o-transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+  }
+  
+  .dropdown-check-list .anchor:active:after {
+    right: 8px;
+    top: 21%;
+  }
+  
+  .dropdown-check-list ul.items {
+    padding: 2px;
+    display: none;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-top: none;
+  }
+  
+  .dropdown-check-list ul.items li {
+    list-style: none;
+  }
+  
+  .dropdown-check-list.visible .anchor {
+    color: #0094ff;
+  }
+  
+  .dropdown-check-list.visible .items {
+    display: block;
+  }
 body {
 
     background-color: #f2f2f2;
@@ -61,3 +112,149 @@ p {
 a{
     text-decoration: none;
 }
+.help-tip{
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    text-align: center;
+    background-color: #BCDBEA;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    line-height: 26px;
+    cursor: default;
+}
+
+.help-tip:before{
+    content:'?';
+    font-weight: bold;
+    color:#fff;
+}
+
+.help-tip:hover p{
+    display:block;
+    transform-origin: 100% 0%;
+
+    -webkit-animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
+
+}
+
+.help-tip p{    /* The tooltip */
+    display: none;
+    text-align: left;
+    background-color: #1E2021;
+    padding: 20px;
+    width: 300px;
+    position: absolute;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    right: -4px;
+    color: #FFF;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.help-tip p:before{ /* The pointer of the tooltip */
+    position: absolute;
+    content: '';
+    width:0;
+    height: 0;
+    border:6px solid transparent;
+    border-bottom-color:#1E2021;
+    right:10px;
+    top:-12px;
+}
+
+.help-tip p:after{ /* Prevents the tooltip from being hidden */
+    width:100%;
+    height:40px;
+    content:'';
+    position: absolute;
+    top:-40px;
+    left:0;
+}
+
+/* CSS animation */
+
+@-webkit-keyframes fadeIn {
+    0% { 
+        opacity:0; 
+        transform: scale(0.6);
+    }
+
+    100% {
+        opacity:100%;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity:0; }
+    100% { opacity:100%; }
+}
+.tool-tip {
+    display: inline-block;
+    position: relative;
+    margin-left: 0.5em;
+  }
+  .tool-tip .tool-tip__icon {
+    background: #27b1f0;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+    font-style: italic;
+    font-family: times new roman;
+    height: 20px;
+    line-height: 1.3em;
+    text-align: center;
+    width: 20px;
+  }
+  .tool-tip .tool-tip__info {
+    display: none;
+    background: #262626;
+    border: 1px solid #27b1f0;
+    border-radius: 3px;
+    font-size: 0.875em;
+    padding: 1em;
+    position: absolute;
+    left: 30px;
+    top: -20px;
+    width: 250px;
+    z-index: 2;
+  }
+  .tool-tip .tool-tip__info:before, .tool-tip .tool-tip__info:after {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 7px;
+    border-style: solid;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #27b1f0;
+  }
+  .tool-tip .tool-tip__info:after {
+    left: -8px;
+    border-right-color: #262626;
+  }
+  .tool-tip .tool-tip__info .info {
+    display: block;
+  }
+  .tool-tip .tool-tip__info .info__title {
+    color: #fa00f3;
+  }
+  .tool-tip:hover .tool-tip__info, .tool-tip:focus .tool-tip__info {
+    display: inline-block;
+  }
+  
+  a:focus + .tool-tip .tool-tip__info {
+    display: inline-block;
+  }
+  .dropdown-toggle{
+    border-color: #d1d3e2;
+  }
+  .fixbtn{
+    text-overflow: ellipsis;
+  overflow: hidden; 
+  white-space: nowrap;
+  }

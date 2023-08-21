@@ -27,6 +27,7 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
     <title>Sistema De control de maquinaria</title>
 
     <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="https://33d73a22f4b6dc792776-9396d99e5006374ffc15abe9d6ae8e26.ssl.cf1.rackcdn.com/dropdownCheckboxes-cdn.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

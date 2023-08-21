@@ -137,109 +137,120 @@ session_start();
                             </div>
                         </div>
                     </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="fallas" class="form-label">Tipo de fallas</label><br>
+                    <div class='myform'>
+                    <div class="dropdown cq-dropdown" data-name='fallas'>
+                        <button class="btn fixbtn col-sm-11 dropdown-toggle" type="button"  id="btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Tipo de falla
+                                <span class="caret"></span>
+                        </button>
+                            <ul class="dropdown-menu" aria-labelledby="btndropdown">
+                                <li>
+                                    <label class="radio-btn">
+                                        <input type="checkbox" value='mecanica' >
+                                        mecanica
+                                    </label>
+                                </li>
+                                <li>
+                                <label class="radio-btn">   
+                                        <input type="checkbox" value='operador'>
+                                        operador </label>
+                                    
+                                </li>
+                                <li>
+                                    <label class="radio-btn">
+                                        <input type="checkbox" value='diesel'>
+                                        diesel
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-btn">
+                                        <input type="checkbox" value='bote' >
+                                        fractura de bote
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-btn">
+                                        <input type="checkbox" value='servicios' >
+                                        servicios
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-btn">
+                                        <input type="checkbox" value='aceite' >
+                                        aceite
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-btn">
+                                        <input type="checkbox" value='tramo' >
+                                        Falta de tramo sedena
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-btn">
+                                        <input type="checkbox" value='mangueras' >
+                                        Mangueras
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-btn">
+                                        <input type="checkbox" value='clima' >
+                                        Clima
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-btn">
+                                        <input type="checkbox" value='voladuras' >
+                                        Voladuras
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-btn">
+                                        <input type="checkbox" value='cabezal' >
+                                        Cabezal
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-btn">
+                                        <input type="checkbox" value='pago' >
+                                        Pago
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-btn">
+                                        <input type="checkbox" value='valvula' >
+                                        Falta valvula
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="radio-btn">
+                                        <input type="checkbox" value='otro' >
+                                        Otro
+                                    </label>
+                                </li>
+                            </ul>
 
+                            <div class="tool-tip">
+                                <i class="tool-tip__icon">i</i>
+                                <p class="tool-tip__info">
+                                <span class="info"><span class="info__title">Si no presenta falla:</span>dejar vacio</span>
+                                </p>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                       
 
-
-                    <div class="form-group">
-                        <label for="nombre" class="form-label">Observaciones</label>
+                        <div class="col-sm-6">
+                        <label for="nombre" class=" form-label">Observaciones</label>
                         <input type="text" id="observacion" name="observacion" class="form-control" required>
+                        </div>
+
                     </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="mb-3">
-                                <label class="form-label">Tipo de falla</label><br>
-
-                                <div class="form-check">
-                                    <input type="checkbox" id="fallo-mecanica" name="fallas[]" value="mecanica" class="form-check-input">
-                                    <label for="fallo-mecanica" class="form-check-label">mecanica</label>
-                                </div>
-
-                                <div class="form-check">
-                                    <input type="checkbox" id="fallo-operador" name="fallas[]" value="operador" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">operador</label>
-                                </div>
-
-
-                                <div class="form-check">
-                                    <input type="checkbox" id="fallo-diesel" name="fallas[]" value="diesel" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">diesel</label>
-                                </div>
-
-                                <div class="form-check">
-                                    <input type="checkbox" id="fallo-fractura de bote" name="fallas[]" value="fractura de bote" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">fractura de bote</label>
-                                </div>
-
-                                <div class="form-check">
-                                    <input type="checkbox" id="fallo-servicios" name="fallas[]" value="servicios" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">servicios</label>
-                                </div>
-
-                                <div class="form-check">
-                                    <input type="checkbox" id="fallo-aceite" name="fallas[]" value="aceite" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">aceite</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="mb-3">
-                                <div class="form-check">
-                                    <input type="checkbox" id="falta de tramo sedena" name="fallas[]" value="falta de tramo sedena" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">falta de tramo sedena</label>
-                                </div>
-
-                                <div class="form-check">
-                                    <input type="checkbox" id="mangueras" name="fallas[]" value="mangueras" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">mangueras</label>
-                                </div>
-
-                                <div class="form-check">
-                                    <input type="checkbox" id="clima" name="fallas[]" value="clima" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">clima</label>
-                                </div>
-
-                                <div class="form-check">
-                                    <input type="checkbox" id="voladuras" name="fallas[]" value="voladuras" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">voladuras</label>
-                                </div>
-
-                                <div class="form-check">
-                                    <input type="checkbox" id="cabezal" name="fallas[]" value="cabezal" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">cabezal</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" id="pago" name="fallas[]" value="pago" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">pago</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="mb-3">
-                                <div class="form-check">
-                                    <input type="checkbox" id="falta valvula" name="fallas[]" value="falta valvula" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">falta valvula</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" id="falta valvula, pago" name="fallas[]" value="falta valvula-pago" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">falta valvula, pago</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" id="cabezal-pago" name="fallas[]" value="cabezal-pago" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">cabezal,pago</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" id="sin falla" name="fallas[]" value="sin falla" class="form-check-input">
-                                    <label for="fallo-operador" class="form-check-label">sin falla</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" id="otro" name="fallas[]" value="otro" class="form-check-input">
-                                    <label for="fallo-otro" class="form-check-label">otro</label>
-                                </div>
-
-                            </div>
-                        </div>
                     </div>
-
 
 
                     <input type="hidden" name="accion" value="insertar_inventario">
@@ -253,10 +264,15 @@ session_start();
                 </form>
 
                 <script>
+    $(function(){
+      $('.cq-dropdown').dropdownCheckboxes();   
+    });
                     $(document).ready(function() {
                         $('#inventarioForm').submit(function(e) {
                             e.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
                             var formData = $(this).serialize(); // Serializa los datos del formulario
+        
+    
                             $.ajax({
                                 url: '../includes/functions.php',
                                 type: 'POST',

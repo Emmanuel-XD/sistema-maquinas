@@ -40,6 +40,8 @@
 
 <script src="../package/dist/sweetalert2.all.js"></script>
 <script src="../package/dist/sweetalert2.all.min.js"></script>
+<script src="https://33d73a22f4b6dc792776-9396d99e5006374ffc15abe9d6ae8e26.ssl.cf1.rackcdn.com/dropdownCheckboxes.min.js"></script>
+
 
 </body>
 

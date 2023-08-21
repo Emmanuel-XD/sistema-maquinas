@@ -97,6 +97,9 @@ session_start();
 
 
     <script>
+               $(function(){
+      $('.cq-dropdown').dropdownCheckboxes();   
+    });
         function exportTableToExcel() {
             const table = document.getElementById('dataTable');
             const data = [];

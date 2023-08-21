@@ -8,7 +8,6 @@
                     <i class="fa fa-times" aria-hidden="true"></i></button>
             </div>
             <div class="modal-body">
-
                 <form id="editInv<?php echo $fila['id']; ?>" method="POST">
                     <div class="row">
                         <div class="col-sm-6">
@@ -129,50 +128,60 @@
                                 <input type="text" id="observacion" name="observacion" class="form-control" value="<?php echo $fila['observacion']; ?>">
                             </div>
                         </div>
-
-
                     </div>
-
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="mb-3">
-                                <label class="form-label">Tipo de falla</label><br>
+                                <label for="fallas" class="form-label">Tipo de fallas</label><br>
+                                <div class="dropdown cq-dropdown" data-name='fallas<?php echo $fila['id']; ?>'>
+                                        <button class="btn  col-sm-11 fixbtn dropdown-toggle" type="button"  id="btndropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                Tipo de falla
+                                                <span class="caret"></span>
+                                        </button>
+                                         <ul class="dropdown-menu" aria-labelledby="btndropdown">
                                 <?php
                                 $tipoFalla = explode(',', $fila['fallo']); // Convertir la cadena de fallas en un arreglo
                                 $tiposFalla = array(
                                     'mecanica', 'operador', 'diesel', 'fractura de bote', 'servicios', 'aceite', 'falta de tramo sedena',
-                                    'mangueras', 'clima', 'voladuras', 'cabezal', 'pago', 'falta valvula', 'falta valvula-pago', 'cabezal-pago', 'sin falla', 'otro',
+                                    'mangueras', 'clima', 'voladuras', 'cabezal', 'pago', 'falta valvula', 'falta valvula-pago', 'cabezal-pago', 'otro',
                                 );
 
                                 $itemsPerRow = 6;
                                 $itemsPerColumn = 4;
                                 $totalItems = count($tiposFalla);
-
+                               
+                                    
+                                            
                                 for ($row = 0; $row < $itemsPerColumn; $row++) {
-                                    echo '<div class="row">';
                                     for ($col = 0; $col < $itemsPerRow; $col++) {
                                         $index = $row * $itemsPerRow + $col;
                                         if ($index < $totalItems) {
                                             $tipo = $tiposFalla[$index];
                                             $checked = in_array($tipo, $tipoFalla) ? 'checked' : '';
-                                            echo '<div class="col-md-2">';
-                                            echo '<div class="form-check">';
-                                            echo '<input type="checkbox" id="fallo-' . $tipo . '" name="fallas[]" value="' . $tipo . '" class="form-check-input" ' . $checked . '>';
-                                            echo '<label for="fallo-' . $tipo . '" class="form-check-label">' . $tipo . '</label>';
-                                            echo '</div>';
-                                            echo '</div>';
-                                        } else {
-                                            // Agregar una columna vacía para mantener la estructura
-                                            echo '<div class="col-md-2"></div>';
-                                        }
+                                            echo '<li>';
+                                            echo '<label class="radio-btn">';
+                                            echo '<input type="checkbox" value="'.$tipo.'" '. $checked .'>';
+                                            echo " $tipo ";
+                                            echo '</label>';
+                                            echo '</li>';
+                                        } 
                                     }
-                                    echo '</div>';
                                 }
                                 ?>
+                                 </ul>    
+                            <div class="tool-tip">
+                                <i class="tool-tip__icon">i</i>
+                                <p class="tool-tip__info">
+                                <span class="info"><span class="info__title">Si no presenta falla:</span>dejar vacio</span>
+                                </p>
+                            </div>
+                            </div>
+                   
+                        </div>
                             </div>
                         </div>
                     </div>
-
+                    
                     <input type="hidden" name="accion" value="editar_inv">
                     <input type="hidden" name="id" value="<?php echo $fila['id']; ?>">
 
@@ -182,18 +191,19 @@
                         <button type="button" class="btn btn-primary" onclick="editarInv(<?php echo $fila['id']; ?>)">Guardar</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     </div>
+                    </form>
 
-
-                </form>
+            
             </div>
-
+    </div>  
         </div>
     </div>
-</div>
 <script>
-    function editarInv(id) {
-        var datosFormulario = $("#editInv" + id).serialize();
 
+    function editarInv(id) {
+        var fallas = $(`input[name=fallas${id}]`).val()
+        var datosFormulario = $("#editInv" + id).serialize();
+        datosFormulario = datosFormulario + '&' + $.param({ 'fallas': fallas });
         $.ajax({
             url: "../includes/functions.php",
             type: "POST",
