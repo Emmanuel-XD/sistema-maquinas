@@ -121,6 +121,25 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
                 </div>
             </li>
 
+            <!-- Nav Item - Pages Collapse Menu -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCars" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fa fa-car" aria-hidden="true"></i>
+                    <span style="font-size: 13px; font-weight: 550; color: #FFFFFF; letter-spacing: .1mm;">Acarreos</span>
+                </a>
+                <div id="collapseCars" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <?php if ($_SESSION["type"] == 1) { ?>
+                            <a class="collapse-item" href="../views/descarga.php">Ver Informacion</a>
+                        <?php }
+                        ?>
+                        <a class="collapse-item" href="../views/form_descarga.php">Registrar Descarga</a>
+
+                    </div>
+                </div>
+            </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
