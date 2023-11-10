@@ -70,7 +70,7 @@ include "../includes/header.php";
               </div>
             </div>
             <div class="col-auto">
-              <i class="fa fa-cogs fa-2x text-gray-300" ></i>
+              <i class="fa fa-cogs fa-2x text-gray-300"></i>
             </div>
           </div>
         </div>
@@ -135,6 +135,8 @@ include "../includes/header.php";
 
   </div>
   <center>
+    <br>
+    <a href="form_descarga.php" class="btn btn-success btn-lg">Agregar Acarreo <i class="fa fa-plus"></i></a>
     <img src="Logo-Primario (1).png" style="max-height: 170px;" class="centered-img">
   </center>
 </div>
