@@ -137,7 +137,7 @@ include "../includes/header.php";
   <center>
     <br>
     <a href="form_descarga.php" class="btn btn-success btn-lg">Agregar Acarreo <i class="fa fa-plus"></i></a>
-    <a href="3" class="btn btn-success btn-lg">CheckList Trascabo <i class="fa fa-plus"></i></a>
+    <a href="trascabo_form.php" class="btn btn-success btn-lg">CheckList Trascabo <i class="fa fa-plus"></i></a>
     <img src="Logo-Primario (1).png" style="max-height: 170px;" class="centered-img">
   </center>
 </div>

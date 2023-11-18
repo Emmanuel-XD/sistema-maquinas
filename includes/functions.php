@@ -1,5 +1,6 @@
 <?php
 if (isset($_POST['accion'])) {
+
     switch ($_POST['accion']) {
             //casos de registros
 
@@ -46,9 +47,9 @@ if (isset($_POST['accion'])) {
         case 'editar_carga':
             editar_carga();
             break;
+
     }
 }
-
 
 
 function insertar_maquina()
