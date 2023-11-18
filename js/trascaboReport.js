@@ -63,22 +63,32 @@ function saveReport(accion) {
         .then(response => response.json())
         .then(data => {
           if(data === "success"){
-            alert("Datos ingresados correctamente");
-            setTimeout(function() {
+            Swal.fire({
+              icon: 'success',
+              title: 'Datos ingresados correctamente',
+          }).then(() => {
               location.reload();
-          }, 100);
+          });
           }
           if(data === "success_check"){
-            alert("Formulario actualizado");
-            setTimeout(function() {
-              window.location.assign("../views/trascabo_consultas.php")
-          }, 100);
+            Swal.fire({
+              icon: 'success',
+              title: 'Formulario actualizado',
+          }).then(() => {
+              window.location.assign("../views/trascabo_consultas.php");
+          });
           }
           if(data === "registered"){
-            alert("Datos registrados previamente");
+            Swal.fire({
+              icon: 'warning',
+              title: 'Datos registrados previamente',
+          });
           }
           if(data === "error"){
-            alert("Ocurrio un error al ingresar los datos intente de nuevo o contacte al administrador");
+            Swal.fire({
+              icon: 'error',
+              title: 'Ocurrió un error al ingresar los datos. Intente de nuevo o contacte al administrador',
+          });
           }
         })
         .catch(error => {
@@ -172,7 +182,10 @@ $("#saveData").click(function (e) {
     saveReport("report_trascabo");
 } else {
     // Display a static error message
-    alert('There are empty fields. Please fill in all required fields.');
+    Swal.fire({
+      icon: 'error',
+      title: 'Completa todos los campos',
+  });
 }
 
   

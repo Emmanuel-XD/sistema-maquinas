@@ -2,11 +2,19 @@
 var date = "";
 $("#searchData").click(function (e) { 
     e.preventDefault();
+
     data = new FormData();
     data.append('fecha' , $("#start").val())
     data.append('maquina', $("#id_maquina").val())
     data.append('accion', 'fillTable')
-    if($())
+    if($("#start").val() === "" || $("#id_maquina").val() === ""){
+        Swal.fire({
+            icon: 'error',
+            title: 'Error, datos incompletos',
+            text: 'Rellene todos los campos antes de generar el informe semanal o quizas la fecha seleccionada no tiene los registros para generar reporte, se requieren todos los registros diarios de la semana para generar el reporte.',
+        });
+    }
+    else{
     fetch("../includes/trascaboRegis.php", {
         method: 'POST', 
         body: data,
@@ -50,7 +58,7 @@ $("#searchData").click(function (e) {
           console.error('Error during fetch:', error);
         });
 
-
+    }
 });
 $("#printExcel").click(function (e) { 
     e.preventDefault();
