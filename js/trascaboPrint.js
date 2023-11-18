@@ -100,7 +100,7 @@ $("#printExcel").click(function (e) {
                         return updatedData;
                     })
                     .then(updatedData => {
-                        return fetch('../static/reporte.xlsm')
+                        return fetch('../static/reporte.xlsx')
                             .then(res => {
                                 if (!res.ok) {
                                     throw new Error(`Failed to fetch workbook (${res.status} ${res.statusText})`);
