@@ -221,10 +221,14 @@ $("#printExcel").click(function (e) {
                             });
                     })
                     .then(buffer => {
+                        var startDate = new Date($("#start").val());
+                        var endDate = new Date(startDate);
+                        endDate.setDate(endDate.getDate() + 7);
+                        var formattedEndDate = endDate.toLocaleDateString();
                         const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
                         const downloadLink = document.createElement('a');
                         downloadLink.href = URL.createObjectURL(blob);
-                        downloadLink.download = `test.xlsx`;
+                        downloadLink.download = `reporteTrascabo-${$("#start").val()}.xlsx`;
                         document.body.appendChild(downloadLink);
                         downloadLink.click();
                         document.body.removeChild(downloadLink);
