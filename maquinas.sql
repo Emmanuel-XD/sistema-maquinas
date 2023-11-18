@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 10-11-2023 a las 16:40:40
--- Versión del servidor: 10.4.20-MariaDB
--- Versión de PHP: 8.0.8
+-- Host: 127.0.0.1
+-- Generation Time: Nov 18, 2023 at 03:36 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `maquinas`
+-- Database: `maquinas`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `acarreos`
+-- Table structure for table `acarreos`
 --
 
 CREATE TABLE `acarreos` (
@@ -38,12 +38,106 @@ CREATE TABLE `acarreos` (
   `image2` varchar(250) NOT NULL,
   `user` varchar(50) NOT NULL,
   `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `historial`
+-- Table structure for table `checklist_trascabo`
+--
+
+CREATE TABLE `checklist_trascabo` (
+  `id` int(10) NOT NULL,
+  `id_report` int(10) NOT NULL,
+  `frontIntert` varchar(1) NOT NULL,
+  `frontIntert_comment` varchar(100) NOT NULL,
+  `traTrab` int(1) NOT NULL,
+  `traTrab_comment` varchar(100) NOT NULL,
+  `dirDel` int(1) NOT NULL,
+  `dirDel_comment` varchar(100) NOT NULL,
+  `dirTra` int(1) NOT NULL,
+  `dirTra_comment` varchar(100) NOT NULL,
+  `stpTra` int(1) NOT NULL,
+  `stpTra_comment` varchar(100) NOT NULL,
+  `espLat` int(1) NOT NULL,
+  `espLat_comment` varchar(100) NOT NULL,
+  `alarmRet` int(1) NOT NULL,
+  `alarmRet_comment` varchar(100) NOT NULL,
+  `claxon` int(1) NOT NULL,
+  `claxon_comment` varchar(100) NOT NULL,
+  `fserv` int(1) NOT NULL,
+  `fserv_comment` varchar(100) NOT NULL,
+  `femer` int(1) NOT NULL,
+  `femer_comment` varchar(100) NOT NULL,
+  `dirSusp` int(1) NOT NULL,
+  `dirSusp_comment` varchar(100) NOT NULL,
+  `cintSeg` int(1) NOT NULL,
+  `cintSeg_comment` varchar(100) NOT NULL,
+  `vidFront` int(1) NOT NULL,
+  `vidFront_comment` varchar(100) NOT NULL,
+  `limpBris` int(1) NOT NULL,
+  `limpBris_comment` varchar(100) NOT NULL,
+  `extnt` int(1) NOT NULL,
+  `extnt_comment` varchar(100) NOT NULL,
+  `asiento` int(1) NOT NULL,
+  `asiento_comment` varchar(100) NOT NULL,
+  `indiHidra` int(1) NOT NULL,
+  `indiHidra_comment` varchar(100) NOT NULL,
+  `motorRef` int(1) NOT NULL,
+  `motorRef_comment` varchar(100) NOT NULL,
+  `batCable` int(1) NOT NULL,
+  `batCable_comment` varchar(100) NOT NULL,
+  `horometro` decimal(4,0) NOT NULL,
+  `horometro_comment` varchar(100) NOT NULL,
+  `fugHidra` int(1) NOT NULL,
+  `fugHidra_comment` varchar(100) NOT NULL,
+  `pasaSusp` int(1) NOT NULL,
+  `pasaSusp_comment` varchar(100) NOT NULL,
+  `fugAire` int(1) NOT NULL,
+  `fugAire_comment` varchar(100) NOT NULL,
+  `grapasAnc` int(1) NOT NULL,
+  `grapasAnc_comment` varchar(100) NOT NULL,
+  `cardam` int(1) NOT NULL,
+  `cardam_comment` varchar(100) NOT NULL,
+  `AcoplesRap` int(1) NOT NULL,
+  `AcoplesRap_comment` varchar(100) NOT NULL,
+  `mangueras` int(1) NOT NULL,
+  `mangueras_comment` varchar(100) NOT NULL,
+  `volco` int(1) NOT NULL,
+  `volco_comment` varchar(100) NOT NULL,
+  `gvolco` int(11) NOT NULL,
+  `gvolco_comment` varchar(100) NOT NULL,
+  `tCombu` int(1) NOT NULL,
+  `tCombu_comment` varchar(100) NOT NULL,
+  `mBomba` int(1) NOT NULL,
+  `mBomba_comment` varchar(100) NOT NULL,
+  `llantas` int(1) NOT NULL,
+  `llantas_comment` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `checklist_trascabo`
+--
+
+INSERT INTO `checklist_trascabo` (`id`, `id_report`, `frontIntert`, `frontIntert_comment`, `traTrab`, `traTrab_comment`, `dirDel`, `dirDel_comment`, `dirTra`, `dirTra_comment`, `stpTra`, `stpTra_comment`, `espLat`, `espLat_comment`, `alarmRet`, `alarmRet_comment`, `claxon`, `claxon_comment`, `fserv`, `fserv_comment`, `femer`, `femer_comment`, `dirSusp`, `dirSusp_comment`, `cintSeg`, `cintSeg_comment`, `vidFront`, `vidFront_comment`, `limpBris`, `limpBris_comment`, `extnt`, `extnt_comment`, `asiento`, `asiento_comment`, `indiHidra`, `indiHidra_comment`, `motorRef`, `motorRef_comment`, `batCable`, `batCable_comment`, `horometro`, `horometro_comment`, `fugHidra`, `fugHidra_comment`, `pasaSusp`, `pasaSusp_comment`, `fugAire`, `fugAire_comment`, `grapasAnc`, `grapasAnc_comment`, `cardam`, `cardam_comment`, `AcoplesRap`, `AcoplesRap_comment`, `mangueras`, `mangueras_comment`, `volco`, `volco_comment`, `gvolco`, `gvolco_comment`, `tCombu`, `tCombu_comment`, `mBomba`, `mBomba_comment`, `llantas`, `llantas_comment`) VALUES
+(1, 1, '0', 'updated3', 1, 'x', 0, 'x', 1, 'x', 0, 'x', 0, 'x', 1, 'x', 0, 'x', 1, 'x', 0, 'NA', 0, 'x', 0, 'x', 0, 'x', 1, 'x', 1, 'x', 1, 'x', 1, 'x', 1, 'x', 1, 'x', 3, 'x', 0, '2', 1, '23', 0, '23', 0, '3', 0, '3', 1, '3', 0, 'x', 0, 'x', 0, 'na', 1, 'x', 0, 'x', 1, 'x'),
+(3, 2, '0', 'e', 1, 'e', 1, 'x', 1, 'dsdad', 0, 'sada', 0, 'e', 1, 'e', 0, 'e', 1, 'e', 0, 'NA', 0, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 3, 'e', 0, 'e', 1, 'e', 0, 'e', 1, 'e', 0, 'e', 1, 'e', 0, 'e', 0, 'e', 0, '0', 0, 'e', 0, 'e', 0, 'e'),
+(6, 5, '0', 'e', 1, 'e', 1, 'x', 1, 'dsdad', 0, 'sada', 0, 'e', 1, 'e', 0, 'e', 1, 'e', 0, 'NA', 0, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 3, 'e', 0, 'e', 1, 'e', 0, 'e', 1, 'e', 0, 'e', 1, 'e', 0, 'e', 0, 'e', 0, '0', 0, 'e', 0, 'e', 0, 'e'),
+(7, 6, '0', 'e', 1, 'e', 1, 'x', 1, 'dsdad', 0, 'sada', 0, 'e', 1, 'e', 0, 'e', 1, 'e', 0, 'NA', 0, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 1, 'e', 3, 'e', 0, 'e', 1, 'e', 0, 'e', 1, 'e', 0, 'e', 1, 'e', 0, 'e', 0, 'e', 0, '0', 0, 'e', 0, 'e', 1, 'e'),
+(8, 7, '0', 'x', 1, 'x', 0, 'xx', 1, 'x', 1, 'x', 0, 'x', 1, 'x', 0, 'x', 0, 'x', 0, 'NA', 1, 'x', 0, 'x', 1, 'x', 0, 'x', 0, 'x', 1, 'x', 0, 'x', 1, 'x', 0, 'x', 12, 'x', 0, 'x', 0, 'x', 1, 'x', 0, 'x', 1, 'x', 0, 'x', 1, 'xx', 1, 'x', 0, '0', 0, 'x', 1, 'x', 0, 'x'),
+(9, 8, '1', 'NA', 1, 'NA', 0, 'NA', 1, 'NA', 0, 'NA', 0, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 1, '', 1, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 0, 'NA', 0, 'NA', 0, 'NA', 1, 'NA', 0, 'NA', 3, 'NA', 0, 'NA', 1, 'NA', 0, 'NA', 0, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 1, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 0, 'NA'),
+(10, 9, '1', 'NA', 1, 'NA', 0, 'NA', 1, 'NA', 0, 'NA', 0, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 1, '', 1, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 0, 'NA', 0, 'NA', 0, 'NA', 1, 'NA', 0, 'NA', 3, 'NA', 0, 'NA', 1, 'NA', 0, 'NA', 0, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 1, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 0, 'NA'),
+(11, 10, '1', 'NA', 1, 'NA', 0, 'NA', 1, 'NA', 0, 'NA', 0, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 1, '', 1, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 0, 'NA', 0, 'NA', 0, 'NA', 1, 'NA', 0, 'NA', 3, 'NA', 0, 'NA', 1, 'NA', 0, 'NA', 0, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 1, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 0, 'NA'),
+(12, 11, '1', 'NA', 1, 'NA', 0, 'NA', 1, 'NA', 0, 'NA', 0, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 1, '', 1, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 0, 'NA', 0, 'NA', 0, 'NA', 1, 'NA', 0, 'NA', 3, 'NA', 0, 'NA', 1, 'NA', 0, 'NA', 0, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 1, 'NA', 1, 'NA', 1, 'NA', 0, 'NA', 0, 'NA'),
+(13, 12, '1', 'x', 1, 'x', 0, 'xx', 1, 'x', 0, 'x', 0, 'x', 1, 'x', 0, 'x', 1, 'x', 0, 'x', 0, 'cd', 1, 'dcd', 0, 'cdcdc', 1, 'dcd', 0, 'dfs', 0, 'dfsdfs', 1, 'sdfs', 1, 'sdf', 1, 'sdf', 112, 'x', 0, 'dsc', 1, 'sdcsd', 0, 'dscdsc', 0, 'sdc', 0, 'csdc', 1, 'dscd', 1, 'dscsdc', 1, 'dsc', 1, 'cds', 1, 'sd', 0, 'dfsd', 0, 'fs'),
+(14, 13, '0', '1', 0, '2', 1, '3', 0, '4', 1, '5', 0, '6', 1, '7', 0, '8', 1, '9', 0, '10', 1, '11', 0, '12', 1, '13', 0, '14', 1, '15', 0, '16', 1, '17', 0, '18', 1, '19', 1, '20', 0, '21', 1, '22', 0, '23', 1, '24', 0, '25', 1, '26', 0, '27', 1, '28', 0, '29', 1, '30', 0, '31', 1, '32'),
+(15, 14, '0', '1', 0, '2', 1, '3', 0, '4', 1, '5', 0, '6', 1, '7', 0, '8', 1, '9', 0, '10', 1, '11', 0, '12', 1, '13', 0, '14', 1, '15', 0, '16', 1, '17', 0, '18', 1, '19', 1, '20', 0, '21', 1, '22', 0, '23', 1, '24', 0, '25', 1, '26', 0, '27', 1, '28', 0, '29', 1, '30', 0, '31', 1, '32'),
+(16, 15, '0', '1', 0, '2', 1, '3', 0, '4', 1, '5', 0, '6', 1, '7', 0, '8', 1, '9', 0, '10', 1, '11', 0, '12', 1, '13', 0, '14', 1, '15', 0, '16', 1, '17', 0, '18', 1, '19', 1, '20', 0, '21', 1, '22', 0, '23', 1, '24', 0, '25', 1, '26', 0, '27', 1, '28', 0, '29', 1, '30', 0, '31', 1, '32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `historial`
 --
 
 CREATE TABLE `historial` (
@@ -54,10 +148,10 @@ CREATE TABLE `historial` (
   `fin` date NOT NULL,
   `datetime` datetime NOT NULL,
   `usuario` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `historial`
+-- Dumping data for table `historial`
 --
 
 INSERT INTO `historial` (`id`, `id_maquina`, `status`, `inicio`, `fin`, `datetime`, `usuario`) VALUES
@@ -72,29 +166,29 @@ INSERT INTO `historial` (`id`, `id_maquina`, `status`, `inicio`, `fin`, `datetim
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `inventario`
+-- Table structure for table `inventario`
 --
 
 CREATE TABLE `inventario` (
   `id` int(11) NOT NULL,
   `id_maquina` int(11) NOT NULL,
   `id_operador` int(11) NOT NULL,
-  `observacion` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `observacion` varchar(250) DEFAULT NULL,
   `horas_t` int(150) DEFAULT NULL,
   `horas_in` int(150) DEFAULT NULL,
   `horometraje_i` int(50) DEFAULT NULL,
   `horometraje_f` int(50) DEFAULT NULL,
-  `lugar_t` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `fallo` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `lugar_t` varchar(150) DEFAULT NULL,
+  `fallo` varchar(150) NOT NULL,
   `hora_paro` time DEFAULT NULL,
   `hora_reinicio` time DEFAULT NULL,
   `fecha` date DEFAULT NULL,
-  `gastos_falla` varchar(500) COLLATE utf8_spanish_ci NOT NULL,
-  `responsable_falla` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+  `gastos_falla` varchar(500) NOT NULL,
+  `responsable_falla` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `inventario`
+-- Dumping data for table `inventario`
 --
 
 INSERT INTO `inventario` (`id`, `id_maquina`, `id_operador`, `observacion`, `horas_t`, `horas_in`, `horometraje_i`, `horometraje_f`, `lugar_t`, `fallo`, `hora_paro`, `hora_reinicio`, `fecha`, `gastos_falla`, `responsable_falla`) VALUES
@@ -126,21 +220,21 @@ INSERT INTO `inventario` (`id`, `id_maquina`, `id_operador`, `observacion`, `hor
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `maquinas`
+-- Table structure for table `maquinas`
 --
 
 CREATE TABLE `maquinas` (
   `id` int(11) NOT NULL,
-  `name` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `modelo` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
-  `serie` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
-  `ubicacion` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `status` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `modelo` varchar(250) NOT NULL,
+  `serie` varchar(250) NOT NULL,
+  `ubicacion` varchar(150) NOT NULL,
+  `status` varchar(150) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `maquinas`
+-- Dumping data for table `maquinas`
 --
 
 INSERT INTO `maquinas` (`id`, `name`, `modelo`, `serie`, `ubicacion`, `status`, `fecha`) VALUES
@@ -153,20 +247,20 @@ INSERT INTO `maquinas` (`id`, `name`, `modelo`, `serie`, `ubicacion`, `status`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `operadores`
+-- Table structure for table `operadores`
 --
 
 CREATE TABLE `operadores` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `apellido` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
   `edad` int(50) NOT NULL,
   `telefono` int(50) NOT NULL,
   `fecha de registro` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `operadores`
+-- Dumping data for table `operadores`
 --
 
 INSERT INTO `operadores` (`id`, `nombre`, `apellido`, `edad`, `telefono`, `fecha de registro`) VALUES
@@ -179,16 +273,16 @@ INSERT INTO `operadores` (`id`, `nombre`, `apellido`, `edad`, `telefono`, `fecha
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `permisos`
+-- Table structure for table `permisos`
 --
 
 CREATE TABLE `permisos` (
   `id` int(11) NOT NULL,
-  `rol` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+  `rol` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `permisos`
+-- Dumping data for table `permisos`
 --
 
 INSERT INTO `permisos` (`id`, `rol`) VALUES
@@ -198,21 +292,57 @@ INSERT INTO `permisos` (`id`, `rol`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `users`
+-- Table structure for table `trascabo_reports`
+--
+
+CREATE TABLE `trascabo_reports` (
+  `id` int(10) NOT NULL,
+  `id_maquina` int(10) NOT NULL,
+  `contractor_name` varchar(250) NOT NULL,
+  `week_number` int(10) NOT NULL,
+  `month` int(2) NOT NULL,
+  `date_register` date NOT NULL,
+  `period_date` varchar(250) NOT NULL,
+  `was_used` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `trascabo_reports`
+--
+
+INSERT INTO `trascabo_reports` (`id`, `id_maquina`, `contractor_name`, `week_number`, `month`, `date_register`, `period_date`, `was_used`) VALUES
+(1, 2, 'Victor perez', 3423, 2, '2023-11-02', '23', 0),
+(2, 2, 'Victor Calderon', 0, 11, '2023-11-03', '123', 0),
+(5, 2, 'Victor Calderon', 0, 11, '2023-11-06', '123', 0),
+(6, 2, 'Victor Calderon', 0, 11, '2023-11-07', '123', 0),
+(7, 2, 'Victor Calderon', 1, 8, '2023-11-08', '12', 0),
+(8, 2, 'alejandro', 43, 10, '2023-11-09', '3', 0),
+(9, 2, 'alejandro', 43, 10, '2023-11-10', '3', 0),
+(10, 2, 'alejandro', 43, 10, '2023-11-11', '3', 0),
+(11, 2, 'alejandro', 43, 10, '2023-11-12', '3', 0),
+(12, 10, 'dsx', 1, 11, '2023-11-01', '2333', 0),
+(13, 2, 'admin', 34, 11, '2023-11-17', '11/16/23-21/04/22', 0),
+(14, 10, 'admin', 34, 11, '2023-11-17', '11/16/23-21/04/22', 0),
+(15, 11, 'admin', 34, 11, '2023-11-17', '11/16/23-21/04/22', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `usuario` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `correo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `telefono` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `password` varchar(300) COLLATE utf8_spanish_ci NOT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `correo` varchar(50) NOT NULL,
+  `telefono` varchar(50) NOT NULL,
+  `password` varchar(300) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_rol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `usuario`, `correo`, `telefono`, `password`, `fecha`, `id_rol`) VALUES
@@ -221,93 +351,117 @@ INSERT INTO `users` (`id`, `usuario`, `correo`, `telefono`, `password`, `fecha`,
 (12, 'admin', 'ricardo.garcia@gl.mx', '12345', '$2y$05$Grln/f.IBgVtg2gzpnDMD.ceKYjnLBasnx3KfbN7J84AdWGudpigW', '2023-08-10 18:19:53', 1);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `acarreos`
+-- Indexes for table `acarreos`
 --
 ALTER TABLE `acarreos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `historial`
+-- Indexes for table `checklist_trascabo`
+--
+ALTER TABLE `checklist_trascabo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `historial`
 --
 ALTER TABLE `historial`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `inventario`
+-- Indexes for table `inventario`
 --
 ALTER TABLE `inventario`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `maquinas`
+-- Indexes for table `maquinas`
 --
 ALTER TABLE `maquinas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `operadores`
+-- Indexes for table `operadores`
 --
 ALTER TABLE `operadores`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `permisos`
+-- Indexes for table `permisos`
 --
 ALTER TABLE `permisos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `users`
+-- Indexes for table `trascabo_reports`
+--
+ALTER TABLE `trascabo_reports`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `acarreos`
+-- AUTO_INCREMENT for table `acarreos`
 --
 ALTER TABLE `acarreos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT de la tabla `historial`
+-- AUTO_INCREMENT for table `checklist_trascabo`
+--
+ALTER TABLE `checklist_trascabo`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `historial`
 --
 ALTER TABLE `historial`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `inventario`
+-- AUTO_INCREMENT for table `inventario`
 --
 ALTER TABLE `inventario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=419;
 
 --
--- AUTO_INCREMENT de la tabla `maquinas`
+-- AUTO_INCREMENT for table `maquinas`
 --
 ALTER TABLE `maquinas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT de la tabla `operadores`
+-- AUTO_INCREMENT for table `operadores`
 --
 ALTER TABLE `operadores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT de la tabla `permisos`
+-- AUTO_INCREMENT for table `permisos`
 --
 ALTER TABLE `permisos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `users`
+-- AUTO_INCREMENT for table `trascabo_reports`
+--
+ALTER TABLE `trascabo_reports`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
