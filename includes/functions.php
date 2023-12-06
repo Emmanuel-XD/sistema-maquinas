@@ -13,6 +13,10 @@ if (isset($_POST['accion'])) {
             insert_salida();
             break;
 
+        case 'insert_vale':
+            insert_vale();
+            break;
+
         case 'insertar_inventario':
             insertar_inventario();
             break;
@@ -43,6 +47,10 @@ if (isset($_POST['accion'])) {
             editar_sa();
             break;
 
+        case 'editar_val':
+            editar_val();
+            break;
+
         case 'editar_user':
             editar_user();
             break;
@@ -66,6 +74,31 @@ function insertar_maquina()
 
     $consulta = "INSERT INTO maquinas (name, modelo, serie, ubicacion, status) 
     VALUES ('$name', '$modelo','$serie','$ubicacion','$status')";
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if ($resultado) {
+        $response = array(
+            'status' => 'success',
+            'message' => 'Los datos se guardaron correctamente'
+        );
+    } else {
+        $response = array(
+            'status' => 'error',
+            'message' => 'Ocurrió un error inesperado'
+        );
+    }
+
+    echo json_encode($response);
+}
+
+function insert_vale()
+{
+    global $conexion;
+    extract($_POST);
+    include "db.php";
+    $fecha = date("Y-m-d ");
+    $consulta = "INSERT INTO resguardos (folio, id_empleado, id_area, puesto, cantidad, descripcion, fecha) 
+    VALUES ('$folio', '$id_empleado','$id_area','$puesto','$cantidad','$descripcion','$fecha')";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado) {
@@ -315,6 +348,25 @@ function editar_sa()
     $consulta = "UPDATE salida_almacen SET folio = '$folio', id_empleado = '$id_empleado', recibio = '$recibio' , 
     id_area = '$id_area', descripcion = '$descripcion', clave = '$clave', solicitado = '$solicitado', id_pieza = '$id_pieza', 
     entregado = '$entregado', observaciones = '$observaciones',fecha = '$fecha' WHERE id = '$id' ";
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if ($resultado) {
+        echo json_encode("correcto");
+    } else {
+        echo json_encode("error");
+    }
+}
+
+function editar_val()
+{
+    require_once("db.php");
+
+    extract($_POST);
+
+
+    $consulta = "UPDATE resguardos SET folio = '$folio', id_empleado = '$id_empleado',
+    id_area = '$id_area', puesto = '$puesto', cantidad = '$cantidad', descripcion = '$descripcion', 
+    fecha = '$fecha' WHERE id = '$id' ";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado) {

@@ -160,6 +160,23 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
                 </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCarsxds" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fa fa-ticket" aria-hidden="true"></i>
+                    <span style="font-size: 13px; font-weight: 550; color: #FFFFFF; letter-spacing: .1mm;">Vales</span>
+                </a>
+                <div id="collapseCarsxds" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <?php if ($_SESSION["type"] == 1) { ?>
+                            <a class="collapse-item" href="../views/form_vales.php">Formulario</a>
+                        <?php }
+                        ?>
+                        <a class="collapse-item" href="../views/vales_resguardo.php">Vales de Resguardo</a>
+
+                    </div>
+                </div>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
