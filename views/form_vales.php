@@ -11,7 +11,7 @@ session_start();
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <br>
-                <h6 class="m-0 font-weight-bold text-center text-primary">Formulario de Salida de Almacen</h6>
+                <h6 class="m-0 font-weight-bold text-center text-primary">Formulario de Vales de Resguardo</h6>
                 <br>
 
 
@@ -23,7 +23,7 @@ session_start();
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="transporte" class="form-label">Responsable Area</label>
+                                <label for="transporte" class="form-label">Nombre</label>
                                 <select class="form-control" name="id_empleado" id="id_empleado">
                                     <option value="0">Selecciona una opción</option>
                                     <?php
@@ -40,8 +40,8 @@ session_start();
                         </div>
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="nombre" class="form-label">Recibio</label>
-                                <input type="text" class="form-control" id="recibio" name="recibio" required>
+                                <label for="nombre" class="form-label">Puesto</label>
+                                <input type="text" class="form-control" id="puesto" name="puesto" required>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -66,59 +66,10 @@ session_start();
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="mb-3">
-                                <label for="transporte" class="form-label">Descripcion</label>
-                                <input type="text" class="form-control" name="descripcion" id="descripcion">
+                                <label for="transporte" class="form-label">Cantidad</label>
+                                <input type="text" class="form-control" name="cantidad" id="cantidad" required>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="mb-3">
-                                <label for="nombre" class="form-label">Clave</label>
-                                <input type="text" class="form-control" id="clave" name="clave" required>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="mb-3">
-                                <label for="nombre" class="form-label">Solicitado</label>
-                                <input type="text" class="form-control" id="solicitado" name="solicitado" required>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="mb-3">
-                                <label for="transporte" class="form-label">Pieza</label>
-                                <select class="form-control" name="id_pieza" id="id_pieza">
-                                    <option value="0">Selecciona una opción</option>
-                                    <?php
-                                    include("../includes/db.php");
-                                    // Código para mostrar categorías desde otra tabla
-                                    $sql = "SELECT * FROM piezas";
-                                    $resultado = mysqli_query($conexion, $sql);
-                                    while ($consulta = mysqli_fetch_array($resultado)) {
-                                        echo '<option value="' . $consulta['id'] . '">' . $consulta['pieza'] . '</option>';
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="mb-3">
-                                <label for="nombre" class="form-label">Entregado</label>
-                                <input type="text" class="form-control" id="entregado" name="entregado" required>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="mb-3">
-                                <label for="nombre" class="form-label">Observaciones</label>
-                                <input type="text" class="form-control" id="observaciones" name="observaciones" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-
                         <div class="col-sm-4">
                             <div class="mb-3">
                                 <label for="folio" class="form-label">Folio</label><br>
@@ -132,14 +83,18 @@ session_start();
                                 <input type="date" class="form-control" id="fecha" name="fecha" value="<?php echo date("Y-m-d"); ?>" required>
                             </div>
                         </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="nombre" class="form-label">Descripcion</label>
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" required>
                     </div>
 
 
             </div>
 
 
-            <input type="hidden" name="accion" value="insert_salida">
+            <input type="hidden" name="accion" value="insert_vale">
             <br>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" id="register" name="registrar">Guardar</button>
@@ -150,9 +105,11 @@ session_start();
                 $(document).ready(function() {
                     $('#id_empleado').change(function() {
                         var id_empleado = $(this).val();
+
+                        // Verificar el último folio registrado por el empleado para el día actual
                         $.ajax({
                             type: 'POST',
-                            url: 'verificar_registro.php',
+                            url: 'verificar_vale.php',
                             data: {
                                 id_empleado: id_empleado
                             },
@@ -161,7 +118,7 @@ session_start();
                                 if (!response.error) {
                                     var nuevoFolio = response.ultimoFolioRegistrado;
                                     $('#folio').val(nuevoFolio);
-                                    console.log("Nuevo folio:", nuevoFolio);
+                                    console.log("Nuevo folio:", nuevoFolio); 
                                 } else {
                                     console.error(response.error);
                                 }

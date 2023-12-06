@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id_empleado"])) {
 }
 function obtenerUltimoFolioRegistrado($conexion, $id_empleado, $fecha_actual)
 {
-    $consulta = "SELECT folio FROM salida_almacen WHERE id_empleado = $id_empleado AND DATE(fecha) = '$fecha_actual' ORDER BY id DESC LIMIT 1";
+    $consulta = "SELECT folio FROM resguardos WHERE id_empleado = $id_empleado AND DATE(fecha) = '$fecha_actual' ORDER BY id DESC LIMIT 1";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado) {
@@ -36,7 +36,6 @@ function obtenerUltimoFolioRegistrado($conexion, $id_empleado, $fecha_actual)
             return obtenerFolioInicial($conexion, $id_empleado, $fecha_actual);
         }
     } else {
-        // Manejar el error en la consulta
         return array("error" => "Error en la consulta: " . mysqli_error($conexion));
     }
 }
@@ -44,7 +43,7 @@ function obtenerUltimoFolioRegistrado($conexion, $id_empleado, $fecha_actual)
 function obtenerFolioInicial($conexion, $id_empleado, $fecha_actual)
 {
     // Obtener el folio inicial para el empleado y el día actual
-    $consulta = "SELECT MAX(CONVERT(SUBSTRING_INDEX(folio, '-', -1), SIGNED)) AS ultimo_consecutivo FROM salida_almacen WHERE DATE(fecha) = '$fecha_actual'";
+    $consulta = "SELECT MAX(CONVERT(SUBSTRING_INDEX(folio, '-', -1), SIGNED)) AS ultimo_consecutivo FROM resguardos WHERE DATE(fecha) = '$fecha_actual'";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado) {
@@ -52,7 +51,7 @@ function obtenerFolioInicial($conexion, $id_empleado, $fecha_actual)
         $ultimoConsecutivo = ($row && !is_null($row['ultimo_consecutivo'])) ? $row['ultimo_consecutivo'] : 0;
 
         // Obtener el máximo consecutivo global para cualquier empleado
-        $consulta_global = "SELECT MAX(CONVERT(SUBSTRING_INDEX(folio, '-', -1), SIGNED)) AS max_global FROM salida_almacen";
+        $consulta_global = "SELECT MAX(CONVERT(SUBSTRING_INDEX(folio, '-', -1), SIGNED)) AS max_global FROM resguardos";
         $resultado_global = mysqli_query($conexion, $consulta_global);
 
         if ($resultado_global) {
