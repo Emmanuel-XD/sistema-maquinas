@@ -96,6 +96,7 @@ function insert_vale()
     global $conexion;
     extract($_POST);
     include "db.php";
+    date_default_timezone_set('America/Mexico_City');
     $fecha = date("Y-m-d ");
     $consulta = "INSERT INTO resguardos (folio, id_empleado, id_area, puesto, cantidad, descripcion, fecha) 
     VALUES ('$folio', '$id_empleado','$id_area','$puesto','$cantidad','$descripcion','$fecha')";
@@ -121,6 +122,7 @@ function insert_salida()
     global $conexion;
     extract($_POST);
     include "db.php";
+    date_default_timezone_set('America/Mexico_City');
     $fecha = date("Y-m-d ");
     $consulta = "INSERT INTO salida_almacen (folio, id_empleado, recibio, id_area, descripcion, clave, solicitado, id_pieza,
     entregado, observaciones, fecha) VALUES ('$folio', '$id_empleado','$recibio','$id_area','$descripcion','$clave','$solicitado','$id_pieza'
