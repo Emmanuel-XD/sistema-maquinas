@@ -29,12 +29,12 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href="https://33d73a22f4b6dc792776-9396d99e5006374ffc15abe9d6ae8e26.ssl.cf1.rackcdn.com/dropdownCheckboxes-cdn.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretty-checkbox/3.0.3/pretty-checkbox.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretty-checkbox/3.0.3/pretty-checkbox.min.css" />
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exceljs@4.3.0/dist/exceljs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
@@ -143,6 +143,22 @@ if ($usuario == null || $usuario == ''  && $permiso == null || $permiso == '') {
                 </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCarsxd" aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fa fa-box" aria-hidden="true"></i>
+                    <span style="font-size: 13px; font-weight: 550; color: #FFFFFF; letter-spacing: .1mm;">Almacen</span>
+                </a>
+                <div id="collapseCarsxd" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <?php if ($_SESSION["type"] == 1) { ?>
+                            <a class="collapse-item" href="../views/form_almacen.php">Formulario</a>
+                        <?php }
+                        ?>
+                        <a class="collapse-item" href="../views/salidas_almacen.php">Salidas de Almacen</a>
+
+                    </div>
+                </div>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
