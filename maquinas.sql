@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-12-2023 a las 00:07:51
+-- Tiempo de generación: 07-12-2023 a las 00:40:28
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.8
 
@@ -370,8 +370,16 @@ CREATE TABLE `resguardos` (
   `puesto` varchar(150) NOT NULL,
   `cantidad` varchar(50) NOT NULL,
   `descripcion` varchar(350) NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `resguardos`
+--
+
+INSERT INTO `resguardos` (`id`, `folio`, `id_empleado`, `id_area`, `puesto`, `cantidad`, `descripcion`, `fecha`) VALUES
+(2, '01', 6, 2, 'sssss', '201', 'Sonido Estéreoxd', '2023-12-07'),
+(3, '02', 3, 1, 'xd', '20', 'Muy  buenos', '2023-12-07');
 
 -- --------------------------------------------------------
 
@@ -617,7 +625,7 @@ ALTER TABLE `piezas`
 -- AUTO_INCREMENT de la tabla `resguardos`
 --
 ALTER TABLE `resguardos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `salida_almacen`
