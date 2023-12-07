@@ -3,6 +3,7 @@ include("../includes/db.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id_empleado"])) {
     $id_empleado = $_POST["id_empleado"];
+    date_default_timezone_set('America/Mexico_City');
     $fecha_actual = date("Y-m-d");
 
     // Obtener el último folio registrado por el empleado para el día actual
