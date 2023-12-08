@@ -27,7 +27,7 @@ session_start();
                             <div class="form-group">
                                 <label for="transporte" class="form-label">Empleado</label>
                                 <select class="form-control" name="id_empleado" id="id_empleado">
-                                    <option value="0">Selecciona una opción</option>
+                                    <option value="">Selecciona una opción</option>
                                     <?php
                                     include("../includes/db.php");
 
@@ -50,13 +50,18 @@ session_start();
 
 
 
-                        <div class="col-md-2">
+                        <div class="col-sm-0.5">
                             <div class="form-group">
-                                <label for="" class="form-label"><b>Filtrar</b></label><br>
+                                <label for="filtro" class="form-label"><b>Filtrar</b></label><br>
                                 <button type="button" id="filtro" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
                         </div>
-
+                        <div class="col-sm-1">
+                            <div class="form-group">
+                        <label for="excel" class="form-label"><b>Archivo</b></label><br>
+                                <button type="button" id="excel" class="btn btn-success"><i class="fas fa-file-excel" aria-hidden="true"></i></button>
+                                </div>
+                        </div>
                     </div>
                 </form>
 
@@ -80,67 +85,9 @@ session_start();
                         </thead>
 
                         <tbody>
-                            <?php
-                            require_once("../includes/db.php");
-                            $result = mysqli_query($conexion, "SELECT r.id,r.folio,r.id_empleado,r.id_area,r.puesto,
-                            r.cantidad,r.descripcion,r.fecha, o.nombre, o.apellido, a.area FROM resguardos r INNER JOIN 
-                            operadores o ON r.id_empleado = o.id INNER JOIN areas a ON r.id_area = a.id");
-                            while ($fila = mysqli_fetch_assoc($result)) :
-                            ?>
-                                <tr>
-                                    <td><?php echo $fila['folio']; ?></td>
-                                    <td><?php echo $fila['nombre'] . ' ' . $fila['apellido']; ?></td>
-                                    <td><?php echo $fila['area']; ?></td>
-                                    <td><?php echo $fila['puesto']; ?></td>
-                                    <td><?php echo $fila['cantidad']; ?></td>
-                                    <td><?php echo $fila['descripcion']; ?></td>
-                                    <td><?php echo $fila['fecha']; ?></td>
-                                    <td>
-                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar<?php echo $fila['id']; ?>">
-                                            <i class="fa fa-edit "></i>
-                                        </button>
-                                        <a href="../includes/eliminar_val.php?id=<?php echo $fila['id'] ?>" class="btn btn-danger btn-del">
-                                            <i class="fa fa-trash "></i></a>
-                                    </td>
-                                </tr>
-                                <?php include "editar_val.php"; ?>
-                            <?php endwhile; ?>
+                        
                         </tbody>
                     </table>
-                    <script>
-                        $('.btn-del').on('click', function(e) {
-                            e.preventDefault();
-                            const href = $(this).attr('href')
-
-                            Swal.fire({
-                                title: 'Estas seguro de eliminar este registro?',
-                                text: "¡No podrás revertir esto!!",
-                                icon: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Si, eliminar!',
-                                cancelButtonText: 'Cancelar!',
-                            }).then((result) => {
-                                if (result.value) {
-                                    if (result.isConfirmed) {
-                                        Swal.fire(
-                                            'Eliminado!',
-                                            'El registro fue eliminado.',
-                                            'success'
-                                        )
-                                    }
-
-                                    document.location.href = href;
-                                }
-                            })
-
-                        })
-                    </script>
-
-
-
-
                 </div>
             </div>
         </div>
@@ -168,5 +115,5 @@ session_start();
 </body>
 
 <?php include "../includes/footer.php"; ?>
-
+<script src="../js/vales.js"></script>
 </html>

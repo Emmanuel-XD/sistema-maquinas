@@ -91,8 +91,6 @@
                      }
 
                      const currentLetter = String.fromCharCode('D'.charCodeAt(0) + i);
-                     console.log(`fecha_${i + 1}: ${data[i].date_register}`);
-                     console.log(`llantas_${i + 1}: ${data[i].llantas}`);
 
                      // Add the updated data to the array
                      updatedData.push({
@@ -257,44 +255,6 @@
      }
  });
 
- function excelPrint() {
-
-     fetch('../static/reporte.xlsm')
-         .then(res => {
-             if (!res.ok) {
-                 throw new Error(`Failed to fetch workbook (${res.status} ${res.statusText})`);
-             }
-             return res.arrayBuffer();
-         })
-         .then(ab => {
-             const workbook = new ExcelJS.Workbook();
-             return workbook.xlsx.load(ab).then(() => {
-                 return workbook; // Return the workbook object
-             });
-         })
-         .then(workbook => {
-             const worksheet = workbook.getWorksheet('TRASCABO');
-             worksheet.getCell('C6').value = "test";
-             worksheet.getCell('C12')
-             return workbook.xlsx.writeBuffer();
-         })
-         .then(buffer => {
-             const blob = new Blob([buffer], {
-                 type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-             });
-             const downloadLink = document.createElement('a');
-             downloadLink.href = URL.createObjectURL(blob);
-             downloadLink.download = `test.xlsx`;
-             document.body.appendChild(downloadLink);
-             downloadLink.click();
-             document.body.removeChild(downloadLink);
-         })
-         .catch(error => {
-             console.error('Error:', error);
-             // Handle the error, e.g., display an error message to the user
-         });
-
- }
 
  function getMonthName(monthNumber) {
      switch (monthNumber) {

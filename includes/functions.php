@@ -12,7 +12,9 @@ if (isset($_POST['accion'])) {
         case 'insert_salida':
             insert_salida();
             break;
-
+        case 'filtar_tbl':
+            tableFill();
+            break;;
         case 'insert_vale':
             insert_vale();
             break;
@@ -64,7 +66,29 @@ if (isset($_POST['accion'])) {
             break;
     }
 }
+function tableFill(){
+    global $conexion;
+    extract($_POST);
+    include "db.php";
+    $query = "SELECT r.id,r.folio,r.id_empleado,r.id_area,r.puesto,
+    r.cantidad,r.descripcion,r.fecha, o.nombre, o.apellido, a.area FROM resguardos r INNER JOIN 
+    operadores o ON r.id_empleado = o.id INNER JOIN areas a ON r.id_area = a.id WHERE r.id_empleado =  '$idEmp' AND r.fecha = '$fecha'";
+    $result = mysqli_query($conexion, $query);
+    
+    if (!$result) {
+        die("Query failed: " . mysqli_error($conexion));
+    }
+    
+    // Fetch data from the result set
+    $data = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+    
+    echo json_encode($data);
 
+    mysqli_close($conexion);
+}
 
 function insertar_maquina()
 {

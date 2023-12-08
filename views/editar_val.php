@@ -1,4 +1,12 @@
-<div class="modal fade" id="editar<?php echo $fila['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<?php $id = $_GET['id']; 
+  global $conexion;
+  include "../includes/db.php";
+ $result = mysqli_query($conexion, "SELECT r.id,r.folio,r.id_empleado,r.id_area,r.puesto,
+ r.cantidad,r.descripcion,r.fecha, o.nombre, o.apellido, a.area FROM resguardos r INNER JOIN 
+ operadores o ON r.id_empleado = o.id INNER JOIN areas a ON r.id_area = a.id WHERE r.id = $id");
+ while ($fila = mysqli_fetch_assoc($result)) :
+?>
+<div class="modal fade" id="editModal<?php echo $fila['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
@@ -100,6 +108,7 @@
         </div>
     </div>
 </div>
+<?php endwhile; ?>
 <script>
     function editVal(id) {
         var datosFormulario = $("#editVal" + id).serialize();
