@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
     function printData() { 
-        fetch('../static/almacenForms.xlsx')
+        fetch('../static/ReporteSalidas.xlsx')
         .then(res => {
             if (!res.ok) {
                 throw new Error(`Failed to fetch workbook (${res.status} ${res.statusText})`);
@@ -140,11 +140,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     worksheet.getCell(`S${item.row}`).value = item.data["solicitado"];
                     worksheet.getCell(`T${item.row}`).value = item.data["recibio"];
                     worksheet.getCell(`U${item.row}`).value = item.data["observaciones"];
-                    workbook.eachSheet(sheet => {
-                        if (sheet !== worksheet) {
-                          workbook.removeWorksheet(sheet.id);
-                        }
-                      });
                 });
            
                 return workbook.xlsx.writeBuffer();

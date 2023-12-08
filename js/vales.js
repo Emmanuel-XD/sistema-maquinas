@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
     function printData() { 
-        fetch('../static/almacenForms.xlsx')
+        fetch('../static/ValesResguardo.xlsx')
         .then(res => {
             if (!res.ok) {
                 throw new Error(`Failed to fetch workbook (${res.status} ${res.statusText})`);
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var area = dataOfTable[0].data["area"]
                 var fecha = dataOfTable[0].data["fecha"]
                 dataOfTable.forEach((item, index) => {
-                    const worksheet = workbook.getWorksheet('Vale de resguardo');
+                    const worksheet = workbook.getWorksheet('VALE DE RESGUARDO');
                     //header data
                     worksheet.getCell(`B7`).value = nombre;
                     worksheet.getCell(`H6`).value = folio;
@@ -133,11 +133,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     //datos
                     worksheet.getCell(`A${item.row}`).value = item.data["cantidad"];
                     worksheet.getCell(`B${item.row}`).value = item.data["descripcion"];
-                    workbook.eachSheet(sheet => {
-                        if (sheet !== worksheet) {
-                          workbook.removeWorksheet(sheet.id);
-                        }
-                      });
                 });
            
                 return workbook.xlsx.writeBuffer();
