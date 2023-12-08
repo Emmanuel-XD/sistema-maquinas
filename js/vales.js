@@ -21,8 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     filtro.addEventListener('click', handleInputChange);
     excel.addEventListener('click', printData);
     function dataofTable(fechaValue, idEmpleadoValue) {
-        console.log("Fecha changed:", fechaValue);
-        console.log("IdEmpleado changed:", idEmpleadoValue);
+
 
         var dataForm = new FormData();
         dataForm.append('accion', 'filtar_tbl');
