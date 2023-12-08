@@ -292,6 +292,5 @@
  $('.btn-edit').on('click', function (e) {
      e.preventDefault();
      var dataIdValue = this.getAttribute('data-id');
-     console.log(dataIdValue);
 
  });
