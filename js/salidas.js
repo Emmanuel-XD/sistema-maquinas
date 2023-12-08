@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("IdEmpleado changed:", idEmpleadoValue);
 
         var dataForm = new FormData();
-        dataForm.append('accion', 'filtar_tbl');
+        dataForm.append('accion', 'fillSalida');
         dataForm.append('idEmp', idEmpleadoValue);
         dataForm.append('fecha', fechaValue);
         
@@ -45,17 +45,21 @@ document.addEventListener('DOMContentLoaded', function () {
                       return data + ' ' + row.apellido; // Combine nombre and apellido for the "Empleado" column
                     }
                   },
+                  { data: 'recibio' },
                   { data: 'area' },
-                  { data: 'puesto' },
-                  { data: 'cantidad' },
                   { data: 'descripcion' },
+                  { data: 'clave' },
+                  { data: 'solicitado' },
+                  { data: 'pieza' },
+                  { data: 'entregado' },
+                  { data: 'observaciones' },
                   { data: 'fecha' },
                   { 
                     data: null, // Use null for a custom column
                     render: function(data, type, row) {
                       return `
                         <td>
-                          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal${row.id}">
+                          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar${row.id}">
                             <i class="fa fa-edit"></i>
                           </button>
                           <a href="#" class="btn btn-danger btn-del">
@@ -83,11 +87,11 @@ document.addEventListener('DOMContentLoaded', function () {
                       }).then((result) => {
                         if (result.isConfirmed) {
                           // If the user confirms, navigate to the delete URL
-                          window.location.href = "../includes/eliminar_val.php?id=" + data.id;
+                          window.location.href = "../includes/eliminar_sa.php?id=" + data.id;
                         }
                       });
                     });
-                    $.get('editar_val.php?id=' + data.id, function(response) {
+                    $.get('editar_sa.php?id=' + data.id, function(response) {
                         $(row).append(response);
                       });
                   }
@@ -95,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
               
               //pasar datos a arreglo
               dataOfTable = [];
-              var currentRow = 12;
+              var currentRow = 19;
               for (let i = 0; i < data.length; i++) {
                 currentRow =  currentRow + i;
                 dataOfTable.push({
@@ -103,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     data: data[i]
                 })
               }
-           
+              console.log(dataOfTable)
             });
     }
     function printData() { 
@@ -120,20 +124,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Use the accumulated data here
                 var nombre =`${dataOfTable[0].data["nombre"]}, ${dataOfTable[0].data["apellido"]}`   ;
                 var folio = dataOfTable[0].data["folio"]
-                var puesto = dataOfTable[0].data["puesto"]
                 var area = dataOfTable[0].data["area"]
                 var fecha = dataOfTable[0].data["fecha"]
+                const [year, month, day] = fecha.split('-');
                 dataOfTable.forEach((item, index) => {
-                    const worksheet = workbook.getWorksheet('Vale de resguardo');
+                    const worksheet = workbook.getWorksheet('VALE DE SALIDA DE ALMACEN');
                     //header data
-                    worksheet.getCell(`B7`).value = nombre;
-                    worksheet.getCell(`H6`).value = folio;
-                    worksheet.getCell(`B8`).value = puesto;
-                    worksheet.getCell(`H8`).value = area;
-                    worksheet.getCell(`H7`).value = fecha;
+                    worksheet.getCell(`K11`).value = nombre;
+                    worksheet.getCell(`U9`).value = folio;
+                    worksheet.getCell(`I9`).value = area;
+                    worksheet.getCell(`U11`).value = day;
+                    worksheet.getCell(`W11`).value = month;
+                    worksheet.getCell(`X11`).value = year;
                     //datos
-                    worksheet.getCell(`A${item.row}`).value = item.data["cantidad"];
-                    worksheet.getCell(`B${item.row}`).value = item.data["descripcion"];
+                    worksheet.getCell(`C${item.row}`).value = item.data["clave"];
+                    worksheet.getCell(`I${item.row}`).value = item.data["descripcion"];
+                    worksheet.getCell(`R${item.row}`).value = item.data["pieza"];
+                    worksheet.getCell(`S${item.row}`).value = item.data["solicitado"];
+                    worksheet.getCell(`T${item.row}`).value = item.data["recibio"];
+                    worksheet.getCell(`U${item.row}`).value = item.data["observaciones"];
                     workbook.eachSheet(sheet => {
                         if (sheet !== worksheet) {
                           workbook.removeWorksheet(sheet.id);
@@ -153,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
             const downloadLink = document.createElement('a');
             downloadLink.href = URL.createObjectURL(blob);
-            downloadLink.download = `ReporteVales.xlsx`;
+            downloadLink.download = `ReporteSalidas.xlsx`;
             document.body.appendChild(downloadLink);
             downloadLink.click();
             document.body.removeChild(downloadLink);
@@ -165,8 +174,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
      }
 });
-
-
-
-
-

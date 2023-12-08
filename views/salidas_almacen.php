@@ -50,13 +50,18 @@ session_start();
 
 
 
-                        <div class="col-md-2">
+                        <div class="col-md-0.5">
                             <div class="form-group">
                                 <label for="" class="form-label"><b>Filtrar</b></label><br>
                                 <button type="button" id="filtro" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
                         </div>
-
+                        <div class="col-sm-1">
+                            <div class="form-group">
+                        <label for="excel" class="form-label"><b>Archivo</b></label><br>
+                                <button type="button" id="excel" class="btn btn-success"><i class="fas fa-file-excel" aria-hidden="true"></i></button>
+                                </div>
+                        </div>
                     </div>
                 </form>
 
@@ -84,38 +89,7 @@ session_start();
                         </thead>
 
                         <tbody>
-                            <?php
-                            require_once("../includes/db.php");
-                            $result = mysqli_query($conexion, "SELECT sa.id,sa.folio,sa.id_empleado,sa.recibio, sa.id_area, 
-                            sa.descripcion, sa.clave,sa.solicitado,sa.id_pieza,sa.entregado,sa.observaciones,sa.fecha,
-                            o.nombre,o.apellido, a.area, p.pieza FROM salida_almacen sa INNER JOIN operadores o 
-                            ON sa.id_empleado = o.id INNER JOIN areas a ON sa.id_area = a.id INNER JOIN piezas p 
-                            ON sa.id_pieza = p.id");
-                            while ($fila = mysqli_fetch_assoc($result)) :
-                            ?>
-                                <tr>
-                                    <td><?php echo $fila['folio']; ?></td>
-                                    <td><?php echo $fila['nombre'] . ' ' . $fila['apellido']; ?></td>
-                                    <td><?php echo $fila['recibio']; ?></td>
-                                    <td><?php echo $fila['area']; ?></td>
-                                    <td><?php echo $fila['descripcion']; ?></td>
-                                    <td><?php echo $fila['clave']; ?></td>
-                                    <td><?php echo $fila['solicitado']; ?></td>
-                                    <td><?php echo $fila['pieza']; ?></td>
-                                    <td><?php echo $fila['entregado']; ?></td>
-                                    <td><?php echo $fila['observaciones']; ?></td>
-
-                                    <td><?php echo $fila['fecha']; ?></td>
-                                    <td>
-                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editar<?php echo $fila['id']; ?>">
-                                            <i class="fa fa-edit "></i>
-                                        </button>
-                                        <a href="../includes/eliminar_sa.php?id=<?php echo $fila['id'] ?>" class="btn btn-danger btn-del">
-                                            <i class="fa fa-trash "></i></a>
-                                    </td>
-                                </tr>
-                                <?php include "editar_sa.php"; ?>
-                            <?php endwhile; ?>
+                        
                         </tbody>
                     </table>
                     <script>
@@ -179,5 +153,5 @@ session_start();
 </body>
 
 <?php include "../includes/footer.php"; ?>
-
+<script src="../js/salidas.js"></script>
 </html>

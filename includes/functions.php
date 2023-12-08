@@ -64,7 +64,33 @@ if (isset($_POST['accion'])) {
         case 'editar_carga':
             editar_carga();
             break;
+        case 'fillSalida':
+            tableFillSalida();
+            break;
     }
+}
+function tableFillSalida(){
+    global $conexion;
+    extract($_POST);
+    include "db.php";
+    $query = "SELECT sa.id,sa.folio,sa.id_empleado,sa.recibio, sa.id_area, 
+    sa.descripcion, sa.clave,sa.solicitado,sa.id_pieza,sa.entregado,sa.observaciones,sa.fecha,
+    o.nombre,o.apellido, a.area, p.pieza FROM salida_almacen sa INNER JOIN operadores o 
+    ON sa.id_empleado = o.id INNER JOIN areas a ON sa.id_area = a.id INNER JOIN piezas p 
+    ON sa.id_pieza = p.id WHERE sa.id_empleado = '$idEmp' AND sa.fecha = '$fecha'";
+    $result = mysqli_query($conexion, $query);
+    if (!$result) {
+        die("Query failed: " . mysqli_error($conexion));
+    }
+    // Fetch data from the result set
+    $data = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+    
+    echo json_encode($data);
+
+    mysqli_close($conexion);
 }
 function tableFill(){
     global $conexion;
